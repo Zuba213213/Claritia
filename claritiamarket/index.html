@@ -1,1 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>claritia — Próximamente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --lav:         #B8B4D4;
+      --lav-xlight:  #ECEAF6;
+      --lav-deep:    #534AB7;
+      --sage:        #8FA89A;
+      --grad-start:  #C4C0DC;
+      --grad-end:    #9AABA0;
+      --purple-dark: #3D3860;
+      --white:       #FFFFFF;
+      --off-white:   #F8F8FA;
+      --charcoal:    #2C2C2C;
+      --mid:         #6B6B6B;
+      --light:       #D0CDE0;
+      --rule:        rgba(184,180,212,0.25);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--charcoal);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,248,250,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 48px; height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topbar-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; color: var(--charcoal);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .topbar-back {
+      font-size: 11px; font-weight: 500;
+      color: var(--lav-deep); text-decoration: none;
+    }
+    .topbar-back:hover { text-decoration: underline; }
+
+    /* ── MAIN ── */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    /* ── MEME ── */
+    .meme-wrap {
+      position: relative;
+      margin-bottom: 40px;
+      animation: floatIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+    .meme-img {
+      width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(61,56,96,0.18);
+      display: block;
+    }
+    .meme-badge {
+      position: absolute;
+      top: -10px; right: -12px;
+      background: linear-gradient(130deg, var(--grad-start), var(--lav));
+      color: var(--purple-dark);
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 20px;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(184,180,212,0.35);
+    }
+
+    /* ── TEXT ── */
+    .cs-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--lav); margin-bottom: 10px;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+    .cs-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 400; color: var(--charcoal);
+      line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      animation: fadeUp 0.5s 0.25s ease both;
+    }
+    .cs-desc {
+      max-width: 380px;
+      font-size: 14px; font-weight: 300;
+      color: var(--mid); line-height: 1.75;
+      margin-bottom: 36px;
+      animation: fadeUp 0.5s 0.30s ease both;
+    }
+
+    /* ── BACK BUTTON ── */
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--purple-dark);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 12px 24px; border-radius: 8px;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      animation: fadeUp 0.5s 0.35s ease both;
+    }
+    .back-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ── PROGRESS DOTS ── */
+    .progress {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 48px;
+      animation: fadeUp 0.5s 0.40s ease both;
+    }
+    .prog-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--mid); margin-right: 4px;
+    }
+    .prog-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .prog-dot.done { background: var(--lav-deep); }
+    .prog-dot.active { background: var(--lav); }
+    .prog-dot.pending {
+      background: transparent;
+      border: 1.5px solid var(--light);
+    }
+    .prog-page-label {
+      font-size: 10px; font-weight: 300; color: var(--light);
+      margin-left: 4px;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      border-top: 1px solid var(--rule);
+      padding: 20px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .fl { font-size: 11px; font-weight: 300; color: var(--mid); }
+    .fbadge {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px;
+      background: var(--lav-xlight); color: var(--lav-deep);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: scale(0.85) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @media(max-width:600px){
+      .topbar { padding: 0 20px; }
+      .page-footer { padding: 16px 20px; }
+      .progress { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand">claritia</a>
+    <a href="index.html" class="topbar-back">← Volver al Vault</a>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <div class="meme-wrap">
+      <img
+        class="meme-img"
+        src="1776293349515_image.png"
+        alt="Estoy cansado, jefe"
+      />
+      <div class="meme-badge">En construcción</div>
+    </div>
+
+    <div class="cs-label">Marketing Vault — claritia</div>
+    <h1 class="cs-title">Próximamente.</h1>
+    <p class="cs-desc">
+      Esta sección está en proceso de construcción. Vuelve pronto — o mejor aún, vuelve al vault y revisa lo que ya está listo.
+    </p>
+
+    <a href="index.html" class="back-btn">
+      ← Volver al Marketing Vault
+    </a>
+
+    <!-- PROGRESS TRACKER -->
+    <div class="progress">
+      <span class="prog-label">Progreso</span>
+      <div class="prog-dot done" title="Consistencia de Marca"></div>
+      <div class="prog-dot done" title="Perfil de Cliente Ideal"></div>
+      <div class="prog-dot done" title="Tono y Copy"></div>
+      <div class="prog-dot active" title="En construcción"></div>
+      <div class="prog-dot pending" title="Pendiente"></div>
+      <div class="prog-dot pending" title="Pendiente"></div>
+      <div class="prog-dot pending" title="Pendiente"></div>
+      <div class="prog-dot pending" title="Pendiente"></div>
+      <span class="prog-page-label">3 / 8 completos</span>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno.</div>
+    <div class="fbadge">Próximamente</div>
+  </footer>
+
+</body>
+</html>
