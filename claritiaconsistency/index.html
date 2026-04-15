@@ -1,1 +1,1004 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>claritia — Consistencia de Marca</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
 
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --lav:         #B8B4D4;
+      --lav-light:   #D4D1E8;
+      --lav-xlight:  #ECEAF6;
+      --lav-deep:    #534AB7;
+      --sage:        #8FA89A;
+      --sage-dark:   #6B8C7D;
+      --grad-start:  #C4C0DC;
+      --grad-end:    #9AABA0;
+      --purple-dark: #3D3860;
+      --white:       #FFFFFF;
+      --off-white:   #F8F8FA;
+      --charcoal:    #2C2C2C;
+      --mid:         #6B6B6B;
+      --light:       #D0CDE0;
+      --rule:        rgba(184,180,212,0.25);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--charcoal);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,248,250,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 48px; height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topbar-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; color: var(--charcoal);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .topbar-crumb {
+      font-size: 11px; font-weight: 400; color: var(--mid);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .topbar-crumb a { color: var(--mid); text-decoration: none; }
+    .topbar-crumb a:hover { color: var(--lav-deep); }
+    .topbar-sep { color: var(--light); }
+    .topbar-cur { color: var(--lav-deep); font-weight: 500; }
+    .topbar-badge {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px;
+      background: var(--lav-xlight); color: var(--lav-deep);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
+      padding: 64px 48px 72px; overflow: hidden;
+    }
+    .hero::before {
+      content:''; position:absolute;
+      width:340px; height:340px; border-radius:50%;
+      background:rgba(255,255,255,0.08);
+      top:-90px; right:-70px;
+    }
+    .hero::after {
+      content:''; position:absolute;
+      width:160px; height:160px; border-radius:50%;
+      background:rgba(255,255,255,0.07);
+      bottom:-40px; left:35%;
+    }
+    .cdeco {
+      position:absolute; border-radius:50%;
+      background:rgba(255,255,255,0.12); pointer-events:none;
+    }
+    .cd1{width:52px;height:52px;top:28px;right:220px;}
+    .cd2{width:28px;height:28px;top:72px;right:284px;}
+    .cd3{width:38px;height:38px;bottom:44px;right:140px;}
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:10px; font-weight:600; letter-spacing:0.18em;
+      text-transform:uppercase; color:rgba(255,255,255,0.60);
+      margin-bottom:20px;
+    }
+    .hero-eyebrow span {
+      width:6px; height:6px; border-radius:50%;
+      background:rgba(255,255,255,0.50); display:inline-block;
+    }
+    .hero-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(40px,5.5vw,68px);
+      font-weight:400; color:var(--white);
+      line-height:1.05; letter-spacing:-0.02em;
+      margin-bottom:8px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-sub {
+      font-size:11px; font-weight:500;
+      letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.60); margin-bottom:24px;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    .hero-desc {
+      max-width:520px; font-size:14px; font-weight:300;
+      color:rgba(255,255,255,0.80); line-height:1.75;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+    .hero-collab {
+      margin-top:32px; font-size:10px; font-weight:500;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.40);
+      animation: fadeUp 0.5s 0.22s ease both;
+    }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display:grid;
+      grid-template-columns:220px 1fr;
+      max-width:1140px; margin:0 auto;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position:sticky; top:52px;
+      height:calc(100vh - 52px);
+      overflow-y:auto;
+      padding:40px 0 40px 48px;
+      border-right:1px solid var(--rule);
+    }
+    .sb-label {
+      font-size:9px; font-weight:600;
+      letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--mid); margin-bottom:16px;
+      padding-bottom:8px; border-bottom:1px solid var(--rule);
+    }
+    .sb-nav { list-style:none; display:flex; flex-direction:column; gap:2px; }
+    .sb-nav a {
+      display:flex; align-items:baseline; gap:8px;
+      font-size:12px; font-weight:400; color:var(--mid);
+      text-decoration:none; padding:6px 12px 6px 0;
+      border-radius:4px; transition:color 0.15s ease; line-height:1.4;
+    }
+    .sb-nav a:hover { color:var(--lav-deep); }
+    .sb-nav a.active { color:var(--lav-deep); font-weight:500; }
+    .nav-n { font-size:9px; color:var(--lav); font-weight:600; min-width:18px; }
+
+    /* ── CONTENT ── */
+    .content { padding:56px 64px 100px 56px; max-width:760px; }
+
+    /* ── SECTION ── */
+    .doc-sec {
+      margin-bottom:72px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .doc-sec:nth-child(1){animation-delay:0.05s}
+    .doc-sec:nth-child(2){animation-delay:0.10s}
+    .doc-sec:nth-child(3){animation-delay:0.15s}
+    .doc-sec:nth-child(4){animation-delay:0.20s}
+    .doc-sec:nth-child(5){animation-delay:0.25s}
+    .doc-sec:nth-child(6){animation-delay:0.30s}
+    .doc-sec:nth-child(7){animation-delay:0.35s}
+    .doc-sec:nth-child(8){animation-delay:0.40s}
+    .doc-sec:nth-child(9){animation-delay:0.45s}
+    .doc-sec:nth-child(10){animation-delay:0.50s}
+    .doc-sec:nth-child(11){animation-delay:0.55s}
+    .doc-sec:nth-child(12){animation-delay:0.60s}
+
+    .sec-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:9px; font-weight:600; letter-spacing:0.2em;
+      text-transform:uppercase; color:var(--lav-deep);
+      background:var(--lav-xlight); padding:4px 12px;
+      border-radius:4px; margin-bottom:16px;
+    }
+    .sec-tag-n { color:var(--lav); }
+    .sec-rule { width:40px; height:2px; background:linear-gradient(90deg,var(--lav),var(--sage)); border-radius:2px; margin-bottom:20px; }
+
+    h2.sh1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(28px,3.5vw,38px);
+      font-weight:400; color:var(--charcoal);
+      line-height:1.1; letter-spacing:-0.01em; margin-bottom:20px;
+    }
+    h3.sh2 {
+      font-family:'DM Serif Display',serif;
+      font-size:22px; font-weight:400; color:var(--charcoal);
+      margin-top:40px; margin-bottom:14px;
+      padding-bottom:10px; border-bottom:1px solid var(--rule);
+    }
+
+    p {
+      font-size:14px; font-weight:300;
+      line-height:1.80; color:var(--charcoal); margin-bottom:16px;
+    }
+    p:last-child { margin-bottom:0; }
+    strong { font-weight:500; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      margin:28px 0; padding:20px 24px;
+      border-left:3px solid var(--lav);
+      background:var(--lav-xlight);
+      border-radius:0 8px 8px 0;
+    }
+    .callout p {
+      font-family:'DM Serif Display',serif;
+      font-style:italic; font-size:17px;
+      color:var(--purple-dark); margin:0; line-height:1.5;
+    }
+
+    /* ── STATUS BAR ── */
+    .status-bar {
+      display:flex; align-items:center; gap:10px;
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:8px; padding:12px 16px; margin-bottom:32px;
+      font-size:12px;
+    }
+    .status-dot { width:8px; height:8px; border-radius:50%; background:#d4a853; flex-shrink:0; }
+    .status-text { color:var(--mid); font-weight:300; }
+
+    /* ── TABLES ── */
+    .twrap { border:1px solid var(--rule); border-radius:8px; overflow:hidden; margin:20px 0; }
+    table.dt { width:100%; border-collapse:collapse; font-size:13px; }
+    table.dt th {
+      background:var(--purple-dark); color:var(--white);
+      font-family:'Poppins',sans-serif; font-weight:500;
+      font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+      padding:12px 16px; text-align:left;
+    }
+    table.dt th:first-child { border-radius:0; }
+    table.dt td {
+      padding:12px 16px; border-bottom:1px solid var(--rule);
+      vertical-align:top; line-height:1.65;
+      font-weight:300; color:var(--charcoal);
+    }
+    table.dt tr:last-child td { border-bottom:none; }
+    table.dt tr:nth-child(even) td { background:rgba(236,234,246,0.20); }
+    table.dt td:first-child { font-weight:500; color:var(--purple-dark); white-space:nowrap; font-size:12px; }
+
+    /* compare table */
+    table.cmp { width:100%; border-collapse:collapse; font-size:13px; }
+    table.cmp th { padding:12px 16px; font-weight:500; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; text-align:left; }
+    .th-yes { background:var(--purple-dark); color:var(--white); }
+    .th-no  { background:#f0ecec; color:#8a4444; }
+    table.cmp td { padding:11px 16px; vertical-align:top; border-bottom:1px solid var(--rule); font-weight:300; line-height:1.6; }
+    .td-yes { background:rgba(236,234,246,0.25); }
+    .td-no  { background:rgba(240,236,236,0.25); color:#5a3a3a; }
+    table.cmp tr:last-child td { border-bottom:none; }
+
+    /* leti table */
+    table.lt { width:100%; border-collapse:collapse; font-size:13px; }
+    table.lt th { padding:10px 16px; font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; text-align:left; }
+    .lth-u { background:var(--lav-xlight); color:var(--lav-deep); }
+    .lth-l { background:var(--purple-dark); color:var(--white); }
+    table.lt td { padding:12px 16px; vertical-align:top; border-bottom:1px solid var(--rule); line-height:1.6; font-weight:300; }
+    table.lt td:first-child { background:rgba(236,234,246,0.18); color:var(--mid); font-style:italic; }
+    table.lt tr:last-child td { border-bottom:none; }
+
+    /* ── LISTS ── */
+    ul.dl {
+      list-style:none; margin:16px 0;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    ul.dl li {
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:13.5px; font-weight:300; line-height:1.65; color:var(--charcoal);
+    }
+    ul.dl li::before {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:var(--lav); margin-top:7px; flex-shrink:0;
+    }
+    ul.dl.warn li::before { background:#c07070; }
+
+    /* ── VALUE CARDS ── */
+    .vgrid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+    .vcard {
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:10px; padding:20px 20px 18px;
+      position:relative; overflow:hidden;
+    }
+    .vcard::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg,var(--lav),var(--sage));
+    }
+    .vcard-t { font-family:'DM Serif Display',serif; font-size:16px; color:var(--purple-dark); margin-bottom:8px; }
+    .vcard p { font-size:12.5px; line-height:1.65; color:var(--mid); margin:0; }
+
+    /* ── ARCHETYPE ── */
+    .agrid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+    .acard {
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:10px; padding:22px 22px 20px; overflow:hidden;
+    }
+    .acard.al { border-top:3px solid var(--lav); }
+    .acard.ar { border-top:3px solid var(--sage); }
+    .acard-label { font-size:10px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--lav-deep); margin-bottom:10px; }
+    .acard.ar .acard-label { color:var(--sage-dark); }
+    .acard-name { font-family:'DM Serif Display',serif; font-size:20px; color:var(--charcoal); margin-bottom:12px; }
+    .acard ul { list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .acard ul li { font-size:12.5px; font-weight:300; color:var(--mid); display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+    .acard ul li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--lav); margin-top:6px; flex-shrink:0; }
+    .acard.ar ul li::before { background:var(--sage); }
+    .acard-refs { margin-top:14px; padding-top:12px; border-top:1px solid var(--rule); font-size:11px; color:var(--mid); font-weight:300; }
+
+    /* ── PERSON CARD ── */
+    .pcard {
+      background:linear-gradient(130deg,var(--purple-dark) 0%,#5A566E 100%);
+      border-radius:12px; padding:28px 28px 26px; margin:20px 0;
+      display:grid; grid-template-columns:1fr auto; gap:24px; align-items:start;
+    }
+    .pcard-label { font-size:10px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:6px; }
+    .pcard-name { font-family:'DM Serif Display',serif; font-size:28px; color:var(--white); margin-bottom:14px; line-height:1; }
+    .pcard ul { list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .pcard ul li { font-size:13px; font-weight:300; color:rgba(255,255,255,0.75); display:flex; align-items:center; gap:10px; line-height:1.4; }
+    .pcard ul li::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--lav-light); flex-shrink:0; }
+    .pcard-note { margin-top:16px; padding-top:14px; border-top:1px solid rgba(255,255,255,0.12); font-size:12px; font-style:italic; color:rgba(255,255,255,0.50); font-family:'DM Serif Display',serif; }
+    .pcard-badge { background:rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:14px 18px; text-align:center; min-width:110px; }
+    .pcard-em { font-size:32px; margin-bottom:6px; display:block; }
+    .pcard-bl { font-size:10px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.50); line-height:1.5; }
+
+    /* ── TONE SCALE ── */
+    .tscale { display:flex; flex-direction:column; gap:20px; margin:20px 0; }
+    .trow { display:grid; grid-template-columns:90px 1fr 90px; align-items:center; gap:12px; }
+    .trow-label { grid-column:1/-1; font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--lav-deep); margin-bottom:-8px; }
+    .tl { text-align:right; font-size:12px; color:var(--mid); font-weight:300; }
+    .tr { text-align:left;  font-size:12px; color:var(--mid); font-weight:300; }
+    .track { position:relative; height:6px; background:var(--lav-xlight); border-radius:3px; }
+    .marker { position:absolute; top:50%; transform:translate(-50%,-50%); width:14px; height:14px; border-radius:50%; background:var(--lav-deep); border:2px solid var(--white); box-shadow:0 0 0 2px var(--lav); }
+
+    /* ── PHASE GRID ── */
+    .pgrid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+    .pcard2 { background:var(--white); border:1px solid var(--rule); border-radius:10px; padding:20px 20px 18px; }
+    .pnum { font-size:9px; font-weight:600; letter-spacing:0.15em; text-transform:uppercase; color:var(--lav); margin-bottom:6px; }
+    .ptitle { font-family:'DM Serif Display',serif; font-size:17px; color:var(--charcoal); margin-bottom:8px; }
+    .pdesc { font-size:12.5px; font-weight:300; color:var(--mid); line-height:1.6; margin:0; }
+    .pcta { margin-top:12px; font-size:12px; font-weight:500; color:var(--lav-deep); font-style:italic; }
+
+    /* ── SWATCHES ── */
+    .swgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0; }
+    .swatch { border-radius:8px; overflow:hidden; border:1px solid var(--rule); }
+    .sw-color { height:64px; }
+    .sw-info { background:var(--white); padding:10px 12px; }
+    .sw-name { font-size:12px; font-weight:500; color:var(--charcoal); margin-bottom:2px; }
+    .sw-hex { font-size:11px; font-weight:400; color:var(--mid); font-family:monospace; }
+    .sw-role { font-size:11px; font-weight:300; color:var(--mid); margin-top:2px; line-height:1.4; }
+
+    /* ── CHECKLIST ── */
+    .cklist { display:flex; flex-direction:column; border:1px solid var(--rule); border-radius:10px; overflow:hidden; margin:20px 0; }
+    .ckrow { display:grid; grid-template-columns:42px 1fr 1fr; align-items:start; border-bottom:1px solid var(--rule); transition:background 0.15s ease; }
+    .ckrow:last-child { border-bottom:none; }
+    .ckrow:hover { background:var(--lav-xlight); }
+    .ckbox { display:flex; align-items:center; justify-content:center; padding:14px 0 14px 14px; }
+    .ckicon { width:16px; height:16px; border-radius:4px; border:1.5px solid var(--lav); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.15s ease; flex-shrink:0; }
+    .ckicon.on { background:var(--lav-deep); border-color:var(--lav-deep); }
+    .ckicon.on::after { content:''; width:8px; height:5px; border-left:1.5px solid #fff; border-bottom:1.5px solid #fff; transform:rotate(-45deg) translateY(-1px); }
+    .ckq { padding:14px 12px; font-size:12.5px; font-weight:500; color:var(--charcoal); line-height:1.5; }
+    .cka { padding:14px 14px 14px 0; font-size:12px; font-weight:300; color:var(--mid); line-height:1.5; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      border-top:1px solid var(--rule); padding:28px 48px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    }
+    .fl { font-size:11px; font-weight:300; color:var(--mid); }
+    .fr { display:flex; align-items:center; gap:12px; }
+    .fbadge { font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:4px 10px; border-radius:4px; background:var(--lav-xlight); color:var(--lav-deep); }
+    .fback { font-size:11px; color:var(--lav-deep); text-decoration:none; font-weight:500; }
+    .fback:hover { text-decoration:underline; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .page-body { grid-template-columns:1fr; }
+      .sidebar { display:none; }
+      .content { padding:40px 28px 80px; }
+      .hero { padding:48px 28px 60px; }
+      .topbar { padding:0 24px; }
+      .topbar-badge { display:none; }
+      .vgrid,.agrid,.pgrid { grid-template-columns:1fr; }
+      .swgrid { grid-template-columns:repeat(2,1fr); }
+      .pcard { grid-template-columns:1fr; }
+      .pcard-badge { display:none; }
+      .ckrow { grid-template-columns:42px 1fr; }
+      .cka { display:none; }
+      .page-footer { padding:24px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="index.html" class="topbar-brand">claritia</a>
+  <div class="topbar-crumb">
+    <a href="index.html">Marketing Vault</a>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-cur">Consistencia de Marca</span>
+  </div>
+  <div class="topbar-badge">01 — Documento Base</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="cdeco cd1"></div>
+  <div class="cdeco cd2"></div>
+  <div class="cdeco cd3"></div>
+  <div class="hero-eyebrow"><span></span>Guía de Consistencia de Marca</div>
+  <h1 class="hero-title">Todo lo que<br/>claritia es.</h1>
+  <div class="hero-sub">Terapia Clínica Online</div>
+  <p class="hero-desc">Fuente única de verdad para todo lo que se produce en nombre de claritia. Cualquier persona que genere contenido, copy, diseño o materiales de marketing debe leer y seguir estas reglas antes de producir cualquier output.</p>
+  <div class="hero-collab">JRZ Consulting Solutions &nbsp;×&nbsp; claritia</div>
+</header>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-label">Contenido</div>
+    <ul class="sb-nav">
+      <li><a href="#s01"><span class="nav-n">01</span> Propósito</a></li>
+      <li><a href="#s02"><span class="nav-n">02</span> Identidad de Marca</a></li>
+      <li><a href="#s03"><span class="nav-n">03</span> Arquetipo</a></li>
+      <li><a href="#s04"><span class="nav-n">04</span> Tono de Voz</a></li>
+      <li><a href="#s05"><span class="nav-n">05</span> Perfil de Cliente</a></li>
+      <li><a href="#s06"><span class="nav-n">06</span> Oportunidad</a></li>
+      <li><a href="#s07"><span class="nav-n">07</span> Journey del Cliente</a></li>
+      <li><a href="#s08"><span class="nav-n">08</span> Identidad Visual</a></li>
+      <li><a href="#s09"><span class="nav-n">09</span> Leti — IA</a></li>
+      <li><a href="#s10"><span class="nav-n">10</span> Canales</a></li>
+      <li><a href="#s11"><span class="nav-n">11</span> Límites</a></li>
+      <li><a href="#s12"><span class="nav-n">12</span> Checklist</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- STATUS -->
+    <div class="status-bar">
+      <div class="status-dot"></div>
+      <div class="status-text"><strong>Estado:</strong>&nbsp; Pre-lanzamiento — documentación activa. Procesos legales y de licenciamiento en curso.</div>
+    </div>
+
+    <!-- 01 -->
+    <section class="doc-sec" id="s01">
+      <div class="sec-tag"><span class="sec-tag-n">01</span> Propósito del Documento</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">¿Para qué sirve este documento?</h2>
+      <p>Este documento es la fuente única de verdad para todo lo que se produce en nombre de claritia. Define quiénes somos, cómo hablamos, a quién le hablamos y cómo se ve, suena y se siente cada pieza de comunicación que creamos.</p>
+      <p>Cualquier persona que genere contenido, copy, diseño o materiales de marketing para claritia debe leer y seguir estas reglas antes de producir cualquier output. No hay excepciones.</p>
+      <div class="callout"><p>"Convertir no es vender una sesión. Es iniciar un proceso."</p></div>
+    </section>
+
+    <!-- 02 -->
+    <section class="doc-sec" id="s02">
+      <div class="sec-tag"><span class="sec-tag-n">02</span> Identidad de Marca</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Quiénes Somos</h2>
+      <p>claritia es una plataforma 100% virtual y automatizada de terapia psicológica online. Conectamos a personas que buscan bienestar mental con psicólogos verificados y capacitados, a través de una experiencia digital fluida y accesible.</p>
+      <p>Operamos con automatización total — desde el matching de pacientes hasta la facturación — para mantener costos bajos sin sacrificar la calidad terapéutica ni el pago justo al psicólogo.</p>
+
+      <h3 class="sh2">Visión</h3>
+      <p>Ser la plataforma líder en Latinoamérica que democratiza el bienestar mental, haciendo que el apoyo psicológico de calidad sea una realidad cotidiana y accesible para millones de personas, redefiniendo la salud mental con tecnología y empatía.</p>
+
+      <h3 class="sh2">Misión</h3>
+      <p>Ofrecer terapias psicológicas virtuales de alto valor y bajo costo, garantizando la conexión con psicólogos capacitados a través de una experiencia 100% digital y fluida. Utilizamos la automatización para optimizar cada proceso, enfocando nuestros esfuerzos en la calidad terapéutica y la accesibilidad económica.</p>
+
+      <h3 class="sh2">Valores Corporativos</h3>
+      <div class="vgrid">
+        <div class="vcard">
+          <div class="vcard-t">Accesibilidad Real</div>
+          <p>El bienestar mental no es un lujo. Mantenemos un modelo de bajo costo para que cualquier persona, en cualquier lugar, pueda iniciar o continuar su proceso terapéutico.</p>
+        </div>
+        <div class="vcard">
+          <div class="vcard-t">Eficiencia Ética</div>
+          <p>La automatización total — matching, facturación, recordatorios — nos permite ser rápidos y confiables sin comprometer la calidad de la atención ni la confidencialidad.</p>
+        </div>
+        <div class="vcard">
+          <div class="vcard-t">Rigor Profesional</div>
+          <p>Bajo costo no significa baja calidad. Altos estándares en la selección de psicólogos, capacitación continua y terapias basadas en evidencia.</p>
+        </div>
+        <div class="vcard">
+          <div class="vcard-t">Transparencia Simple</div>
+          <p>Operamos con honestidad y sencillez. Las tarifas, procesos y políticas son claras, diseñadas para eliminar la confusión y hacer que la experiencia sea fluida y confiable.</p>
+        </div>
+      </div>
+
+      <h3 class="sh2">Ventaja Competitiva</h3>
+      <div class="callout"><p>Bajo costo + alta eficiencia operativa. Al automatizar todo, los costos se reducen al mínimo — precios accesibles sin sacrificar la paga del psicólogo ni la calidad del servicio.</p></div>
+    </section>
+
+    <!-- 03 -->
+    <section class="doc-sec" id="s03">
+      <div class="sec-tag"><span class="sec-tag-n">03</span> Arquetipo de Marca</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Cuidador Moderno + Everyman</h2>
+      <p>claritia combina dos arquetipos clásicos de branding. Esta combinación no es accidental: define cada decisión de diseño, tono, copy y experiencia de usuario.</p>
+      <div class="agrid">
+        <div class="acard al">
+          <div class="acard-label">El Cuidador</div>
+          <div class="acard-name">Caregiver</div>
+          <ul>
+            <li>Representa protección, apoyo y responsabilidad emocional</li>
+            <li>Ayuda a otros a sentirse mejor, más seguros, más acompañados</li>
+            <li>No busca protagonismo. Busca cuidar.</li>
+            <li>Habla con calidez, genera seguridad</li>
+            <li>Prioriza personas sobre el producto</li>
+          </ul>
+          <div class="acard-refs"><strong>Referentes:</strong> UNICEF, WWF, TOMS</div>
+        </div>
+        <div class="acard ar">
+          <div class="acard-label">La Persona Común</div>
+          <div class="acard-name">Everyman</div>
+          <ul>
+            <li>Representa personas reales viviendo vidas reales</li>
+            <li>Su motivación: pertenecer y sentirse comprendido</li>
+            <li>No es aspiracional. Es identificable.</li>
+            <li>Habla de forma directa, usa lenguaje cotidiano</li>
+            <li>Se ve accesible. Evita el elitismo.</li>
+          </ul>
+          <div class="acard-refs"><strong>Referentes:</strong> IKEA, Target, Wendy's</div>
+        </div>
+      </div>
+
+      <h3 class="sh2">Si claritia fuera una persona</h3>
+      <div class="pcard">
+        <div>
+          <div class="pcard-label">Referencia de Persona</div>
+          <div class="pcard-name">Pedro Pascal</div>
+          <ul>
+            <li>Profesional sin ser distante</li>
+            <li>Humano sin ser informal</li>
+            <li>Accesible sin perder calidad</li>
+            <li>Empático sin prometer soluciones mágicas</li>
+          </ul>
+          <div class="pcard-note">"No es un gurú de la salud mental. Es alguien confiable que está ahí para acompañarte."</div>
+        </div>
+        <div class="pcard-badge">
+          <span class="pcard-em">&#128081;</span>
+          <div class="pcard-bl">Cuidador<br/>+ Everyman</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="doc-sec" id="s04">
+      <div class="sec-tag"><span class="sec-tag-n">04</span> Tono de Voz</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Cómo Habla claritia</h2>
+      <p>El tono de voz debe ser consistente en absolutamente todos los canales: website, WhatsApp, respuestas de Leti, redes sociales, emails, materiales de marketing. <strong>No hay excepciones.</strong></p>
+
+      <h3 class="sh2">Los cuatro ejes del tono</h3>
+      <div class="twrap">
+        <table class="dt">
+          <thead><tr><th>Eje</th><th>Descripción</th></tr></thead>
+          <tbody>
+            <tr><td>Claro</td><td>Fácil de entender pero no superficial ni infantil. Sin jerga médica. Sin tecnicismos. Una persona sin conocimiento de psicología debe poder entender todo.</td></tr>
+            <tr><td>Simple</td><td>Frases cortas. Ideas directas. Sin rodeos. El lector no debería tener que releer para entender.</td></tr>
+            <tr><td>Empático</td><td>Reconocemos que la persona que nos lee está pasando por algo difícil. No minimizamos. No juzgamos. No dramatizamos. Acompañamos.</td></tr>
+            <tr><td>Honesto</td><td>No prometemos felicidad eterna. No usamos hipérboles vacías. Sí decimos que las cosas pueden mejorar, que el proceso vale, que estamos aquí. Realismo humano.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sh2">Escala de tono — dónde vive claritia</h3>
+      <div class="tscale">
+        <div class="trow">
+          <div class="trow-label">Lenguaje</div>
+          <div class="tl">Casual</div>
+          <div class="track"><div class="marker" style="left:65%"></div></div>
+          <div class="tr">Profesional</div>
+        </div>
+        <div class="trow">
+          <div class="trow-label">Estética</div>
+          <div class="tl">Exclusivo</div>
+          <div class="track"><div class="marker" style="left:70%"></div></div>
+          <div class="tr">Accesible</div>
+        </div>
+        <div class="trow">
+          <div class="trow-label">Complejidad</div>
+          <div class="tl">Simple</div>
+          <div class="track"><div class="marker" style="left:30%"></div></div>
+          <div class="tr">Técnico</div>
+        </div>
+        <div class="trow">
+          <div class="trow-label">Rol</div>
+          <div class="tl">Experto</div>
+          <div class="track"><div class="marker" style="left:68%"></div></div>
+          <div class="tr">Acompañante</div>
+        </div>
+        <div class="trow">
+          <div class="trow-label">Actitud</div>
+          <div class="tl">Optimismo irreal</div>
+          <div class="track"><div class="marker" style="left:72%"></div></div>
+          <div class="tr">Realismo humano</div>
+        </div>
+      </div>
+
+      <h3 class="sh2">Reglas de escritura</h3>
+      <p style="font-size:12px;font-weight:600;color:var(--lav-deep);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Lo que SÍ hacemos</p>
+      <ul class="dl">
+        <li>Usar "tú" o "vos" según la región. Nunca "usted" en comunicación directa.</li>
+        <li>Oraciones cortas. Máximo 20 palabras por oración en copy de alto impacto.</li>
+        <li>Empezar con la emoción, no con el servicio. ("¿Te sientes abrumado?" antes que "Ofrecemos terapia.")</li>
+        <li>Validar antes de proponer. Reconocer el estado emocional antes de mencionar la solución.</li>
+        <li>Usar lenguaje de proceso, no de cura: "comenzar", "acompañar", "avanzar" — nunca "sanar" ni "curar".</li>
+        <li>CTAs directos e invitadores: "Habla con alguien hoy." / "Empieza cuando quieras."</li>
+      </ul>
+
+      <p style="font-size:12px;font-weight:600;color:#c07070;text-transform:uppercase;letter-spacing:0.08em;margin:24px 0 8px;">Lo que NO hacemos</p>
+      <ul class="dl warn">
+        <li>No usar memes, jerga de redes sociales ni lenguaje que envejece rápido.</li>
+        <li>No usar terminología clínica sin explicarla.</li>
+        <li>No prometer resultados absolutos. ("claritia te va a cambiar la vida" — NUNCA.)</li>
+        <li>No hablar de forma condescendiente ni paternalista.</li>
+        <li>No usar exclamaciones excesivas. Un signo de exclamación por párrafo, máximo.</li>
+        <li>No usar "paciente" en comunicación externa. Decimos "personas", "tú", "quien nos escribe".</li>
+      </ul>
+
+      <h3 class="sh2">Ejemplos de tono — correcto vs. incorrecto</h3>
+      <div class="twrap">
+        <table class="cmp">
+          <thead><tr><th class="th-yes">✓ Correcto</th><th class="th-no">✗ Incorrecto</th></tr></thead>
+          <tbody>
+            <tr><td class="td-yes">"No tienes que tener todo claro para empezar."</td><td class="td-no">"¡La terapia te va a cambiar la vida! ¡Regístrate ya!"</td></tr>
+            <tr><td class="td-yes">"Sentirse abrumado no significa que algo está mal contigo."</td><td class="td-no">"Nuestros psicólogos certificados ofrecen servicios terapéuticos de alta calidad."</td></tr>
+            <tr><td class="td-yes">"Habla con alguien. Desde casa. Hoy."</td><td class="td-no">"¿Sufres de ansiedad crónica o depresión mayor? ¡Tenemos la solución!"</td></tr>
+            <tr><td class="td-yes">"Aquí estamos cuando estés listo."</td><td class="td-no">"¡No esperes más! ¡Cupos limitados!"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="doc-sec" id="s05">
+      <div class="sec-tag"><span class="sec-tag-n">05</span> Perfil de Cliente Ideal</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">A Quién Le Hablamos</h2>
+      <p>claritia no segmenta por diagnóstico ni por nivel socioeconómico. Segmentamos por <strong>situación emocional</strong> y por las barreras que impiden que la persona busque ayuda. No todos se identifican como "pacientes".</p>
+      <div class="callout"><p>"La gente no busca terapia. Busca dejar de sentirse así."</p></div>
+
+      <h3 class="sh2">Dos segmentos de entrada</h3>
+      <div class="twrap">
+        <table class="dt">
+          <thead><tr><th>Segmento</th><th>Perfil</th></tr></thead>
+          <tbody>
+            <tr><td>Barrera Económica</td><td>Perciben la terapia como cara o inaccesible. Quieren ayuda real pero buscan opciones que puedan pagar. La propuesta de bajo costo es el gancho principal.</td></tr>
+            <tr><td>Barrera de Comodidad</td><td>Sí pagarían por terapia pero no quieren desplazarse. Prefieren hacerlo desde casa, en sus horarios, sin trámites. La experiencia 100% digital es el gancho.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sh2">Contextos emocionales que atendemos</h3>
+      <p>No hablamos de diagnósticos. Hablamos de experiencias humanas.</p>
+      <ul class="dl">
+        <li>Ansiedad — miedo constante, dificultad para descansar, sobrepensamiento</li>
+        <li>Depresión — tristeza sin causa aparente, falta de energía, desconexión</li>
+        <li>Burnout laboral — agotamiento extremo, sensación de vacío profesional</li>
+        <li>Trauma — experiencias difíciles del pasado que siguen afectando el presente</li>
+        <li>Crisis personales — rupturas, pérdidas, cambios de vida importantes</li>
+        <li>Maternidad difícil — depresión postparto, agotamiento, culpa materna</li>
+        <li>Neurodivergencia — TDAH, autismo, dificultades de procesamiento</li>
+        <li>Procesos de vida — duelo, transiciones, búsqueda de sentido</li>
+      </ul>
+
+      <h3 class="sh2">Lo que buscan en Google</h3>
+      <p>Todo el copy y SEO debe partir de este lenguaje emocional — no de lenguaje clínico.</p>
+      <ul class="dl">
+        <li>"¿Por qué me siento tan ansioso todo el tiempo?"</li>
+        <li>"Cómo dejar de sobrepensar todo"</li>
+        <li>"Necesito hablar con alguien pero no sé con quién"</li>
+        <li>"Psicólogo online barato o accesible"</li>
+        <li>"Cómo saber si necesito terapia"</li>
+        <li>"Cómo calmar mi mente cuando no para"</li>
+        <li>"Por qué me siento triste sin razón"</li>
+        <li>"Cómo empezar terapia si nunca he ido"</li>
+      </ul>
+    </section>
+
+    <!-- 06 -->
+    <section class="doc-sec" id="s06">
+      <div class="sec-tag"><span class="sec-tag-n">06</span> Oportunidad de Mercado</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">El Contexto que Nos Da Relevancia</h2>
+      <p>La salud mental está creciendo como necesidad, pero no como acceso. Tres percepciones bloquean a la mayoría de las personas que necesitan ayuda:</p>
+      <ul class="dl">
+        <li>La terapia es cara</li>
+        <li>La terapia es complicada de acceder</li>
+        <li>La terapia es solo para ciertos perfiles de personas</li>
+      </ul>
+
+      <h3 class="sh2">El comportamiento digital ya cambió</h3>
+      <ul class="dl">
+        <li>Más del 37% de las personas ya han usado chatbots de IA para apoyo emocional o bienestar mental.</li>
+        <li>1 de cada 8 usuarios jóvenes dice sentirse cómodo hablando de emociones con un chatbot confidencial.</li>
+        <li>Las personas ya buscan espacios digitales para procesar emociones, incluso fuera de plataformas diseñadas para terapia.</li>
+      </ul>
+
+      <h3 class="sh2">El posicionamiento de claritia</h3>
+      <p>claritia no compite con la inteligencia artificial. Evoluciona ese comportamiento. Las personas ya usan IA porque es inmediata, privada, no juzga, está disponible 24/7 y es accesible económicamente. claritia convierte esas mismas razones en el puente hacia una experiencia terapéutica real con un profesional humano.</p>
+      <div class="callout"><p>"La gente ya quiere hablar. claritia ofrece con quién hacerlo."</p></div>
+    </section>
+
+    <!-- 07 -->
+    <section class="doc-sec" id="s07">
+      <div class="sec-tag"><span class="sec-tag-n">07</span> Journey del Cliente</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Cómo Vive el Usuario su Experiencia</h2>
+      <p>La estrategia de conversión tiene cuatro fases. El cliente nunca debe sentir que está siendo vendido. Debe sentir que está siendo <strong>acompañado</strong> desde el primer contacto.</p>
+      <div class="pgrid">
+        <div class="pcard2">
+          <div class="pnum">Fase 01</div>
+          <div class="ptitle">Posicionamiento</div>
+          <p class="pdesc">Existir en la mente del usuario en el momento exacto en que siente que necesita ayuda. Redes sociales, Google, contenido de awareness.</p>
+          <div class="pcta">Tono: empático. No menciona el servicio todavía.</div>
+        </div>
+        <div class="pcard2">
+          <div class="pnum">Fase 02</div>
+          <div class="ptitle">Gancho</div>
+          <p class="pdesc">Contenido relatable que genera identificación emocional tan fuerte que la persona quiere saber más.</p>
+          <div class="pcta">"Necesito hablar con alguien pero no sé con quién."</div>
+        </div>
+        <div class="pcard2">
+          <div class="pnum">Fase 03</div>
+          <div class="ptitle">Conversión</div>
+          <p class="pdesc">El único momento en que mencionamos directamente el servicio y el precio. Fricción mínima. El usuario puede iniciar en menos de 2 minutos.</p>
+          <div class="pcta">"Habla con un psicólogo hoy. Desde tu casa."</div>
+        </div>
+        <div class="pcard2">
+          <div class="pnum">Fase 04</div>
+          <div class="ptitle">Experiencia</div>
+          <p class="pdesc">El verdadero diferenciador. El primer contacto debe ser tan cálido y fluido que la persona quiera continuar su proceso terapéutico.</p>
+          <div class="pcta">"Hola. Aquí estoy."</div>
+        </div>
+      </div>
+      <h3 class="sh2">Objetivo de conversión</h3>
+      <p>Convertir no es vender una sesión suelta. Es iniciar un proceso. La retención a 4 semanas y el número de sesiones promedio por usuario son las métricas que más importan.</p>
+    </section>
+
+    <!-- 08 -->
+    <section class="doc-sec" id="s08">
+      <div class="sec-tag"><span class="sec-tag-n">08</span> Identidad Visual</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Cómo se Ve claritia</h2>
+      <p>La identidad visual combina la suavidad del lavanda con tonos sage que generan una estética segura, accesible y contemporánea — sin ser clínica ni fría.</p>
+
+      <h3 class="sh2">Paleta de colores</h3>
+      <div class="swgrid">
+        <div class="swatch">
+          <div class="sw-color" style="background:#B8B4D4;"></div>
+          <div class="sw-info"><div class="sw-name">Lavanda</div><div class="sw-hex">#B8B4D4</div><div class="sw-role">Color primario. Acentos, UI, bordes.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#8FA89A;"></div>
+          <div class="sw-info"><div class="sw-name">Sage</div><div class="sw-hex">#8FA89A</div><div class="sw-role">Color secundario. Gradientes, énfasis.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#ECEAF6;"></div>
+          <div class="sw-info"><div class="sw-name">Lavanda Claro</div><div class="sw-hex">#ECEAF6</div><div class="sw-role">Fondos de cards, callouts.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#3D3860;"></div>
+          <div class="sw-info"><div class="sw-name">Púrpura Oscuro</div><div class="sw-hex">#3D3860</div><div class="sw-role">Fondos de énfasis, headers.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#2C2C2C;"></div>
+          <div class="sw-info"><div class="sw-name">Carbón</div><div class="sw-hex">#2C2C2C</div><div class="sw-role">Texto principal. Nunca negro puro.</div></div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#F8F8FA;border:1px solid #e0dded;"></div>
+          <div class="sw-info"><div class="sw-name">Off-White</div><div class="sw-hex">#F8F8FA</div><div class="sw-role">Fondo principal. Espacio para respirar.</div></div>
+        </div>
+      </div>
+
+      <h3 class="sh2">Tipografía</h3>
+      <div class="twrap">
+        <table class="dt">
+          <thead><tr><th>Uso</th><th>Fuente</th><th>Aplicación</th></tr></thead>
+          <tbody>
+            <tr><td>Display / Títulos</td><td>DM Serif Display (web) — Apax Medium (impreso)</td><td>Títulos principales únicamente. Nunca en cuerpo de texto.</td></tr>
+            <tr><td>Cuerpo / Interface</td><td>Poppins 300–500</td><td>Todo el cuerpo de texto, tablas, CTAs, UI.</td></tr>
+            <tr><td>Tamaño mínimo</td><td>—</td><td>11pt en impreso. 14px en digital.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sh2">Reglas de aplicación visual</h3>
+      <ul class="dl">
+        <li>Siempre dejar espacio en blanco generoso. El diseño de claritia respira.</li>
+        <li>Los fondos oscuros solo se usan para secciones específicas de énfasis, no páginas enteras.</li>
+        <li>Las imágenes muestran personas reales en situaciones cotidianas. No stock genérico de "personas felices posando".</li>
+        <li>El logo "claritia" siempre en minúsculas. Nunca CLARITIA ni Claritia.</li>
+        <li>Los gradientes van de lavanda a sage — nunca colores clínicos (verde hospital, azul corporativo frío).</li>
+      </ul>
+    </section>
+
+    <!-- 09 -->
+    <section class="doc-sec" id="s09">
+      <div class="sec-tag"><span class="sec-tag-n">09</span> Leti — Inteligencia Artificial</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Cómo Habla Leti</h2>
+      <p>Leti es la inteligencia artificial de claritia. Responderá en Instagram DMs, WhatsApp y el chat del website. Será la primera voz que escuche la mayoría de los usuarios. Su tono debe ser indistinguible del tono humano de claritia.</p>
+      <p><strong>Leti no es un bot frío. Leti es claritia.</strong></p>
+
+      <h3 class="sh2">Lo que Leti SÍ hace</h3>
+      <ul class="dl">
+        <li>Responde mensajes de bienvenida y primeras consultas con calidez inmediata</li>
+        <li>Orienta al usuario en el proceso de inicio — cómo empezar, qué esperar, cuánto cuesta</li>
+        <li>Ayuda a identificar el tipo de apoyo que el usuario necesita para orientar el matching con el psicólogo adecuado</li>
+        <li>Envía recordatorios de sesiones</li>
+        <li>Hace seguimiento post-sesión</li>
+        <li>Maneja preguntas administrativas: horarios, pagos, reagendamiento</li>
+        <li>En situaciones de crisis, reconoce la urgencia y conecta de inmediato con soporte humano</li>
+      </ul>
+
+      <h3 class="sh2">Lo que Leti NUNCA hace</h3>
+      <ul class="dl warn">
+        <li>NUNCA hace terapia. No diagnostica. No interpreta síntomas. No da consejos clínicos.</li>
+        <li>NUNCA minimiza lo que el usuario está sintiendo.</li>
+        <li>NUNCA usa respuestas genéricas de bot ("Entiendo tu consulta. Un agente te atenderá pronto.")</li>
+        <li>NUNCA promete resultados terapéuticos específicos.</li>
+        <li>NUNCA reemplaza al psicólogo en ningún aspecto del proceso clínico.</li>
+      </ul>
+
+      <h3 class="sh2">Tono de Leti — ejemplos</h3>
+      <div class="twrap">
+        <table class="lt">
+          <thead><tr><th class="lth-u">El usuario dice...</th><th class="lth-l">Leti responde...</th></tr></thead>
+          <tbody>
+            <tr><td>"Me siento muy mal últimamente."</td><td>"Gracias por escribir. Lo que sientes importa. ¿Quieres contarme un poco más sobre lo que está pasando?"</td></tr>
+            <tr><td>"¿Cuánto cuesta?"</td><td>"El precio es muy accesible, pensado para que no sea una barrera. Déjame orientarte sobre las opciones. ¿Por dónde te gustaría empezar?"</td></tr>
+            <tr><td>"No sé si esto es para mí."</td><td>"No tienes que tener todo claro para empezar. Muchas personas que hoy están en proceso sintieron exactamente eso al inicio."</td></tr>
+            <tr><td>"Estoy en crisis ahora mismo."</td><td>"Estoy aquí. Lo que estás sintiendo es real y merece atención ahora. Déjame conectarte con alguien de inmediato."</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="doc-sec" id="s10">
+      <div class="sec-tag"><span class="sec-tag-n">10</span> Canales Digitales</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Dónde Vivimos y Cómo</h2>
+      <p>El tono central de claritia no cambia entre canales, pero la forma en que se expresa se adapta al contexto de cada plataforma.</p>
+      <div class="twrap">
+        <table class="dt">
+          <thead><tr><th>Canal</th><th>Rol y Reglas</th></tr></thead>
+          <tbody>
+            <tr><td>Website</td><td>Hub central. Aquí ocurre la conversión final. Leti vive aquí como chat de bienvenida. La experiencia debe permitir pasar de "llegué al sitio" a "empecé mi proceso" en menos de 3 clics y 5 minutos.</td></tr>
+            <tr><td>WhatsApp</td><td>Canal de conversación directa. Leti responde aquí. Tono personal e inmediato. Canal preferido en Latinoamérica. Nunca spam. Solo conversaciones iniciadas por el usuario o seguimientos consentidos.</td></tr>
+            <tr><td>Instagram</td><td>Posicionamiento y gancho. Contenido visual, emocional y relatable. El equipo de social media maneja el contenido. Leti responde los DMs.</td></tr>
+            <tr><td>Facebook</td><td>Similar a Instagram, enfocado en rango de edad ligeramente mayor. Leti responde mensajes directos.</td></tr>
+            <tr><td>TikTok</td><td>Posicionamiento con contenido de alta identificación emocional. Mayor informalidad visual, pero el tono de marca se mantiene.</td></tr>
+            <tr><td>Google Ads / SEO</td><td>Captura intención de búsqueda. El copy parte de las búsquedas emocionales de la sección 05. No copy clínico. Copy de situación.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="doc-sec" id="s11">
+      <div class="sec-tag"><span class="sec-tag-n">11</span> Líneas que No Cruzamos</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Lo que claritia Nunca Hace</h2>
+      <p>Estas son reglas absolutas. No tienen excepción, sin importar el canal, el formato o el objetivo de conversión.</p>
+
+      <h3 class="sh2">En copy y comunicación</h3>
+      <ul class="dl warn">
+        <li>Nunca usar el miedo como mecanismo de conversión. ("Si no atiendes tu ansiedad ahora, puede empeorar." — PROHIBIDO.)</li>
+        <li>Nunca trivializar la salud mental con humor inadecuado.</li>
+        <li>Nunca usar testimonios fabricados o estadísticas sin fuente verificable.</li>
+        <li>Nunca prometer tiempos específicos de recuperación. ("En 8 sesiones estarás mejor." — NUNCA.)</li>
+        <li>Nunca usar lenguaje que estigmatice condiciones de salud mental.</li>
+        <li>Nunca hacer comparaciones despectivas con la competencia.</li>
+      </ul>
+
+      <h3 class="sh2">En diseño</h3>
+      <ul class="dl warn">
+        <li>Nunca usar imágenes que asocien salud mental con debilidad, locura o peligro.</li>
+        <li>Nunca usar paleta clínica: verde hospital, blanco aséptico, azul corporativo frío.</li>
+        <li>Nunca diseñar con densidad de información que abrume al usuario. El espacio en blanco es parte del diseño.</li>
+      </ul>
+
+      <h3 class="sh2">En la experiencia del usuario</h3>
+      <ul class="dl warn">
+        <li>Nunca hacer que el proceso de inicio sea complicado. Cada paso extra pierde a alguien que necesita ayuda.</li>
+        <li>Nunca tratar al usuario como un ticket de soporte. Siempre como una persona.</li>
+        <li>Nunca dejar un mensaje sin respuesta por más del tiempo de respuesta acordado.</li>
+      </ul>
+    </section>
+
+    <!-- 12 -->
+    <section class="doc-sec" id="s12">
+      <div class="sec-tag"><span class="sec-tag-n">12</span> Checklist de Consistencia</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Antes de Publicar Cualquier Output</h2>
+      <p>Cualquier pieza de comunicación — post, email, copy de ad, página web, mensaje de Leti, documento — debe pasar esta checklist antes de ser publicada o entregada.</p>
+      <div class="cklist">
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿El tono es empático y honesto?</div>
+          <div class="cka">¿Valida la experiencia del usuario sin dramatizar ni minimizar?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿El lenguaje es claro y simple?</div>
+          <div class="cka">¿Una persona sin conocimiento de psicología lo entiende fácilmente?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿Evita promesas absolutas?</div>
+          <div class="cka">¿No dice "te vamos a curar" ni promete resultados específicos?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿Habla de experiencias, no de diagnósticos?</div>
+          <div class="cka">¿Dice "sentirte abrumado" en lugar de "Trastorno de Ansiedad Generalizada"?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿El CTA es claro y tiene baja fricción?</div>
+          <div class="cka">¿El siguiente paso es obvio y fácil de dar?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿La identidad visual es consistente?</div>
+          <div class="cka">¿Usa la paleta correcta, la tipografía correcta y suficiente espacio en blanco?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿El logo aparece en minúsculas?</div>
+          <div class="cka">¿Dice "claritia" y no "CLARITIA" ni "Claritia"?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿Si Leti lo dice, suena humano?</div>
+          <div class="cka">¿Podría confundirse con la respuesta de una persona real y empática?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿Refleja el arquetipo Cuidador + Everyman?</div>
+          <div class="cka">¿Es cálido sin ser paternalista? ¿Es accesible sin ser informal?</div>
+        </div>
+        <div class="ckrow">
+          <div class="ckbox"><div class="ckicon" onclick="this.classList.toggle('on')"></div></div>
+          <div class="ckq">¿Está en español correcto para el mercado objetivo?</div>
+          <div class="cka">¿El registro y el vocabulario corresponden a la región?</div>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:40px;"><p>"La terapia no debería ser un lujo. claritia existe para cambiar eso."</p></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno. No distribuir sin autorización.</div>
+  <div class="fr">
+    <div class="fbadge">01 — Documento Base</div>
+    <a href="index.html" class="fback">← Volver al Vault</a>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.doc-sec[id]');
+  const links = document.querySelectorAll('.sb-nav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
