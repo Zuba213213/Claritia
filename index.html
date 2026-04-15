@@ -1,1 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>claritia — Marketing Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
 
+  <style>
+    /* ─── RESET ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ─── TOKENS — estrategia.pdf palette ───────────── */
+    :root {
+      --lav:        #B8B4D4;   /* lavender mid — matches pdf circles */
+      --lav-light:  #D4D1E8;   /* lighter lavender */
+      --lav-xlight: #ECEAF6;   /* near white lavender */
+      --sage:       #8FA89A;   /* sage-grey from pdf gradient end */
+      --sage-dark:  #6B8C7D;
+      --grad-start: #C4C0DC;   /* pdf cover gradient left */
+      --grad-end:   #9AABA0;   /* pdf cover gradient right */
+      --white:      #FFFFFF;
+      --off-white:  #F8F8FA;
+      --charcoal:   #2C2C2C;
+      --mid:        #6B6B6B;
+      --light:      #D0CDE0;
+      --card-bg:    rgba(255,255,255,0.72);
+      --card-hover: rgba(255,255,255,0.92);
+    }
+
+    /* ─── BASE ───────────────────────────────────────── */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--charcoal);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── HERO — gradient from estrategia.pdf ───────── */
+    .hero {
+      position: relative;
+      background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
+      padding: 72px 48px 80px;
+      overflow: hidden;
+    }
+
+    /* floating circles — echoing the pdf icon system */
+    .hero::before,
+    .hero::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.10);
+    }
+    .hero::before {
+      width: 320px; height: 320px;
+      top: -80px; right: -60px;
+    }
+    .hero::after {
+      width: 180px; height: 180px;
+      bottom: -40px; left: 30%;
+    }
+
+    /* decorative circles — matching pdf aesthetic */
+    .circle-deco {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.13);
+      pointer-events: none;
+    }
+    .c1 { width: 56px;  height: 56px;  top: 32px;  right: 200px; }
+    .c2 { width: 30px;  height: 30px;  top: 80px;  right: 260px; }
+    .c3 { width: 42px;  height: 42px;  bottom: 48px; right: 120px; }
+    .c4 { width: 22px;  height: 22px;  bottom: 60px; left: 48px;  }
+
+    /* icon circles matching pdf style */
+    .icon-cluster {
+      position: absolute;
+      top: 28px;
+      right: 48px;
+      display: flex;
+      gap: 10px;
+      opacity: 0.55;
+    }
+    .icon-dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+
+    .hero-collab {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 28px;
+    }
+
+    .hero-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(52px, 7vw, 80px);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-sub {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero-desc {
+      max-width: 440px;
+      font-size: 14px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.80);
+      line-height: 1.7;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    /* quote bar */
+    .hero-quote {
+      margin-top: 36px;
+      padding: 14px 20px;
+      border-left: 2px solid rgba(255,255,255,0.45);
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: rgba(255,255,255,0.90);
+      max-width: 460px;
+      line-height: 1.5;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    /* ─── MAIN CONTENT ──────────────────────────────── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 48px 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--light);
+    }
+
+    /* ─── VAULT GRID ────────────────────────────────── */
+    .vault-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    /* card base */
+    .vcard {
+      background: var(--white);
+      border: 1px solid rgba(184,180,212,0.25);
+      border-radius: 12px;
+      padding: 28px 28px 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      animation: fadeUp 0.5s ease both;
+    }
+    .vcard:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(184,180,212,0.22);
+      border-color: rgba(184,180,212,0.55);
+    }
+
+    /* accent bar on top of each card */
+    .vcard::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--lav), var(--sage));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .vcard:hover::before { opacity: 1; }
+
+    /* grid placement */
+    .vcard--hero   { grid-column: span 12; }
+    .vcard--wide   { grid-column: span 7; }
+    .vcard--narrow { grid-column: span 5; }
+    .vcard--half   { grid-column: span 6; }
+    .vcard--third  { grid-column: span 4; }
+
+    /* featured / dark card */
+    .vcard--featured {
+      background: linear-gradient(130deg, #3D3860 0%, #5A566E 100%);
+      border-color: transparent;
+      color: var(--white);
+    }
+    .vcard--featured:hover {
+      box-shadow: 0 16px 48px rgba(61,56,96,0.30);
+      border-color: transparent;
+    }
+    .vcard--featured::before {
+      background: linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+    }
+
+    /* card internals */
+    .card-num {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--lav);
+      margin-bottom: 14px;
+    }
+    .vcard--featured .card-num { color: rgba(255,255,255,0.50); }
+
+    .card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 10px;
+    }
+    .vcard--featured .card-title { color: var(--white); font-size: 26px; }
+
+    .card-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .vcard--featured .card-desc { color: rgba(255,255,255,0.65); }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 20px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      background: var(--lav-xlight);
+      color: #534AB7;
+      align-self: flex-start;
+    }
+    .vcard--featured .card-tag {
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+    }
+
+    .card-route {
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--lav);
+      letter-spacing: 0.03em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .vcard:hover .card-route { opacity: 1; transform: translateY(0); }
+    .vcard--featured .card-route { color: rgba(255,255,255,0.45); }
+
+    .card-arrow {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--lav-xlight);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      color: #534AB7;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .vcard:hover .card-arrow { opacity: 1; transform: translateX(0); }
+    .vcard--featured .card-arrow {
+      background: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.80);
+    }
+
+    /* stagger animation delays */
+    .vcard:nth-child(1) { animation-delay: 0.05s; }
+    .vcard:nth-child(2) { animation-delay: 0.10s; }
+    .vcard:nth-child(3) { animation-delay: 0.15s; }
+    .vcard:nth-child(4) { animation-delay: 0.20s; }
+    .vcard:nth-child(5) { animation-delay: 0.25s; }
+    .vcard:nth-child(6) { animation-delay: 0.30s; }
+    .vcard:nth-child(7) { animation-delay: 0.35s; }
+    .vcard:nth-child(8) { animation-delay: 0.40s; }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--light);
+      padding: 28px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-left {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--mid);
+    }
+    .footer-left strong { font-weight: 500; color: var(--charcoal); }
+    .footer-badge {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      background: var(--lav-xlight);
+      color: #534AB7;
+    }
+
+    /* ─── ANIMATIONS ─────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { padding: 48px 28px 64px; }
+      .main { padding: 40px 28px 64px; }
+      .footer { padding: 24px 28px; }
+      .vcard--wide,
+      .vcard--narrow,
+      .vcard--half,
+      .vcard--third { grid-column: span 12; }
+      .icon-cluster { display: none; }
+    }
+    @media (max-width: 600px) {
+      .vcard--hero { grid-column: span 12; }
+      .hero-logo { font-size: 44px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ HERO ══════════════════════════════════════════ -->
+  <header class="hero">
+    <div class="circle-deco c1"></div>
+    <div class="circle-deco c2"></div>
+    <div class="circle-deco c3"></div>
+    <div class="circle-deco c4"></div>
+
+    <div class="icon-cluster">
+      <div class="icon-dot">&#9675;</div>
+      <div class="icon-dot" style="width:24px;height:24px;margin-top:6px;">&#9675;</div>
+      <div class="icon-dot" style="width:28px;height:28px;margin-top:2px;">&#9675;</div>
+    </div>
+
+    <div class="hero-collab">JRZ Consulting Solutions &nbsp;&times;&nbsp; claritia</div>
+    <div class="hero-logo">claritia</div>
+    <div class="hero-sub">Terapia Clínica Online</div>
+    <p class="hero-desc">
+      Repositorio central de marketing. Fuente única de verdad para todo lo que se produce en nombre de claritia.
+    </p>
+    <blockquote class="hero-quote">
+      "Convertir no es vender una sesión. Es iniciar un proceso."
+    </blockquote>
+  </header>
+
+  <!-- ═══ MAIN VAULT ════════════════════════════════════ -->
+  <main class="main">
+
+    <div class="section-header">
+      <span class="section-label">Repositorio de Estrategia</span>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="vault-grid">
+
+      <!-- 01 — Brand Guide (featured full-width) -->
+      <a class="vcard vcard--featured vcard--hero" href="/claritiaconsistency">
+        <div class="card-num">01 — Guía de Marca</div>
+        <div class="card-title">Consistencia de Marca</div>
+        <div class="card-desc">
+          Fuente única de verdad. Identidad de marca, tono de voz, valores corporativos, arquetipos, reglas de identidad visual y checklist de consistencia. Punto de partida obligatorio para cualquier output.
+        </div>
+        <div class="card-tag">Documento Base</div>
+        <div class="card-route">/claritiaconsistency</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- 02 — ICP (wide) -->
+      <a class="vcard vcard--wide" href="/claritiaicp">
+        <div class="card-num">02 — Audiencia</div>
+        <div class="card-title">Perfil de Cliente Ideal</div>
+        <div class="card-desc">
+          Segmentos de entrada, contextos emocionales que atendemos y búsquedas reales de la audiencia. La base para todo el copy y la estrategia SEO.
+        </div>
+        <div class="card-tag">Estrategia</div>
+        <div class="card-route">/claritiaicp</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- 03 — Tone (narrow) -->
+      <a class="vcard vcard--narrow" href="/claritiatone">
+        <div class="card-num">03 — Comunicación</div>
+        <div class="card-title">Tono y Lenguaje de Copy</div>
+        <div class="card-desc">
+          Los cuatro ejes de tono, reglas de escritura, ejemplos correctos e incorrectos para cada canal.
+        </div>
+        <div class="card-tag">Copy</div>
+        <div class="card-route">/claritiatone</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- 04 — Journey (half) -->
+      <a class="vcard vcard--half" href="/claritiajourney">
+        <div class="card-num">04 — Proceso</div>
+        <div class="card-title">Journey del Cliente</div>
+        <div class="card-desc">
+          Las cuatro fases del proceso de conversión: posicionamiento, gancho, conversión y experiencia. Roles de Leti y el psicólogo en cada etapa.
+        </div>
+        <div class="card-tag">Proceso</div>
+        <div class="card-route">/claritiajourney</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- 05 — Leti (half) -->
+      <a class="vcard vcard--half" href="/claritialeti">
+        <div class="card-num">05 — Inteligencia Artificial</div>
+        <div class="card-title">Leti — Reglas de la IA</div>
+        <div class="card-desc">
+          Qué hace Leti, qué nunca hace, y cómo debe sonar en Instagram DMs, WhatsApp y el chat del website.
+        </div>
+        <div class="card-tag">IA</div>
+        <div class="card-route">/claritialeti</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- 06 — Visual (third) -->
+      <a class="vcard vcard--third" href="/claritiavisual">
+        <div class="card-num">06 — Diseño</div>
+        <div class="card-title">Identidad Visual</div>
+        <div class="card-desc">
+          Paleta de colores, tipografía y reglas de aplicación. Uso correcto del logo.
+        </div>
+        <div class="card-tag">Diseño</div>
+        <div class="card-route">/claritiavisual</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- 07 — Market (third) -->
+      <a class="vcard vcard--third" href="/claritiamarket">
+        <div class="card-num">07 — Contexto</div>
+        <div class="card-title">Oportunidad de Mercado</div>
+        <div class="card-desc">
+          El contexto que le da relevancia a claritia y su posicionamiento frente a la IA.
+        </div>
+        <div class="card-tag">Mercado</div>
+        <div class="card-route">/claritiamarket</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- 08 — Limits (third) -->
+      <a class="vcard vcard--third" href="/claritialimits">
+        <div class="card-num">08 — Límites</div>
+        <div class="card-title">Líneas que No Cruzamos</div>
+        <div class="card-desc">
+          Reglas absolutas de copy, diseño y experiencia de usuario. Sin excepciones.
+        </div>
+        <div class="card-tag">Reglas</div>
+        <div class="card-route">/claritialimits</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+    </div><!-- /vault-grid -->
+  </main>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-left">
+      <strong>claritia</strong> &nbsp;&times;&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno. No distribuir sin autorización.
+    </div>
+    <div class="footer-badge">Marketing Vault</div>
+  </footer>
+
+</body>
+</html>
