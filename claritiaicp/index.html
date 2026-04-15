@@ -1,1 +1,1170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>claritia — Perfil de Cliente Ideal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
 
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── EXACT TOKENS FROM SYSTEM ── */
+    :root {
+      --lav:         #B8B4D4;
+      --lav-light:   #D4D1E8;
+      --lav-xlight:  #ECEAF6;
+      --lav-deep:    #534AB7;
+      --sage:        #8FA89A;
+      --sage-dark:   #6B8C7D;
+      --grad-start:  #C4C0DC;
+      --grad-end:    #9AABA0;
+      --purple-dark: #3D3860;
+      --white:       #FFFFFF;
+      --off-white:   #F8F8FA;
+      --charcoal:    #2C2C2C;
+      --mid:         #6B6B6B;
+      --light:       #D0CDE0;
+      --rule:        rgba(184,180,212,0.25);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--off-white);
+      color: var(--charcoal);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,248,250,0.93);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 48px; height: 52px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .topbar-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px; color: var(--charcoal);
+      text-decoration: none; letter-spacing: -0.01em;
+    }
+    .topbar-crumb {
+      font-size: 11px; font-weight: 400; color: var(--mid);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .topbar-crumb a { color: var(--mid); text-decoration: none; }
+    .topbar-crumb a:hover { color: var(--lav-deep); }
+    .topbar-sep { color: var(--light); }
+    .topbar-cur { color: var(--lav-deep); font-weight: 500; }
+    .topbar-badge {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px;
+      background: var(--lav-xlight); color: var(--lav-deep);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
+      padding: 64px 48px 72px; overflow: hidden;
+    }
+    .hero::before {
+      content:''; position:absolute;
+      width:340px; height:340px; border-radius:50%;
+      background:rgba(255,255,255,0.08); top:-90px; right:-70px;
+    }
+    .hero::after {
+      content:''; position:absolute;
+      width:160px; height:160px; border-radius:50%;
+      background:rgba(255,255,255,0.07); bottom:-40px; left:35%;
+    }
+    .cdeco { position:absolute; border-radius:50%; background:rgba(255,255,255,0.12); pointer-events:none; }
+    .cd1{width:52px;height:52px;top:28px;right:220px;}
+    .cd2{width:28px;height:28px;top:72px;right:284px;}
+    .cd3{width:38px;height:38px;bottom:44px;right:140px;}
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:10px; font-weight:600; letter-spacing:0.18em;
+      text-transform:uppercase; color:rgba(255,255,255,0.60); margin-bottom:20px;
+    }
+    .hero-eyebrow span {
+      width:6px; height:6px; border-radius:50%;
+      background:rgba(255,255,255,0.50); display:inline-block;
+    }
+    .hero-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(40px,5.5vw,68px); font-weight:400; color:var(--white);
+      line-height:1.05; letter-spacing:-0.02em; margin-bottom:8px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-sub {
+      font-size:11px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.60); margin-bottom:24px;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    .hero-desc {
+      max-width:560px; font-size:14px; font-weight:300;
+      color:rgba(255,255,255,0.80); line-height:1.75;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+    .hero-collab {
+      margin-top:32px; font-size:10px; font-weight:500;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.40); animation: fadeUp 0.5s 0.22s ease both;
+    }
+
+    /* ── STAT ROW ── */
+    .stat-row {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1px; background:var(--rule);
+      border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+    }
+    .stat-cell {
+      background:var(--white); padding:24px 32px;
+      display:flex; flex-direction:column; gap:4px;
+    }
+    .stat-num {
+      font-family:'DM Serif Display',serif;
+      font-size:38px; font-weight:400; color:var(--purple-dark);
+      line-height:1;
+    }
+    .stat-label {
+      font-size:12px; font-weight:300; color:var(--mid); line-height:1.5;
+    }
+    .stat-source {
+      font-size:10px; font-weight:400; color:var(--light);
+      margin-top:4px; letter-spacing:0.03em;
+    }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display:grid; grid-template-columns:220px 1fr;
+      max-width:1140px; margin:0 auto;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position:sticky; top:52px; height:calc(100vh - 52px);
+      overflow-y:auto; padding:40px 0 40px 48px;
+      border-right:1px solid var(--rule);
+    }
+    .sb-label {
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--mid); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--rule);
+    }
+    .sb-nav { list-style:none; display:flex; flex-direction:column; gap:2px; }
+    .sb-nav a {
+      display:flex; align-items:baseline; gap:8px;
+      font-size:12px; font-weight:400; color:var(--mid);
+      text-decoration:none; padding:6px 12px 6px 0;
+      border-radius:4px; transition:color 0.15s ease; line-height:1.4;
+    }
+    .sb-nav a:hover { color:var(--lav-deep); }
+    .sb-nav a.active { color:var(--lav-deep); font-weight:500; }
+    .nav-n { font-size:9px; color:var(--lav); font-weight:600; min-width:18px; }
+
+    /* ── CONTENT ── */
+    .content { padding:56px 64px 100px 56px; max-width:760px; }
+
+    /* ── SECTION ── */
+    .doc-sec {
+      margin-bottom:80px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .doc-sec:nth-child(1){animation-delay:0.05s}
+    .doc-sec:nth-child(2){animation-delay:0.10s}
+    .doc-sec:nth-child(3){animation-delay:0.15s}
+    .doc-sec:nth-child(4){animation-delay:0.20s}
+    .doc-sec:nth-child(5){animation-delay:0.25s}
+    .doc-sec:nth-child(6){animation-delay:0.30s}
+    .doc-sec:nth-child(7){animation-delay:0.35s}
+    .doc-sec:nth-child(8){animation-delay:0.40s}
+
+    .sec-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--lav-deep); background:var(--lav-xlight);
+      padding:4px 12px; border-radius:4px; margin-bottom:16px;
+    }
+    .sec-tag-n { color:var(--lav); }
+    .sec-rule { width:40px; height:2px; background:linear-gradient(90deg,var(--lav),var(--sage)); border-radius:2px; margin-bottom:20px; }
+
+    h2.sh1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(28px,3.5vw,38px); font-weight:400; color:var(--charcoal);
+      line-height:1.1; letter-spacing:-0.01em; margin-bottom:20px;
+    }
+    h3.sh2 {
+      font-family:'DM Serif Display',serif;
+      font-size:22px; font-weight:400; color:var(--charcoal);
+      margin-top:40px; margin-bottom:14px;
+      padding-bottom:10px; border-bottom:1px solid var(--rule);
+    }
+    p {
+      font-size:14px; font-weight:300; line-height:1.80;
+      color:var(--charcoal); margin-bottom:16px;
+    }
+    p:last-child { margin-bottom:0; }
+    strong { font-weight:500; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      margin:28px 0; padding:20px 24px;
+      border-left:3px solid var(--lav);
+      background:var(--lav-xlight); border-radius:0 8px 8px 0;
+    }
+    .callout p {
+      font-family:'DM Serif Display',serif; font-style:italic;
+      font-size:17px; color:var(--purple-dark); margin:0; line-height:1.5;
+    }
+
+    /* ── PERSONA PORTRAIT ── */
+    .portrait {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .portrait-header {
+      background: linear-gradient(130deg, var(--purple-dark) 0%, #5A566E 100%);
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 20px;
+    }
+    .portrait-name {
+      font-family:'DM Serif Display',serif;
+      font-size:26px; color:var(--white); margin-bottom:4px; line-height:1.1;
+    }
+    .portrait-tagline {
+      font-size:12px; font-weight:300; color:rgba(255,255,255,0.65); line-height:1.5;
+      max-width:360px;
+    }
+    .portrait-badge {
+      background:rgba(255,255,255,0.10);
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:8px; padding:10px 16px; text-align:center; white-space:nowrap;
+    }
+    .portrait-badge-age {
+      font-family:'DM Serif Display',serif;
+      font-size:22px; color:var(--white); display:block; line-height:1;
+    }
+    .portrait-badge-label {
+      font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+      color:rgba(255,255,255,0.50); margin-top:4px; display:block;
+    }
+    .portrait-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .portrait-col {
+      padding: 22px 24px;
+      border-right: 1px solid var(--rule);
+    }
+    .portrait-col:last-child { border-right: none; }
+    .portrait-col-title {
+      font-size:9px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--lav-deep); margin-bottom:12px;
+    }
+    .portrait-list {
+      list-style:none; display:flex; flex-direction:column; gap:8px;
+    }
+    .portrait-list li {
+      font-size:12.5px; font-weight:300; color:var(--charcoal);
+      display:flex; align-items:flex-start; gap:10px; line-height:1.55;
+    }
+    .portrait-list li::before {
+      content:''; width:5px; height:5px; border-radius:50%;
+      background:var(--lav); margin-top:6px; flex-shrink:0;
+    }
+
+    /* ── EMOTIONAL STATE CARDS ── */
+    .emotion-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px; margin:20px 0;
+    }
+    .emotion-card {
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:10px; padding:18px 20px 16px;
+      position:relative; overflow:hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .emotion-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(184,180,212,0.18);
+    }
+    .emotion-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,var(--lav),var(--sage));
+    }
+    .emotion-icon {
+      font-size:20px; margin-bottom:8px; display:block;
+      line-height:1;
+    }
+    .emotion-title {
+      font-family:'DM Serif Display',serif;
+      font-size:16px; color:var(--charcoal); margin-bottom:6px;
+    }
+    .emotion-desc {
+      font-size:12px; font-weight:300; color:var(--mid);
+      line-height:1.6; margin:0;
+    }
+    .emotion-stat {
+      margin-top:10px; padding-top:10px; border-top:1px solid var(--rule);
+      font-size:11px; font-weight:400; color:var(--lav-deep);
+    }
+
+    /* ── SEGMENT CARDS ── */
+    .segment-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0;
+    }
+    .seg-card {
+      border-radius:10px; padding:22px 22px 20px; overflow:hidden;
+    }
+    .seg-card.economic {
+      background:var(--purple-dark); border:none;
+    }
+    .seg-card.comfort {
+      background:var(--white); border:1px solid var(--rule);
+    }
+    .seg-num {
+      font-size:9px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .seg-card.economic .seg-num { color:rgba(255,255,255,0.45); }
+    .seg-card.comfort .seg-num  { color:var(--lav); }
+    .seg-title {
+      font-family:'DM Serif Display',serif;
+      font-size:20px; margin-bottom:10px; line-height:1.1;
+    }
+    .seg-card.economic .seg-title { color:var(--white); }
+    .seg-card.comfort .seg-title  { color:var(--charcoal); }
+    .seg-hook {
+      font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+      padding:3px 10px; border-radius:3px; display:inline-block; margin-bottom:14px;
+    }
+    .seg-card.economic .seg-hook { background:rgba(255,255,255,0.12); color:rgba(255,255,255,0.70); }
+    .seg-card.comfort .seg-hook  { background:var(--lav-xlight); color:var(--lav-deep); }
+    .seg-list { list-style:none; display:flex; flex-direction:column; gap:6px; }
+    .seg-list li {
+      font-size:12.5px; font-weight:300; line-height:1.55;
+      display:flex; align-items:flex-start; gap:8px;
+    }
+    .seg-card.economic .seg-list li { color:rgba(255,255,255,0.75); }
+    .seg-card.comfort .seg-list li  { color:var(--mid); }
+    .seg-list li::before {
+      content:''; width:5px; height:5px; border-radius:50%;
+      margin-top:6px; flex-shrink:0;
+    }
+    .seg-card.economic .seg-list li::before { background:var(--lav-light); }
+    .seg-card.comfort .seg-list li::before  { background:var(--sage); }
+
+    /* ── BARRIER CARDS ── */
+    .barrier-stack {
+      display:flex; flex-direction:column; gap:12px; margin:20px 0;
+    }
+    .barrier-card {
+      display:grid; grid-template-columns:44px 1fr;
+      align-items:start; gap:16px;
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:10px; padding:18px 20px;
+    }
+    .barrier-num-wrap {
+      width:44px; height:44px; border-radius:50%;
+      background:var(--lav-xlight); display:flex;
+      align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .barrier-num {
+      font-family:'DM Serif Display',serif;
+      font-size:18px; color:var(--lav-deep);
+    }
+    .barrier-title {
+      font-family:'DM Serif Display',serif;
+      font-size:17px; color:var(--charcoal); margin-bottom:6px;
+    }
+    .barrier-desc {
+      font-size:13px; font-weight:300; color:var(--mid);
+      line-height:1.65; margin:0;
+    }
+    .barrier-what {
+      margin-top:10px; font-size:12px; font-weight:500;
+      color:var(--lav-deep); font-style:italic;
+    }
+
+    /* ── SEARCH INTENT PILLS ── */
+    .intent-section { margin:20px 0; }
+    .intent-group { margin-bottom:24px; }
+    .intent-group-label {
+      font-size:9px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--sage-dark); margin-bottom:10px; display:flex; align-items:center; gap:8px;
+    }
+    .intent-group-label::after {
+      content:''; flex:1; height:1px; background:var(--rule);
+    }
+    .pill-wrap {
+      display:flex; flex-wrap:wrap; gap:8px;
+    }
+    .pill {
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:20px; padding:7px 14px;
+      font-size:12px; font-weight:300; color:var(--charcoal);
+      line-height:1.3; transition: all 0.15s ease;
+    }
+    .pill:hover {
+      background:var(--lav-xlight); border-color:var(--lav);
+      color:var(--lav-deep);
+    }
+    .pill.high {
+      background:var(--lav-xlight); border-color:var(--lav);
+      color:var(--lav-deep); font-weight:400;
+    }
+
+    /* ── WHAT MOVES THEM ── */
+    .move-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;
+    }
+    .move-card {
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:10px; padding:18px 20px;
+    }
+    .move-icon { font-size:18px; margin-bottom:8px; display:block; }
+    .move-title {
+      font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--lav-deep); margin-bottom:6px;
+    }
+    .move-copy {
+      font-family:'DM Serif Display',serif; font-style:italic;
+      font-size:15px; color:var(--charcoal); margin-bottom:8px; line-height:1.4;
+    }
+    .move-why {
+      font-size:11.5px; font-weight:300; color:var(--mid); line-height:1.55; margin:0;
+    }
+
+    /* ── PLATFORM GRID ── */
+    .platform-grid {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0;
+    }
+    .plat-card {
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:10px; padding:16px 16px 14px;
+    }
+    .plat-name {
+      font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--charcoal); margin-bottom:6px; display:flex; align-items:center; gap:6px;
+    }
+    .plat-dot {
+      width:6px; height:6px; border-radius:50%; flex-shrink:0;
+    }
+    .plat-role {
+      font-size:11.5px; font-weight:300; color:var(--mid); line-height:1.55; margin-bottom:8px;
+    }
+    .plat-action {
+      font-size:10.5px; font-weight:500; color:var(--lav-deep);
+      border-top:1px solid var(--rule); padding-top:8px;
+    }
+
+    /* ── NOT THIS PERSON (counter-profile) ── */
+    .counter-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:0;
+      border:1px solid var(--rule); border-radius:10px; overflow:hidden; margin:20px 0;
+    }
+    .counter-col { padding:20px 22px; }
+    .counter-col.yes { background:rgba(236,234,246,0.30); border-right:1px solid var(--rule); }
+    .counter-col.no  { background:#faf8f8; }
+    .counter-col-label {
+      font-size:10px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;
+      margin-bottom:12px;
+    }
+    .counter-col.yes .counter-col-label { color:var(--lav-deep); }
+    .counter-col.no  .counter-col-label { color:#a07070; }
+    .counter-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
+    .counter-list li {
+      font-size:12.5px; font-weight:300; line-height:1.55;
+      display:flex; align-items:flex-start; gap:8px; color:var(--charcoal);
+    }
+    .counter-list li::before {
+      content:''; width:5px; height:5px; border-radius:50%;
+      margin-top:6px; flex-shrink:0;
+    }
+    .counter-col.yes .counter-list li::before { background:var(--lav); }
+    .counter-col.no  .counter-list li::before { background:#c09090; }
+
+    /* ── TONE COMPASS ── */
+    .tone-compass {
+      display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:20px 0;
+    }
+    .tone-card {
+      background:var(--white); border:1px solid var(--rule);
+      border-radius:10px; padding:18px 20px 16px;
+    }
+    .tone-seg-label {
+      font-size:9px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--sage-dark); margin-bottom:10px;
+    }
+    .tone-phrase {
+      font-family:'DM Serif Display',serif; font-style:italic;
+      font-size:15px; color:var(--purple-dark); margin-bottom:10px;
+      line-height:1.4; padding-bottom:10px; border-bottom:1px solid var(--rule);
+    }
+    .tone-avoid {
+      font-size:11px; font-weight:300; color:var(--mid); line-height:1.55;
+    }
+    .tone-avoid strong { font-weight:500; color:#a07070; }
+
+    /* ── DATA CALLOUT ── */
+    .data-callout {
+      display:flex; align-items:center; gap:16px;
+      background:var(--white); border:1px solid var(--rule);
+      border-left:3px solid var(--lav);
+      border-radius:0 8px 8px 0; padding:14px 18px; margin:16px 0;
+    }
+    .data-callout-num {
+      font-family:'DM Serif Display',serif;
+      font-size:32px; color:var(--purple-dark);
+      flex-shrink:0; line-height:1;
+    }
+    .data-callout-text {
+      font-size:13px; font-weight:300; color:var(--mid); line-height:1.55;
+    }
+    .data-callout-text strong { font-weight:500; color:var(--charcoal); }
+
+    /* ── GENERIC LISTS ── */
+    ul.dl {
+      list-style:none; margin:16px 0;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    ul.dl li {
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:13.5px; font-weight:300; line-height:1.65; color:var(--charcoal);
+    }
+    ul.dl li::before {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:var(--lav); margin-top:7px; flex-shrink:0;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      border-top:1px solid var(--rule); padding:28px 48px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    }
+    .fl { font-size:11px; font-weight:300; color:var(--mid); }
+    .fr { display:flex; align-items:center; gap:12px; }
+    .fbadge {
+      font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+      padding:4px 10px; border-radius:4px; background:var(--lav-xlight); color:var(--lav-deep);
+    }
+    .fnav { display:flex; align-items:center; gap:16px; }
+    .fnav a {
+      font-size:11px; color:var(--lav-deep); text-decoration:none; font-weight:500;
+    }
+    .fnav a:hover { text-decoration:underline; }
+    .fnav-sep { color:var(--light); font-size:11px; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .page-body { grid-template-columns:1fr; }
+      .sidebar { display:none; }
+      .content { padding:40px 28px 80px; }
+      .hero { padding:48px 28px 60px; }
+      .topbar { padding:0 24px; }
+      .topbar-badge { display:none; }
+      .stat-row { grid-template-columns:1fr; }
+      .portrait-body { grid-template-columns:1fr; }
+      .portrait-col { border-right:none; border-bottom:1px solid var(--rule); }
+      .portrait-col:last-child { border-bottom:none; }
+      .emotion-grid,.segment-grid,.move-grid,.tone-compass { grid-template-columns:1fr; }
+      .platform-grid { grid-template-columns:repeat(2,1fr); }
+      .counter-grid { grid-template-columns:1fr; }
+      .counter-col.yes { border-right:none; border-bottom:1px solid var(--rule); }
+      .portrait-header { grid-template-columns:1fr; }
+      .portrait-badge { display:none; }
+      .page-footer { padding:24px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="index.html" class="topbar-brand">claritia</a>
+  <div class="topbar-crumb">
+    <a href="index.html">Marketing Vault</a>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-cur">Perfil de Cliente Ideal</span>
+  </div>
+  <div class="topbar-badge">02 — Audiencia</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="cdeco cd1"></div>
+  <div class="cdeco cd2"></div>
+  <div class="cdeco cd3"></div>
+  <div class="hero-eyebrow"><span></span>Perfil de Cliente Ideal</div>
+  <h1 class="hero-title">La persona<br/>que nos necesita.</h1>
+  <div class="hero-sub">Terapia Clínica Online</div>
+  <p class="hero-desc">
+    Este documento es un retrato. No una lista de segmentos — una descripción real de quién es la persona que claritia acompaña, qué está viviendo, qué la detiene y qué necesita escuchar para dar el primer paso.
+  </p>
+  <div class="hero-collab">JRZ Consulting Solutions &nbsp;×&nbsp; claritia</div>
+</header>
+
+<!-- STAT ROW -->
+<div class="stat-row">
+  <div class="stat-cell">
+    <div class="stat-num">74.7%</div>
+    <div class="stat-label">de personas en América Latina que necesitan atención de salud mental no la reciben</div>
+    <div class="stat-source">Fuente: PAHO / World Mental Health Surveys</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">46%</div>
+    <div class="stat-label">de los trabajadores latinoamericanos experimentó burnout al menos una vez en 2024</div>
+    <div class="stat-source">Fuente: Buk — Burnout Laboral 2025, Chile · Colombia · México · Perú</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">92%</div>
+    <div class="stat-label">de los usuarios de internet en América Latina usa WhatsApp — el canal donde ya vive nuestra audiencia</div>
+    <div class="stat-source">Fuente: DataReportal / We Are Social / Meltwater 2024</div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-label">Contenido</div>
+    <ul class="sb-nav">
+      <li><a href="#s01"><span class="nav-n">01</span> El retrato</a></li>
+      <li><a href="#s02"><span class="nav-n">02</span> Quién es</a></li>
+      <li><a href="#s03"><span class="nav-n">03</span> Lo que siente</a></li>
+      <li><a href="#s04"><span class="nav-n">04</span> Los dos segmentos</a></li>
+      <li><a href="#s05"><span class="nav-n">05</span> Las tres barreras</a></li>
+      <li><a href="#s06"><span class="nav-n">06</span> Cómo busca</a></li>
+      <li><a href="#s07"><span class="nav-n">07</span> Qué la mueve</a></li>
+      <li><a href="#s08"><span class="nav-n">08</span> Dónde está</a></li>
+      <li><a href="#s09"><span class="nav-n">09</span> Quién no es</a></li>
+      <li><a href="#s10"><span class="nav-n">10</span> Tono para esta audiencia</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- 01 -->
+    <section class="doc-sec" id="s01">
+      <div class="sec-tag"><span class="sec-tag-n">01</span> El Retrato</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">¿Quién es la persona que claritia acompaña?</h2>
+      <p>claritia no segmenta por diagnóstico ni por nivel socioeconómico. No hablamos con "pacientes". Hablamos con personas que están pasando por algo difícil y no saben muy bien cómo nombrarlo, o que sí lo saben pero no han encontrado la forma de pedir ayuda.</p>
+      <p>La brecha de tratamiento en América Latina no es un problema de demanda — las personas sí quieren ayuda. Es un problema de acceso, costo y vergüenza. <strong>El trabajo de claritia es eliminar esas barreras, una por una.</strong></p>
+      <div class="callout"><p>"La gente no busca terapia. Busca dejar de sentirse así."</p></div>
+    </section>
+
+    <!-- 02 -->
+    <section class="doc-sec" id="s02">
+      <div class="sec-tag"><span class="sec-tag-n">02</span> Quién Es</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Un retrato concreto</h2>
+      <p>La audiencia principal de claritia vive en América Latina — principalmente en zonas urbanas o semi-urbanas de México, Colombia, Argentina, Chile, Perú y el resto de la región. Tiene entre 20 y 45 años, usa smartphone, y ya vive gran parte de su vida a través de plataformas digitales. Probablemente usa WhatsApp todos los días.</p>
+      <p>Dos retratos concentran el grueso de la audiencia:</p>
+
+      <div class="portrait">
+        <div class="portrait-header">
+          <div>
+            <div class="portrait-name">Valeria, 28 años</div>
+            <div class="portrait-tagline">Trabajadora urbana, vive sola o con pareja. Millennials y Gen Z que ya saben que algo no está bien pero no saben por dónde empezar — y tienen miedo de que sea más complicado de lo que parece.</div>
+          </div>
+          <div class="portrait-badge">
+            <span class="portrait-badge-age">20–35</span>
+            <span class="portrait-badge-label">Segmento principal</span>
+          </div>
+        </div>
+        <div class="portrait-body">
+          <div class="portrait-col">
+            <div class="portrait-col-title">Lo que vive</div>
+            <ul class="portrait-list">
+              <li>Se siente constantemente agotada pero no puede "justificarlo"</li>
+              <li>Le cuesta dormir o desconectarse del trabajo</li>
+              <li>Siente ansiedad antes de situaciones que antes le parecían normales</li>
+              <li>Ha buscado en Google "cómo dejar de sobrepensar" más de una vez</li>
+              <li>Habla con amigos o en redes, pero siente que no es suficiente</li>
+            </ul>
+          </div>
+          <div class="portrait-col">
+            <div class="portrait-col-title">Por qué no ha buscado ayuda</div>
+            <ul class="portrait-list">
+              <li>Cree que la terapia es cara para lo que gana</li>
+              <li>No sabe bien cómo empezar ni a quién buscar</li>
+              <li>Siente que "tampoco es para tanto" aunque sabe que sí lo es</li>
+              <li>No quiere que sea un proceso largo y complicado</li>
+              <li>Le da algo de vergüenza reconocer que necesita ayuda</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="portrait" style="margin-top:16px;">
+        <div class="portrait-header" style="background:linear-gradient(130deg, #5A566E 0%, var(--sage-dark) 100%);">
+          <div>
+            <div class="portrait-name">Andrés, 38 años</div>
+            <div class="portrait-tagline">Profesional con responsabilidades, tal vez con familia. Millennials maduros o Gen X jóvenes que llevan tiempo cargando solos con algo que ya está afectando su vida cotidiana.</div>
+          </div>
+          <div class="portrait-badge">
+            <span class="portrait-badge-age">30–45</span>
+            <span class="portrait-badge-label">Segmento secundario</span>
+          </div>
+        </div>
+        <div class="portrait-body">
+          <div class="portrait-col">
+            <div class="portrait-col-title">Lo que vive</div>
+            <ul class="portrait-list">
+              <li>Sensación de vacío o desconexión que no puede explicar</li>
+              <li>Burnout que se expresa como apatía, no como crisis visible</li>
+              <li>Relaciones desgastadas por su estado emocional</li>
+              <li>Siente que "debería poder solo" y le cuesta pedir ayuda</li>
+              <li>El tiempo es escaso — reuniones, familia, obligaciones</li>
+            </ul>
+          </div>
+          <div class="portrait-col">
+            <div class="portrait-col-title">Por qué no ha buscado ayuda</div>
+            <ul class="portrait-list">
+              <li>No tiene tiempo para buscar terapeuta, agendar y desplazarse</li>
+              <li>Ha escuchado que la terapia es un proceso largo sin resultados rápidos</li>
+              <li>Le incomoda la idea de abrirse con un desconocido cara a cara</li>
+              <li>Cree que necesita estar "en crisis" para justificar ir a terapia</li>
+              <li>El costo mensual de terapia regular se siente prohibitivo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="doc-sec" id="s03">
+      <div class="sec-tag"><span class="sec-tag-n">03</span> Lo que Siente</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Contextos emocionales que atendemos</h2>
+      <p>No hablamos de diagnósticos. Hablamos de experiencias humanas. Cualquier persona que se identifique con alguno de estos contextos es audiencia potencial de claritia.</p>
+
+      <div class="emotion-grid">
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9679;</span>
+          <div class="emotion-title">Ansiedad</div>
+          <p class="emotion-desc">Miedo constante que no encuentra causa. Dificultad para descansar. La mente que no para. Revisar todo dos veces.</p>
+          <div class="emotion-stat">Tratamiento gap en América Latina: 78% — las personas no reciben ayuda</div>
+        </div>
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9675;</span>
+          <div class="emotion-title">Depresión</div>
+          <p class="emotion-desc">Tristeza sin causa aparente. Falta de energía para cosas que antes importaban. Desconexión de personas cercanas.</p>
+          <div class="emotion-stat">Tratamiento gap para depresión en América Latina: 74%</div>
+        </div>
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9670;</span>
+          <div class="emotion-title">Burnout laboral</div>
+          <p class="emotion-desc">Agotamiento que no se va con descanso. Sensación de vacío profesional. Ya no encontrarle sentido a lo que uno hace.</p>
+          <div class="emotion-stat">46% de trabajadores latinoamericanos lo experimentó en 2024 (Buk)</div>
+        </div>
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9671;</span>
+          <div class="emotion-title">Crisis personales</div>
+          <p class="emotion-desc">Rupturas, pérdidas, cambios de vida que llegan de golpe. Momentos en que una persona reconoce que necesita apoyo externo.</p>
+          <div class="emotion-stat">Los momentos de crisis son el punto de entrada más frecuente a la terapia</div>
+        </div>
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9651;</span>
+          <div class="emotion-title">Trauma</div>
+          <p class="emotion-desc">Experiencias difíciles del pasado que siguen afectando el presente. Reacciones que no tienen sentido hasta que alguien las ayuda a nombrar.</p>
+          <div class="emotion-stat">Contexto de alta retención — quienes empiezan por trauma suelen continuar el proceso</div>
+        </div>
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9652;</span>
+          <div class="emotion-title">Maternidad difícil</div>
+          <p class="emotion-desc">Depresión postparto, agotamiento, culpa materna. Un segmento con altísima necesidad y muy poco acceso a apoyo especializado.</p>
+          <div class="emotion-stat">Uno de los segmentos más subatendidos en la región — acceso a apoyo es mínimo</div>
+        </div>
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9642;</span>
+          <div class="emotion-title">Neurodivergencia</div>
+          <p class="emotion-desc">TDAH, autismo, dificultades de procesamiento. Personas que llevan toda la vida sintiendo que funcionan diferente sin entender por qué.</p>
+          <div class="emotion-stat">17% de personas neurodivergentes experimentan burnout frecuente — el doble del promedio (Buk)</div>
+        </div>
+        <div class="emotion-card">
+          <span class="emotion-icon">&#9643;</span>
+          <div class="emotion-title">Procesos de vida</div>
+          <p class="emotion-desc">Duelo, transiciones, búsqueda de sentido. Personas que no están "en crisis" pero sienten que necesitan a alguien con quien pensar.</p>
+          <div class="emotion-stat">Segmento de alta conversión: ya tienen intención, solo necesitan acceso y confianza</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="doc-sec" id="s04">
+      <div class="sec-tag"><span class="sec-tag-n">04</span> Los Dos Segmentos</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Por qué no han empezado</h2>
+      <p>La misma persona puede pertenecer a ambos segmentos. No son excluyentes — son dos tipos de conversación. Cada uno tiene un gancho diferente y una entrada diferente al proceso.</p>
+
+      <div class="segment-grid">
+        <div class="seg-card economic">
+          <div class="seg-num">Segmento 01</div>
+          <div class="seg-title">Barrera<br/>Económica</div>
+          <div class="seg-hook">Gancho: precio accesible</div>
+          <ul class="seg-list">
+            <li>Quieren ayuda real pero creen que no pueden pagarlo</li>
+            <li>Han buscado opciones y las han descartado por el costo</li>
+            <li>Saben que la terapia existe pero la perciben como un lujo</li>
+            <li>Responden a mensajes de acceso y precio sin vergüenza</li>
+            <li>La propuesta de bajo costo es el desbloqueador principal</li>
+          </ul>
+        </div>
+        <div class="seg-card comfort">
+          <div class="seg-num">Segmento 02</div>
+          <div class="seg-title">Barrera de<br/>Comodidad</div>
+          <div class="seg-hook">Gancho: experiencia digital</div>
+          <ul class="seg-list">
+            <li>Sí pagarían por terapia pero no quieren el proceso físico</li>
+            <li>No quieren trasladarse, esperar ni acomodar horarios rígidos</li>
+            <li>Prefieren iniciar desde casa, en su propio tiempo</li>
+            <li>La fricción del proceso tradicional los ha detenido antes</li>
+            <li>El modelo 100% digital elimina su obstáculo real</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="doc-sec" id="s05">
+      <div class="sec-tag"><span class="sec-tag-n">05</span> Las Tres Barreras</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Qué los detiene — en detalle</h2>
+      <p>Comprender las barreras es más importante que conocer las motivaciones. Una persona motivada pero bloqueada no convierte. claritia está diseñada para eliminar las tres barreras simultáneamente.</p>
+
+      <div class="barrier-stack">
+        <div class="barrier-card">
+          <div class="barrier-num-wrap">
+            <div class="barrier-num">1</div>
+          </div>
+          <div>
+            <div class="barrier-title">El costo percibido</div>
+            <p class="barrier-desc">En América Latina, la cobertura de seguros para salud mental es mínima. La terapia es privada por defecto, con costos que en ciudades principales pueden ser equivalentes a $30–80 USD por sesión. Para una gran parte de la población trabajadora esto no es sostenible semanalmente. <strong>Pero la barrera también es perceptual</strong> — muchas personas asumen que es cara antes de buscar opciones reales.</p>
+            <div class="barrier-what">Respuesta de claritia: modelo de bajo costo + automatización que no sacrifica calidad.</div>
+          </div>
+        </div>
+        <div class="barrier-card">
+          <div class="barrier-num-wrap">
+            <div class="barrier-num">2</div>
+          </div>
+          <div>
+            <div class="barrier-title">La fricción del proceso</div>
+            <p class="barrier-desc">Encontrar un terapeuta adecuado, verificar que esté disponible, agendar, desplazarse, mantener horarios fijos semana a semana — cada uno de estos pasos es una barrera real, especialmente para personas con trabajos exigentes, familias o vidas urbanas complicadas. <strong>La fricción es el motivo por el que muchas personas que ya quieren empezar no empiezan.</strong></p>
+            <div class="barrier-what">Respuesta de claritia: proceso 100% digital, matching automático, inicio en menos de 2 minutos.</div>
+          </div>
+        </div>
+        <div class="barrier-card">
+          <div class="barrier-num-wrap">
+            <div class="barrier-num">3</div>
+          </div>
+          <div>
+            <div class="barrier-title">El estigma y el no saber por dónde empezar</div>
+            <p class="barrier-desc">La cultura latinoamericana históricamente ha visto la búsqueda de apoyo psicológico como señal de debilidad. <strong>El estigma no siempre es sobre ser visto por otros</strong> — muchas veces es interno: la persona siente que "no está tan mal" o que "debería poder solo". Sumado a esto, muchos no saben con claridad qué hace un psicólogo, qué esperar de la primera sesión, o si lo que sienten justifica ir.</p>
+            <div class="barrier-what">Respuesta de claritia: tono sin juicio, onboarding cálido con Leti, lenguaje de proceso no de diagnóstico.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-callout">
+        <div class="data-callout-num">75%</div>
+        <div class="data-callout-text">
+          <strong>de los trabajadores mexicanos experimenta estrés laboral agudo</strong>, según el IMSS y OCC. México es el país con mayor fatiga por estrés laboral a nivel mundial según la OMS. El mercado no es pequeño — la barrera es de acceso, no de demanda.
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="doc-sec" id="s06">
+      <div class="sec-tag"><span class="sec-tag-n">06</span> Cómo Busca</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Lo que buscan en Google</h2>
+      <p>Estas son las intenciones de búsqueda reales de nuestra audiencia. <strong>Todo el copy, SEO y estrategia de ads debe partir de este lenguaje emocional</strong> — no del lenguaje clínico ni del lenguaje de servicio. La persona no empieza buscando un psicólogo. Empieza intentando entender qué le pasa.</p>
+
+      <div class="intent-section">
+        <div class="intent-group">
+          <div class="intent-group-label">Alto volumen — entrada emocional directa</div>
+          <div class="pill-wrap">
+            <div class="pill high">"¿Por qué me siento tan ansioso todo el tiempo?"</div>
+            <div class="pill high">"Cómo dejar de sobrepensar todo"</div>
+            <div class="pill high">"No puedo dejar de pensar en lo mismo"</div>
+            <div class="pill high">"Por qué me siento triste sin razón"</div>
+            <div class="pill high">"Cómo calmar la mente cuando no para"</div>
+          </div>
+        </div>
+        <div class="intent-group">
+          <div class="intent-group-label">Intención de conexión — quieren hablar con alguien</div>
+          <div class="pill-wrap">
+            <div class="pill">"Necesito hablar con alguien pero no sé con quién"</div>
+            <div class="pill">"Con quién hablar cuando te sientes mal"</div>
+            <div class="pill">"Cómo pedir ayuda cuando no sabes qué pedir"</div>
+            <div class="pill">"Chat de apoyo emocional gratuito"</div>
+          </div>
+        </div>
+        <div class="intent-group">
+          <div class="intent-group-label">Intención de acceso — ya están considerando terapia</div>
+          <div class="pill-wrap">
+            <div class="pill">"Psicólogo online barato o accesible"</div>
+            <div class="pill">"Cómo empezar terapia si nunca he ido"</div>
+            <div class="pill">"Cómo saber si necesito terapia"</div>
+            <div class="pill">"Terapia online desde casa"</div>
+            <div class="pill">"Psicólogo online México / Colombia / Argentina"</div>
+          </div>
+        </div>
+        <div class="intent-group">
+          <div class="intent-group-label">Contextos específicos — burnout y trabajo</div>
+          <div class="pill-wrap">
+            <div class="pill">"Cómo manejar el estrés y la ansiedad en el trabajo"</div>
+            <div class="pill">"Síntomas de burnout laboral"</div>
+            <div class="pill">"Me siento agotado pero no sé por qué"</div>
+            <div class="pill">"Cómo dejar de sentirme abrumado"</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:13px; color:var(--mid); font-style:italic; margin-top:8px;">Nota: Las búsquedas marcadas en lavanda tienen mayor volumen y mayor intención de conversión — son los puntos de entrada prioritarios para la estrategia SEO y Google Ads.</p>
+    </section>
+
+    <!-- 07 -->
+    <section class="doc-sec" id="s07">
+      <div class="sec-tag"><span class="sec-tag-n">07</span> Qué la Mueve</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Qué necesita escuchar para dar el primer paso</h2>
+      <p>Una persona puede reconocerse en el contenido, identificar la barrera y aun así no convertir. Lo que la mueve a actuar son mensajes específicos que validan su experiencia, reducen el miedo y hacen que el siguiente paso se sienta pequeño.</p>
+
+      <div class="move-grid">
+        <div class="move-card">
+          <span class="move-icon">&#10003;</span>
+          <div class="move-title">Validación sin drama</div>
+          <div class="move-copy">"No tienes que tener todo claro para empezar."</div>
+          <p class="move-why">La audiencia tiene miedo de no saber qué decir en la primera sesión. Esta frase elimina ese miedo directamente.</p>
+        </div>
+        <div class="move-card">
+          <span class="move-icon">&#10003;</span>
+          <div class="move-title">Acceso sin fricción</div>
+          <div class="move-copy">"Desde tu casa. Sin lista de espera. Hoy."</div>
+          <p class="move-why">Convierte el proceso en algo inmediato y no intimidante. La barreras de tiempo y traslado desaparecen.</p>
+        </div>
+        <div class="move-card">
+          <span class="move-icon">&#10003;</span>
+          <div class="move-title">Precio sin vergüenza</div>
+          <div class="move-copy">"Un precio pensado para que no sea una barrera."</div>
+          <p class="move-why">Habla del precio de frente, sin rodeos, y lo enmarca como una decisión consciente de claritia — no como una concesión de calidad.</p>
+        </div>
+        <div class="move-card">
+          <span class="move-icon">&#10003;</span>
+          <div class="move-title">Proceso, no cura</div>
+          <div class="move-copy">"No prometemos resultados mágicos. Prometemos acompañarte."</div>
+          <p class="move-why">La audiencia desconfía de promesas exageradas. El realismo honesto genera más confianza que el optimismo vacío.</p>
+        </div>
+        <div class="move-card">
+          <span class="move-icon">&#10003;</span>
+          <div class="move-title">El primer paso es pequeño</div>
+          <div class="move-copy">"Escríbenos. Solo eso."</div>
+          <p class="move-why">El CTA debe sentirse como la acción más pequeña posible. WhatsApp es el canal perfecto para este primer paso de baja fricción.</p>
+        </div>
+        <div class="move-card">
+          <span class="move-icon">&#10003;</span>
+          <div class="move-title">Identificación emocional</div>
+          <div class="move-copy">"Sentirse abrumado no significa que algo está mal contigo."</div>
+          <p class="move-why">La persona que lo lee dice "esto soy yo". Ese momento de reconocimiento es el corazón de la fase de gancho.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="doc-sec" id="s08">
+      <div class="sec-tag"><span class="sec-tag-n">08</span> Dónde Está</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Canales y comportamiento digital</h2>
+      <p>La audiencia de claritia ya está en plataformas digitales. La pregunta no es si tiene acceso — es cómo se comporta en cada canal y qué rol juega claritia en cada uno.</p>
+
+      <div class="data-callout">
+        <div class="data-callout-num">92%</div>
+        <div class="data-callout-text">
+          <strong>de los usuarios de internet en América Latina usa WhatsApp.</strong> Brasil roza el 99% de penetración. México, Colombia y Argentina superan el 90%. WhatsApp no es solo un canal de comunicación en esta región — es la infraestructura de conversación por defecto.
+        </div>
+      </div>
+
+      <div class="platform-grid">
+        <div class="plat-card">
+          <div class="plat-name">
+            <div class="plat-dot" style="background:var(--lav-deep);"></div>
+            WhatsApp
+          </div>
+          <div class="plat-role">Canal de conversación directa. Donde ocurre el primer contacto real. Leti vive aquí.</div>
+          <div class="plat-action">Rol: Conversión y onboarding. CTA primario.</div>
+        </div>
+        <div class="plat-card">
+          <div class="plat-name">
+            <div class="plat-dot" style="background:#d44e78;"></div>
+            Instagram
+          </div>
+          <div class="plat-role">Posicionamiento y gancho. Audiencia 18–35. Contenido emocional y relatable. DMs gestionados por Leti.</div>
+          <div class="plat-action">Rol: Awareness y identificación emocional.</div>
+        </div>
+        <div class="plat-card">
+          <div class="plat-name">
+            <div class="plat-dot" style="background:#1877F2;"></div>
+            Facebook
+          </div>
+          <div class="plat-role">Audiencia 30–50. Mayor para Andrés que para Valeria. Ads emocionales y mensajes directos con Leti.</div>
+          <div class="plat-action">Rol: Alcance en segmento 30+ y ads de conversión.</div>
+        </div>
+        <div class="plat-card">
+          <div class="plat-name">
+            <div class="plat-dot" style="background:#000000;"></div>
+            TikTok
+          </div>
+          <div class="plat-role">Gen Z y millennials jóvenes. Contenido de alta identificación emocional. Mayor informalidad, misma profundidad.</div>
+          <div class="plat-action">Rol: Awareness con Gen Z. Alto potencial de viralizacion.</div>
+        </div>
+        <div class="plat-card">
+          <div class="plat-name">
+            <div class="plat-dot" style="background:var(--sage-dark);"></div>
+            Google / SEO
+          </div>
+          <div class="plat-role">Captura intención de búsqueda en el momento de mayor apertura. Copy emocional, no clínico.</div>
+          <div class="plat-action">Rol: Captura intención alta. Búsquedas listadas en sección 06.</div>
+        </div>
+        <div class="plat-card">
+          <div class="plat-name">
+            <div class="plat-dot" style="background:var(--lav);"></div>
+            Website
+          </div>
+          <div class="plat-role">Hub de conversión. El destino final del journey. Leti como chat de bienvenida. Máximo 3 clics para iniciar.</div>
+          <div class="plat-action">Rol: Conversión final y proceso de inicio.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section class="doc-sec" id="s09">
+      <div class="sec-tag"><span class="sec-tag-n">09</span> Quién No Es</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">El contra-perfil</h2>
+      <p>Saber quién no es el cliente de claritia es tan importante como saber quién sí lo es. El tono, el copy y el diseño deben estar construidos para la persona correcta — lo que funciona para una audiencia puede alejar a otra.</p>
+
+      <div class="counter-grid">
+        <div class="counter-col yes">
+          <div class="counter-col-label">claritia habla con...</div>
+          <ul class="counter-list">
+            <li>Personas que sienten que algo no está bien pero no saben cómo nombrarlo</li>
+            <li>Adultos que buscan accesibilidad económica y/o conveniencia digital</li>
+            <li>Quienes nunca han ido a terapia y no saben qué esperar</li>
+            <li>Personas que prefieren privacidad y no quieren un proceso presencial</li>
+            <li>Quienes han pensado en terapia pero siempre han encontrado una razón para posponerlo</li>
+            <li>Personas en momento de transición vital que necesitan acompañamiento</li>
+          </ul>
+        </div>
+        <div class="counter-col no">
+          <div class="counter-col-label">claritia no es para...</div>
+          <ul class="counter-list">
+            <li>Personas en crisis psiquiátrica aguda que necesitan atención presencial inmediata</li>
+            <li>Quienes buscan un diagnóstico clínico formal o gestión de medicación</li>
+            <li>Personas que requieren terapia intensiva de alta especialización (ej. trastornos severos)</li>
+            <li>Quienes prefieren exclusivamente la relación presencial con su terapeuta</li>
+            <li>Audiencias que no tienen acceso a smartphone o internet estable</li>
+          </ul>
+        </div>
+      </div>
+
+      <p style="margin-top:16px; font-size:13px; font-weight:300; color:var(--mid);">
+        Importante: claritia siempre debe tener protocolos claros para redirigir a la persona adecuada cuando identifica una necesidad fuera de su alcance. Esto no es una limitación — es parte de operar con rigor profesional y transparencia simple.
+      </p>
+    </section>
+
+    <!-- 10 -->
+    <section class="doc-sec" id="s10">
+      <div class="sec-tag"><span class="sec-tag-n">10</span> Tono para Esta Audiencia</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Cómo hablar con cada segmento</h2>
+      <p>Los cuatro ejes del tono de claritia (claro, simple, empático, honesto) aplican siempre — pero la forma de expresarlos varía según el segmento y el momento del journey. Estas son las frases que funcionan para cada perfil.</p>
+
+      <div class="tone-compass">
+        <div class="tone-card">
+          <div class="tone-seg-label">Valeria — 20 a 35 años · Barrera de estigma / no saber por dónde</div>
+          <div class="tone-phrase">"No tienes que tener todo claro para empezar. Muchas personas que hoy están en proceso sintieron exactamente eso al inicio."</div>
+          <p class="tone-avoid">Evitar: <strong>terminología clínica, urgencia artificial, promesas de resultados.</strong> Esta audiencia detecta inmediatamente el lenguaje de marketing y lo desconecta emocionalmente.</p>
+        </div>
+        <div class="tone-card">
+          <div class="tone-seg-label">Andrés — 30 a 45 años · Barrera de tiempo / fricción</div>
+          <div class="tone-phrase">"Desde tu casa. En tu horario. Sin trámites. Solo necesitas escribir."</div>
+          <p class="tone-avoid">Evitar: <strong>procesos largos de onboarding, formularios extensos, lenguaje aspiracional.</strong> Esta audiencia valora la eficiencia y siente que ya tiene demasiado en su plato.</p>
+        </div>
+        <div class="tone-card">
+          <div class="tone-seg-label">Barrera económica — cualquier edad</div>
+          <div class="tone-phrase">"Un precio pensado para que no sea una barrera. Porque el acceso al bienestar no debería depender de cuánto ganas."</div>
+          <p class="tone-avoid">Evitar: <strong>ambigüedad en el precio, lenguaje de "lujo accesible".</strong> Ser directos sobre el precio es un acto de respeto con esta audiencia, no una debilidad.</p>
+        </div>
+        <div class="tone-card">
+          <div class="tone-seg-label">Burnout laboral — primer punto de entrada</div>
+          <div class="tone-phrase">"Sentirte agotado no significa que eres débil. Significa que llevas demasiado tiempo solo con demasiado."</div>
+          <p class="tone-avoid">Evitar: <strong>el lenguaje de productividad o "volver a rendir mejor".</strong> Esta audiencia no quiere optimizarse. Quiere sentirse mejor.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:36px;">
+        <p>"La terapia no debería ser un lujo. claritia existe para cambiar eso."</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno. No distribuir sin autorización.</div>
+  <div class="fr">
+    <div class="fbadge">02 — Audiencia</div>
+    <div class="fnav">
+      <a href="claritiaconsistency.html">← Consistencia de Marca</a>
+      <span class="fnav-sep">/</span>
+      <a href="claritiatone.html">Tono y Copy →</a>
+      <span class="fnav-sep">/</span>
+      <a href="index.html">Vault</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.doc-sec[id]');
+  const links = document.querySelectorAll('.sb-nav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
