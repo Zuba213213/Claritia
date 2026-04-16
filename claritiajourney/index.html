@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>claritia — Próximamente</title>
+  <title>claritia — Journey del Cliente</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     :root {
       --lav:         #B8B4D4;
+      --lav-light:   #D4D1E8;
       --lav-xlight:  #ECEAF6;
       --lav-deep:    #534AB7;
       --sage:        #8FA89A;
+      --sage-dark:   #6B8C7D;
       --grad-start:  #C4C0DC;
       --grad-end:    #9AABA0;
       --purple-dark: #3D3860;
@@ -24,6 +28,12 @@
       --mid:         #6B6B6B;
       --light:       #D0CDE0;
       --rule:        rgba(184,180,212,0.25);
+
+      /* phase accent colors */
+      --p1: #8FA89A;   /* sage — awareness */
+      --p2: #B8B4D4;   /* lavender — hook */
+      --p3: #534AB7;   /* lav-deep — conversion */
+      --p4: #3D3860;   /* purple-dark — experience */
     }
 
     body {
@@ -31,8 +41,7 @@
       background: var(--off-white);
       color: var(--charcoal);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
 
     /* ── TOPBAR ── */
@@ -49,189 +58,1037 @@
       font-size: 18px; color: var(--charcoal);
       text-decoration: none; letter-spacing: -0.01em;
     }
-    .topbar-back {
-      font-size: 11px; font-weight: 500;
-      color: var(--lav-deep); text-decoration: none;
-    }
-    .topbar-back:hover { text-decoration: underline; }
-
-    /* ── MAIN ── */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 64px 24px;
-      text-align: center;
-    }
-
-    /* ── MEME ── */
-    .meme-wrap {
-      position: relative;
-      margin-bottom: 40px;
-      animation: floatIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-    .meme-img {
-      width: 220px;
-      border-radius: 12px;
-      box-shadow: 0 12px 40px rgba(61,56,96,0.18);
-      display: block;
-    }
-    .meme-badge {
-      position: absolute;
-      top: -10px; right: -12px;
-      background: linear-gradient(130deg, var(--grad-start), var(--lav));
-      color: var(--purple-dark);
-      font-size: 9px; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 20px;
-      white-space: nowrap;
-      box-shadow: 0 2px 8px rgba(184,180,212,0.35);
-    }
-
-    /* ── TEXT ── */
-    .cs-label {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--lav); margin-bottom: 10px;
-      animation: fadeUp 0.5s 0.2s ease both;
-    }
-    .cs-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 400; color: var(--charcoal);
-      line-height: 1.1; letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      animation: fadeUp 0.5s 0.25s ease both;
-    }
-    .cs-desc {
-      max-width: 380px;
-      font-size: 14px; font-weight: 300;
-      color: var(--mid); line-height: 1.75;
-      margin-bottom: 36px;
-      animation: fadeUp 0.5s 0.30s ease both;
-    }
-
-    /* ── BACK BUTTON ── */
-    .back-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--purple-dark);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 12px; font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 12px 24px; border-radius: 8px;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      animation: fadeUp 0.5s 0.35s ease both;
-    }
-    .back-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-
-    /* ── PROGRESS DOTS ── */
-    .progress {
+    .topbar-crumb {
+      font-size: 11px; font-weight: 400; color: var(--mid);
       display: flex; align-items: center; gap: 8px;
-      margin-top: 48px;
-      animation: fadeUp 0.5s 0.40s ease both;
     }
-    .prog-label {
-      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--mid); margin-right: 4px;
+    .topbar-crumb a { color: var(--mid); text-decoration: none; }
+    .topbar-crumb a:hover { color: var(--lav-deep); }
+    .topbar-sep { color: var(--light); }
+    .topbar-cur { color: var(--lav-deep); font-weight: 500; }
+    .topbar-badge {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px;
+      background: var(--lav-xlight); color: var(--lav-deep);
     }
-    .prog-dot {
-      width: 8px; height: 8px; border-radius: 50%;
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
+      padding: 64px 48px 72px; overflow: hidden;
     }
-    .prog-dot.done { background: var(--lav-deep); }
-    .prog-dot.active { background: var(--lav); }
-    .prog-dot.pending {
-      background: transparent;
-      border: 1.5px solid var(--light);
+    .hero::before {
+      content:''; position:absolute;
+      width:340px; height:340px; border-radius:50%;
+      background:rgba(255,255,255,0.08); top:-90px; right:-70px;
     }
-    .prog-page-label {
-      font-size: 10px; font-weight: 300; color: var(--light);
-      margin-left: 4px;
+    .hero::after {
+      content:''; position:absolute;
+      width:160px; height:160px; border-radius:50%;
+      background:rgba(255,255,255,0.07); bottom:-40px; left:35%;
+    }
+    .cdeco { position:absolute; border-radius:50%; background:rgba(255,255,255,0.12); pointer-events:none; }
+    .cd1{width:52px;height:52px;top:28px;right:220px;}
+    .cd2{width:28px;height:28px;top:72px;right:284px;}
+    .cd3{width:38px;height:38px;bottom:44px;right:140px;}
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:10px; font-weight:600; letter-spacing:0.18em;
+      text-transform:uppercase; color:rgba(255,255,255,0.60); margin-bottom:20px;
+    }
+    .hero-eyebrow span {
+      width:6px; height:6px; border-radius:50%;
+      background:rgba(255,255,255,0.50); display:inline-block;
+    }
+    .hero-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(40px,5.5vw,68px); font-weight:400; color:var(--white);
+      line-height:1.05; letter-spacing:-0.02em; margin-bottom:8px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-sub {
+      font-size:11px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.60); margin-bottom:24px;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    .hero-desc {
+      max-width:560px; font-size:14px; font-weight:300;
+      color:rgba(255,255,255,0.80); line-height:1.75;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+    .hero-collab {
+      margin-top:32px; font-size:10px; font-weight:500;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.40); animation: fadeUp 0.5s 0.22s ease both;
+    }
+
+    /* ── PHASE FLOW MAP ── */
+    .flow-map {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      padding: 0;
+      overflow-x: auto;
+    }
+    .flow-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      min-width: 600px;
+    }
+    .flow-phase {
+      padding: 20px 24px 18px;
+      border-right: 1px solid var(--rule);
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      transition: background 0.15s ease;
+    }
+    .flow-phase:last-child { border-right: none; }
+    .flow-phase::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+    .flow-phase:hover { background: var(--lav-xlight); }
+    .flow-phase:hover::after { opacity: 1; }
+    .fp1::after { background: var(--p1); }
+    .fp2::after { background: var(--p2); }
+    .fp3::after { background: var(--p3); }
+    .fp4::after { background: var(--p4); }
+
+    .flow-num {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .flow-num-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+    }
+    .fp1 .flow-num { color: var(--p1); }
+    .fp2 .flow-num { color: var(--p2); }
+    .fp3 .flow-num { color: var(--lav-deep); }
+    .fp4 .flow-num { color: var(--p4); }
+
+    .flow-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 17px; color: var(--charcoal);
+      line-height: 1.15; margin-bottom: 6px;
+    }
+    .flow-tagline {
+      font-size: 11px; font-weight: 300; color: var(--mid);
+      line-height: 1.5;
+    }
+    .flow-arrow {
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 20px; height: 20px;
+      background: var(--rule);
+      clip-path: polygon(0 50%, 100% 0, 100% 100%);
+      z-index: 1;
+    }
+    .flow-phase:last-child .flow-arrow { display: none; }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display:grid; grid-template-columns:220px 1fr;
+      max-width:1140px; margin:0 auto;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position:sticky; top:52px; height:calc(100vh - 52px);
+      overflow-y:auto; padding:40px 0 40px 48px;
+      border-right:1px solid var(--rule);
+    }
+    .sb-label {
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--mid); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--rule);
+    }
+    .sb-nav { list-style:none; display:flex; flex-direction:column; gap:2px; }
+    .sb-nav a {
+      display:flex; align-items:baseline; gap:8px;
+      font-size:12px; font-weight:400; color:var(--mid);
+      text-decoration:none; padding:6px 12px 6px 0;
+      border-radius:4px; transition:color 0.15s ease; line-height:1.4;
+    }
+    .sb-nav a:hover { color:var(--lav-deep); }
+    .sb-nav a.active { color:var(--lav-deep); font-weight:500; }
+    .nav-n { font-size:9px; color:var(--lav); font-weight:600; min-width:18px; }
+    .sb-divider {
+      height:1px; background:var(--rule); margin:12px 0 10px;
+    }
+    .sb-sub {
+      font-size:9px; font-weight:600; letter-spacing:0.16em; text-transform:uppercase;
+      color:var(--light); padding: 0 0 6px;
+    }
+
+    /* ── CONTENT ── */
+    .content { padding:56px 64px 100px 56px; max-width:760px; }
+
+    /* ── SECTION ── */
+    .doc-sec {
+      margin-bottom:80px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .doc-sec:nth-child(1){animation-delay:0.05s}
+    .doc-sec:nth-child(2){animation-delay:0.10s}
+    .doc-sec:nth-child(3){animation-delay:0.15s}
+    .doc-sec:nth-child(4){animation-delay:0.20s}
+    .doc-sec:nth-child(5){animation-delay:0.25s}
+    .doc-sec:nth-child(6){animation-delay:0.30s}
+    .doc-sec:nth-child(7){animation-delay:0.35s}
+
+    .sec-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--lav-deep); background:var(--lav-xlight);
+      padding:4px 12px; border-radius:4px; margin-bottom:16px;
+    }
+    .sec-tag-n { color:var(--lav); }
+    .sec-rule { width:40px; height:2px; background:linear-gradient(90deg,var(--lav),var(--sage)); border-radius:2px; margin-bottom:20px; }
+
+    h2.sh1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(28px,3.5vw,38px); font-weight:400; color:var(--charcoal);
+      line-height:1.1; letter-spacing:-0.01em; margin-bottom:20px;
+    }
+    h3.sh2 {
+      font-family:'DM Serif Display',serif;
+      font-size:22px; font-weight:400; color:var(--charcoal);
+      margin-top:40px; margin-bottom:14px;
+      padding-bottom:10px; border-bottom:1px solid var(--rule);
+    }
+    p {
+      font-size:14px; font-weight:300; line-height:1.80;
+      color:var(--charcoal); margin-bottom:16px;
+    }
+    p:last-child { margin-bottom:0; }
+    strong { font-weight:500; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      margin:28px 0; padding:20px 24px;
+      border-left:3px solid var(--lav);
+      background:var(--lav-xlight); border-radius:0 8px 8px 0;
+    }
+    .callout p {
+      font-family:'DM Serif Display',serif; font-style:italic;
+      font-size:17px; color:var(--purple-dark); margin:0; line-height:1.5;
+    }
+
+    /* ── PHASE DEEP-DIVE CARD ── */
+    .phase-card {
+      border-radius: 12px; overflow: hidden;
+      margin: 24px 0;
+      border: 1px solid var(--rule);
+    }
+    .phase-header {
+      padding: 22px 26px 20px;
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 16px;
+    }
+    .ph1 .phase-header { background: var(--p1); }
+    .ph2 .phase-header { background: var(--lav); }
+    .ph3 .phase-header { background: var(--lav-deep); }
+    .ph4 .phase-header { background: var(--purple-dark); }
+
+    .phase-header-left {}
+    .phase-num-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.55);
+      margin-bottom: 6px;
+    }
+    .phase-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px; color: var(--white); line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .phase-objective {
+      font-size: 12px; font-weight: 300;
+      color: rgba(255,255,255,0.70); line-height: 1.5;
+      max-width: 360px;
+    }
+    .phase-metric-box {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px; padding: 12px 16px;
+      text-align: center; flex-shrink: 0; white-space: nowrap;
+    }
+    .phase-metric-label {
+      font-size: 8px; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      display: block; margin-bottom: 4px;
+    }
+    .phase-metric-value {
+      font-family: 'DM Serif Display', serif;
+      font-size: 13px; color: rgba(255,255,255,0.85);
+      line-height: 1.35;
+    }
+
+    .phase-body {
+      background: var(--white);
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .phase-col {
+      padding: 20px 22px;
+      border-right: 1px solid var(--rule);
+    }
+    .phase-col:last-child { border-right: none; }
+    .phase-col-title {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--mid); margin-bottom: 12px;
+    }
+    .phase-list {
+      list-style: none; display: flex; flex-direction: column; gap: 7px;
+    }
+    .phase-list li {
+      font-size: 12.5px; font-weight: 300; color: var(--charcoal);
+      display: flex; align-items: flex-start; gap: 9px; line-height: 1.55;
+    }
+    .phase-list li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--lav); margin-top: 6px; flex-shrink: 0;
+    }
+    .phase-copy-example {
+      margin-top: 14px; padding: 12px 14px;
+      background: var(--lav-xlight); border-radius: 6px;
+      font-family: 'DM Serif Display', serif; font-style: italic;
+      font-size: 13px; color: var(--purple-dark); line-height: 1.5;
+    }
+    .phase-copy-label {
+      font-size: 8px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--lav); display: block; margin-bottom: 5px;
+    }
+
+    /* ── PHASE CONNECTOR ── */
+    .phase-connector {
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 0; gap: 8px;
+    }
+    .connector-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--lav), transparent);
+    }
+    .connector-label {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--lav);
+      background: var(--lav-xlight); padding: 3px 10px; border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── ROLES TABLE ── */
+    .twrap { border:1px solid var(--rule); border-radius:8px; overflow:hidden; margin:20px 0; }
+    table.dt { width:100%; border-collapse:collapse; font-size:13px; }
+    table.dt th {
+      background:var(--purple-dark); color:var(--white);
+      font-family:'Poppins',sans-serif; font-weight:500;
+      font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+      padding:12px 16px; text-align:left;
+    }
+    table.dt td {
+      padding:12px 16px; border-bottom:1px solid var(--rule);
+      vertical-align:top; line-height:1.65;
+      font-weight:300; color:var(--charcoal);
+    }
+    table.dt tr:last-child td { border-bottom:none; }
+    table.dt tr:nth-child(even) td { background:rgba(236,234,246,0.18); }
+    table.dt td:first-child { font-weight:500; color:var(--purple-dark); white-space:nowrap; font-size:12px; }
+
+    /* ── METRIC GRID ── */
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 12px; margin: 20px 0;
+    }
+    .metric-card {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 10px; padding: 18px 18px 16px;
+      position: relative; overflow: hidden;
+    }
+    .metric-card::before {
+      content: ''; position: absolute; top:0; left:0; right:0; height:2px;
+      background: linear-gradient(90deg, var(--lav), var(--sage));
+    }
+    .metric-phase {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--lav); margin-bottom: 6px;
+    }
+    .metric-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 15px; color: var(--charcoal); margin-bottom: 4px; line-height: 1.2;
+    }
+    .metric-desc {
+      font-size: 11.5px; font-weight: 300; color: var(--mid); line-height: 1.55; margin: 0;
+    }
+
+    /* ── LETI ROLE CARD ── */
+    .leti-role {
+      background: linear-gradient(130deg, var(--purple-dark) 0%, #5A566E 100%);
+      border-radius: 12px; padding: 24px 26px; margin: 20px 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .leti-col-title {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .leti-col.does .leti-col-title { color: rgba(255,255,255,0.50); }
+    .leti-col.doesnt .leti-col-title { color: rgba(255,255,255,0.30); }
+    .leti-list {
+      list-style: none; display: flex; flex-direction: column; gap: 7px;
+    }
+    .leti-list li {
+      font-size: 12.5px; font-weight: 300; line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .leti-col.does .leti-list li { color: rgba(255,255,255,0.78); }
+    .leti-col.doesnt .leti-list li { color: rgba(255,255,255,0.45); }
+    .leti-list li::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      margin-top: 6px; flex-shrink: 0;
+    }
+    .leti-col.does .leti-list li::before { background: var(--lav-light); }
+    .leti-col.doesnt .leti-list li::before { background: rgba(255,255,255,0.20); }
+
+    /* ── ONBOARDING FLOW ── */
+    .onboard-flow {
+      display: flex; flex-direction: column; gap: 0;
+      margin: 20px 0; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+    }
+    .onboard-step {
+      display: grid; grid-template-columns: 48px 1fr;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.12s ease;
+    }
+    .onboard-step:last-child { border-bottom: none; }
+    .onboard-step:hover { background: var(--lav-xlight); }
+    .step-num-wrap {
+      display: flex; align-items: center; justify-content: center;
+      border-right: 1px solid var(--rule); padding: 16px 0;
+    }
+    .step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 16px; color: var(--lav-deep);
+    }
+    .step-body { padding: 14px 18px; }
+    .step-action {
+      font-size: 12px; font-weight: 600; color: var(--charcoal);
+      margin-bottom: 3px;
+    }
+    .step-detail {
+      font-size: 12px; font-weight: 300; color: var(--mid); line-height: 1.55; margin: 0;
+    }
+    .step-leti-badge {
+      display: inline-block; margin-left: 8px;
+      font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 3px;
+      background: var(--lav-xlight); color: var(--lav-deep);
+      vertical-align: middle;
+    }
+
+    /* ── GENERIC LISTS ── */
+    ul.dl {
+      list-style:none; margin:16px 0;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    ul.dl li {
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:13.5px; font-weight:300; line-height:1.65; color:var(--charcoal);
+    }
+    ul.dl li::before {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:var(--lav); margin-top:7px; flex-shrink:0;
     }
 
     /* ── FOOTER ── */
     .page-footer {
-      border-top: 1px solid var(--rule);
-      padding: 20px 48px;
-      display: flex; justify-content: space-between; align-items: center;
+      border-top:1px solid var(--rule); padding:28px 48px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
     }
-    .fl { font-size: 11px; font-weight: 300; color: var(--mid); }
+    .fl { font-size:11px; font-weight:300; color:var(--mid); }
+    .fr { display:flex; align-items:center; gap:12px; }
     .fbadge {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 4px;
-      background: var(--lav-xlight); color: var(--lav-deep);
+      font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+      padding:4px 10px; border-radius:4px; background:var(--lav-xlight); color:var(--lav-deep);
     }
+    .fnav { display:flex; align-items:center; gap:16px; }
+    .fnav a { font-size:11px; color:var(--lav-deep); text-decoration:none; font-weight:500; }
+    .fnav a:hover { text-decoration:underline; }
+    .fnav-sep { color:var(--light); font-size:11px; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes floatIn {
-      from { opacity: 0; transform: scale(0.85) translateY(20px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .page-body { grid-template-columns:1fr; }
+      .sidebar { display:none; }
+      .content { padding:40px 28px 80px; }
+      .hero { padding:48px 28px 60px; }
+      .topbar { padding:0 24px; }
+      .topbar-badge { display:none; }
+      .phase-body { grid-template-columns:1fr; }
+      .phase-col { border-right:none; border-bottom:1px solid var(--rule); }
+      .phase-col:last-child { border-bottom:none; }
+      .phase-header { flex-direction:column; }
+      .phase-metric-box { display:none; }
+      .metric-grid { grid-template-columns:1fr 1fr; }
+      .leti-role { grid-template-columns:1fr; gap:16px; }
+      .page-footer { padding:24px 28px; }
+    }
     @media(max-width:600px){
-      .topbar { padding: 0 20px; }
-      .page-footer { padding: 16px 20px; }
-      .progress { flex-wrap: wrap; justify-content: center; }
+      .metric-grid { grid-template-columns:1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOPBAR -->
-  <nav class="topbar">
-    <a href="index.html" class="topbar-brand">claritia</a>
-    <a href="index.html" class="topbar-back">← Volver al Vault</a>
-  </nav>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <div class="meme-wrap">
-      <img
-        class="meme-img"
-        src="1776293349515_image.png"
-        alt="Estoy cansado, jefe"
-      />
-      <div class="meme-badge">En construcción</div>
-    </div>
-
-    <div class="cs-label">Marketing Vault — claritia</div>
-    <h1 class="cs-title">Próximamente.</h1>
-    <p class="cs-desc">
-      Esta sección está en proceso de construcción. Vuelve pronto — o mejor aún, vuelve al vault y revisa lo que ya está listo.
-    </p>
-
-    <a href="index.html" class="back-btn">
-      ← Volver al Marketing Vault
-    </a>
-
-    <!-- PROGRESS TRACKER -->
-    <div class="progress">
-      <span class="prog-label">Progreso</span>
-      <div class="prog-dot done" title="Consistencia de Marca"></div>
-      <div class="prog-dot done" title="Perfil de Cliente Ideal"></div>
-      <div class="prog-dot done" title="Tono y Copy"></div>
-      <div class="prog-dot active" title="En construcción"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <span class="prog-page-label">3 / 8 completos</span>
-    </div>
-
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="index.html" class="topbar-brand">claritia</a>
+  <div class="topbar-crumb">
+    <a href="index.html">Marketing Vault</a>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-cur">Journey del Cliente</span>
   </div>
+  <div class="topbar-badge">04 — Proceso</div>
+</nav>
 
-  <!-- FOOTER -->
-  <footer class="page-footer">
-    <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno.</div>
-    <div class="fbadge">Próximamente</div>
-  </footer>
+<!-- HERO -->
+<header class="hero">
+  <div class="cdeco cd1"></div>
+  <div class="cdeco cd2"></div>
+  <div class="cdeco cd3"></div>
+  <div class="hero-eyebrow"><span></span>Journey del Cliente</div>
+  <h1 class="hero-title">El camino de<br/>quien nos necesita.</h1>
+  <div class="hero-sub">Terapia Clínica Online</div>
+  <p class="hero-desc">
+    Cuatro fases. Desde el primer momento en que alguien siente que necesita ayuda hasta que se convierte en parte de un proceso terapéutico continuo. El cliente nunca debe sentir que está siendo vendido — debe sentir que está siendo acompañado.
+  </p>
+  <div class="hero-collab">JRZ Consulting Solutions &nbsp;×&nbsp; claritia</div>
+</header>
+
+<!-- PHASE FLOW MAP -->
+<div class="flow-map">
+  <div class="flow-inner">
+    <a class="flow-phase fp1" href="#s02">
+      <div class="flow-num">
+        <div class="flow-num-dot" style="background:var(--p1)"></div>
+        Fase 01
+      </div>
+      <div class="flow-title">Posicionamiento</div>
+      <div class="flow-tagline">Existir en la mente del usuario en el momento exacto</div>
+    </a>
+    <a class="flow-phase fp2" href="#s03">
+      <div class="flow-num">
+        <div class="flow-num-dot" style="background:var(--p2)"></div>
+        Fase 02
+      </div>
+      <div class="flow-title">Gancho</div>
+      <div class="flow-tagline">Identificación emocional que genera acción</div>
+    </a>
+    <a class="flow-phase fp3" href="#s04">
+      <div class="flow-num">
+        <div class="flow-num-dot" style="background:var(--p3)"></div>
+        Fase 03
+      </div>
+      <div class="flow-title">Conversión</div>
+      <div class="flow-tagline">La invitación directa a dar el paso</div>
+    </a>
+    <a class="flow-phase fp4" href="#s05">
+      <div class="flow-num">
+        <div class="flow-num-dot" style="background:var(--p4)"></div>
+        Fase 04
+      </div>
+      <div class="flow-title">Experiencia</div>
+      <div class="flow-tagline">El diferenciador real — donde comienza la retención</div>
+    </a>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-label">Contenido</div>
+    <ul class="sb-nav">
+      <li><a href="#s01"><span class="nav-n">—</span> El principio rector</a></li>
+    </ul>
+    <div class="sb-divider"></div>
+    <div class="sb-sub">Las 4 fases</div>
+    <ul class="sb-nav">
+      <li><a href="#s02"><span class="nav-n">01</span> Posicionamiento</a></li>
+      <li><a href="#s03"><span class="nav-n">02</span> Gancho</a></li>
+      <li><a href="#s04"><span class="nav-n">03</span> Conversión</a></li>
+      <li><a href="#s05"><span class="nav-n">04</span> Experiencia</a></li>
+    </ul>
+    <div class="sb-divider"></div>
+    <ul class="sb-nav">
+      <li><a href="#s06"><span class="nav-n">—</span> Roles: Leti y psicólogo</a></li>
+      <li><a href="#s07"><span class="nav-n">—</span> Métricas por fase</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- INTRO -->
+    <section class="doc-sec" id="s01">
+      <div class="sec-tag"><span class="sec-tag-n">Principio Rector</span></div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Convertir no es vender una sesión. Es iniciar un proceso.</h2>
+      <p>La estrategia de conversión de claritia tiene cuatro fases. Cada una tiene un objetivo específico, canales definidos y un tono que debe mantenerse consistente. El éxito no se mide en transacciones — se mide en continuidad terapéutica.</p>
+      <p>El cliente nunca debe sentir que está <strong>"siendo vendido"</strong>. Debe sentir que está siendo acompañado desde el primer contacto. Esto no es solo filosofía — es la mecánica real del journey: cada fase prepara emocionalmente el terreno para la siguiente.</p>
+
+      <div class="callout">
+        <p>"La retención a 4 semanas y el número de sesiones promedio por usuario son las métricas que más importan. Todo lo demás es camino hacia ahí."</p>
+      </div>
+    </section>
+
+    <!-- FASE 1 -->
+    <section class="doc-sec" id="s02">
+      <div class="sec-tag" style="background:rgba(143,168,154,0.15); color:var(--sage-dark);">
+        <span style="color:var(--sage);">01</span> &nbsp;Posicionamiento
+      </div>
+      <div class="sec-rule" style="background:linear-gradient(90deg,var(--sage),var(--lav));"></div>
+      <h2 class="sh1">Existir en la mente del usuario en el momento exacto</h2>
+      <p>El objetivo de esta fase no es vender — es que claritia aparezca en el momento preciso en que una persona siente que necesita ayuda. Este es el momento de máxima receptividad. Todavía no nombramos el servicio.</p>
+
+      <div class="phase-card ph1">
+        <div class="phase-header">
+          <div class="phase-header-left">
+            <div class="phase-num-label">Fase 01 — Posicionamiento</div>
+            <div class="phase-name">Existir cuando importa</div>
+            <div class="phase-objective">Aparecer en el momento exacto en que la persona siente que necesita ayuda. Sin mencionar el servicio. Sin vender nada todavía.</div>
+          </div>
+          <div class="phase-metric-box">
+            <span class="phase-metric-label">Métrica clave</span>
+            <div class="phase-metric-value">Alcance<br/>+ Engagement<br/>emocional</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-col">
+            <div class="phase-col-title">Canales activos</div>
+            <ul class="phase-list">
+              <li>Redes sociales — Facebook, Instagram, TikTok</li>
+              <li>Google — SEO con búsquedas emocionales</li>
+              <li>Contenido de awareness orgánico</li>
+              <li>Google Ads — intención de búsqueda</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">Tipo de contenido</span>
+              "Emocional y relatable. Posts que generan identificación, no ventas directas. Shares y likes importan más que follows en esta etapa."
+            </div>
+          </div>
+          <div class="phase-col">
+            <div class="phase-col-title">Reglas de tono en esta fase</div>
+            <ul class="phase-list">
+              <li>Empático ante todo — valida la experiencia del usuario</li>
+              <li>No mencionar el servicio ni el precio todavía</li>
+              <li>Reflejar la experiencia del usuario de vuelta hacia él</li>
+              <li>Contenido que la persona querría compartir con alguien que lo necesita</li>
+              <li>Métricas: alcance, impresiones, comentarios y shares emocionales</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">Ejemplo de copy</span>
+              "¿Por qué me siento tan ansioso todo el tiempo?" — partir del lenguaje de búsqueda real de la audiencia.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="phase-connector">
+      <div class="connector-line"></div>
+      <div class="connector-label">La identificación emocional crea el puente</div>
+      <div class="connector-line"></div>
+    </div>
+
+    <!-- FASE 2 -->
+    <section class="doc-sec" id="s03">
+      <div class="sec-tag" style="background:rgba(184,180,212,0.18); color:var(--lav-deep);">
+        <span style="color:var(--lav);">02</span> &nbsp;Gancho
+      </div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Identificación emocional tan fuerte que la persona quiere saber más</h2>
+      <p>La fase de gancho es el momento en que la persona pasa de "esto me recuerda algo" a "esto soy yo". El contenido debe ser tan preciso en nombrar la experiencia del usuario que sienta que fue escrito para ella específicamente.</p>
+
+      <div class="phase-card ph2">
+        <div class="phase-header">
+          <div class="phase-header-left">
+            <div class="phase-num-label">Fase 02 — Gancho</div>
+            <div class="phase-name">Esto soy yo</div>
+            <div class="phase-objective">Contenido tan relatable que la persona quiere saber más. El momento de identificación máxima — todavía sin hablar del servicio directamente.</div>
+          </div>
+          <div class="phase-metric-box">
+            <span class="phase-metric-label">Métrica clave</span>
+            <div class="phase-metric-value">CTR<br/>+ Tiempo de<br/>visualización</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-col">
+            <div class="phase-col-title">Canales activos</div>
+            <ul class="phase-list">
+              <li>Ads emocionales — Instagram, Facebook, TikTok</li>
+              <li>Contenido orgánico de alto potencial de share</li>
+              <li>Reels / videos cortos de identificación</li>
+              <li>Posts de texto que nombran experiencias específicas</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">Copy de referencia</span>
+              "Necesito hablar con alguien pero no sé con quién."
+            </div>
+          </div>
+          <div class="phase-col">
+            <div class="phase-col-title">Reglas de tono en esta fase</div>
+            <ul class="phase-list">
+              <li>Personal y directo — hablar de experiencias, no de síntomas</li>
+              <li>Todavía sin mencionar el servicio explícitamente</li>
+              <li>La persona debe sentir que el contenido la entiende mejor que ella misma</li>
+              <li>El share es el mayor indicador de que el copy funcionó</li>
+              <li>Métricas: CTR, tiempo de visualización, comentarios de identificación</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">Copy de referencia</span>
+              "No tienes que tener todo claro para empezar."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="phase-connector">
+      <div class="connector-line"></div>
+      <div class="connector-label">La identificación se convierte en intención</div>
+      <div class="connector-line"></div>
+    </div>
+
+    <!-- FASE 3 -->
+    <section class="doc-sec" id="s04">
+      <div class="sec-tag" style="background:rgba(83,74,183,0.10); color:var(--lav-deep);">
+        <span style="color:var(--lav-deep);">03</span> &nbsp;Conversión
+      </div>
+      <div class="sec-rule" style="background:linear-gradient(90deg,var(--lav-deep),var(--purple-dark));"></div>
+      <h2 class="sh1">La invitación directa a dar el paso</h2>
+      <p>Esta es la única fase en que claritia menciona directamente el servicio y el precio. El terreno emocional ya fue preparado — ahora el trabajo es hacer que el siguiente paso sea tan pequeño y obvio que la persona no tenga ninguna razón para no darlo.</p>
+      <p><strong>Regla crítica:</strong> fricción mínima. El usuario debe poder iniciar su proceso en menos de 2 minutos desde el momento en que decide hacerlo.</p>
+
+      <div class="phase-card ph3">
+        <div class="phase-header">
+          <div class="phase-header-left">
+            <div class="phase-num-label">Fase 03 — Conversión</div>
+            <div class="phase-name">El paso más pequeño posible</div>
+            <div class="phase-objective">Convertir la identificación emocional en acción concreta. Fricción mínima. Precio claro. CTA directo. El usuario inicia en menos de 2 minutos.</div>
+          </div>
+          <div class="phase-metric-box">
+            <span class="phase-metric-label">Métrica clave</span>
+            <div class="phase-metric-value">Tasa de<br/>conversión<br/>+ Costo/lead</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-col">
+            <div class="phase-col-title">Canales activos</div>
+            <ul class="phase-list">
+              <li>Ads de conversión directa — Meta, Google</li>
+              <li>Landing page / website — hub de conversión</li>
+              <li>WhatsApp — entrada directa vía Leti</li>
+              <li>Retargeting a audiencias de fases 1 y 2</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">Copy de conversión</span>
+              "Habla con un psicólogo hoy. Desde tu casa. A un precio accesible."
+            </div>
+          </div>
+          <div class="phase-col">
+            <div class="phase-col-title">Reglas de tono y diseño en esta fase</div>
+            <ul class="phase-list">
+              <li>Aquí sí mencionamos el servicio y el precio — directamente</li>
+              <li>Cálido pero directo: urgencia amable, nunca presión</li>
+              <li>El CTA es la acción más pequeña posible: "Escríbenos"</li>
+              <li>Sin formularios largos antes del primer contacto humano</li>
+              <li>El precio se encuadra como decisión intencional, no como descuento</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">CTA de referencia</span>
+              "Escríbenos. Solo eso."
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="phase-connector">
+      <div class="connector-line"></div>
+      <div class="connector-label">La conversión comienza la experiencia</div>
+      <div class="connector-line"></div>
+    </div>
+
+    <!-- FASE 4 -->
+    <section class="doc-sec" id="s05">
+      <div class="sec-tag" style="background:rgba(61,56,96,0.08); color:var(--purple-dark);">
+        <span style="color:var(--purple-dark);">04</span> &nbsp;Experiencia
+      </div>
+      <div class="sec-rule" style="background:linear-gradient(90deg,var(--purple-dark),var(--lav));"></div>
+      <h2 class="sh1">El verdadero diferenciador — donde comienza la retención</h2>
+      <p>La experiencia del primer contacto es la fase más importante del journey. Todo lo anterior (posicionamiento, gancho, conversión) solo tiene valor si la experiencia que sigue lo justifica. La retención comienza aquí, en los primeros minutos del primer contacto.</p>
+
+      <div class="phase-card ph4">
+        <div class="phase-header">
+          <div class="phase-header-left">
+            <div class="phase-num-label">Fase 04 — Experiencia</div>
+            <div class="phase-name">"Hola. Aquí estoy."</div>
+            <div class="phase-objective">Que el primer contacto sea tan cálido y fluido que la persona quiera continuar su proceso. La retención se decide en los primeros minutos.</div>
+          </div>
+          <div class="phase-metric-box">
+            <span class="phase-metric-label">Métrica clave</span>
+            <div class="phase-metric-value">Retención<br/>4 semanas<br/>+ NPS</div>
+          </div>
+        </div>
+        <div class="phase-body">
+          <div class="phase-col">
+            <div class="phase-col-title">Lo que ocurre en el primer contacto</div>
+            <ul class="phase-list">
+              <li>El usuario llega, escribe, alguien responde de inmediato</li>
+              <li>Leti recibe el primer mensaje con calidez real</li>
+              <li>El onboarding comienza sin formularios — la calidez es primero</li>
+              <li>El matching con el psicólogo se orienta según lo que el usuario comparte</li>
+              <li>La primera sesión se programa con fricción mínima</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">Tono del primer contacto</span>
+              "Hola. Aquí estoy." — Cálido, humano, sin protocolos fríos.
+            </div>
+          </div>
+          <div class="phase-col">
+            <div class="phase-col-title">Objetivo de retención</div>
+            <ul class="phase-list">
+              <li>Convertir no es vender una sesión — es iniciar un proceso</li>
+              <li>La meta no son sesiones sueltas sino continuidad terapéutica</li>
+              <li>El seguimiento post-sesión de Leti es parte de la retención</li>
+              <li>La experiencia digital fluida reduce el abandono entre sesiones</li>
+              <li>Métricas: retención a 4 semanas, sesiones promedio, NPS</li>
+            </ul>
+            <div class="phase-copy-example">
+              <span class="phase-copy-label">Seguimiento de Leti</span>
+              "¿Cómo estás?" — La pregunta más simple es la más poderosa.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sh2">El proceso de onboarding paso a paso</h3>
+      <p>El usuario no debe llenar formularios largos antes de sentirse acogido. La calidez es primero — los datos son después.</p>
+
+      <div class="onboard-flow">
+        <div class="onboard-step">
+          <div class="step-num-wrap"><div class="step-num">1</div></div>
+          <div class="step-body">
+            <div class="step-action">El usuario llega al website, WhatsApp o DM</div>
+            <p class="step-detail">Cualquier canal de entrada es válido. La experiencia debe ser idéntica en todos.</p>
+          </div>
+        </div>
+        <div class="onboard-step">
+          <div class="step-num-wrap"><div class="step-num">2</div></div>
+          <div class="step-body">
+            <div class="step-action">Escribe su primer mensaje <span class="step-leti-badge">Leti</span></div>
+            <p class="step-detail">Leti responde de inmediato con calidez — no con un menú de opciones ni un formulario.</p>
+          </div>
+        </div>
+        <div class="onboard-step">
+          <div class="step-num-wrap"><div class="step-num">3</div></div>
+          <div class="step-body">
+            <div class="step-action">Leti orienta la conversación <span class="step-leti-badge">Leti</span></div>
+            <p class="step-detail">Entiende qué necesita el usuario para orientar el matching. Sin cuestionarios. Conversación natural.</p>
+          </div>
+        </div>
+        <div class="onboard-step">
+          <div class="step-num-wrap"><div class="step-num">4</div></div>
+          <div class="step-body">
+            <div class="step-action">Matching con el psicólogo adecuado</div>
+            <p class="step-detail">El sistema asigna automáticamente el psicólogo más adecuado según el contexto compartido.</p>
+          </div>
+        </div>
+        <div class="onboard-step">
+          <div class="step-num-wrap"><div class="step-num">5</div></div>
+          <div class="step-body">
+            <div class="step-action">Primera sesión agendada</div>
+            <p class="step-detail">En el horario del usuario. Sin desplazamiento. Confirmación automática con recordatorio de Leti.</p>
+          </div>
+        </div>
+        <div class="onboard-step">
+          <div class="step-num-wrap"><div class="step-num">6</div></div>
+          <div class="step-body">
+            <div class="step-action">El proceso terapéutico comienza</div>
+            <p class="step-detail">El psicólogo conduce toda la parte clínica. Leti gestiona admin, recordatorios y seguimientos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROLES -->
+    <section class="doc-sec" id="s06">
+      <div class="sec-tag"><span class="sec-tag-n">Roles</span></div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Leti y el psicólogo — división clara</h2>
+      <p>El journey tiene dos actores operativos. La distinción entre sus roles no es opcional — es la garantía de que claritia opera con rigor profesional y eficiencia ética simultáneamente.</p>
+
+      <div class="leti-role">
+        <div class="leti-col does">
+          <div class="leti-col-title">Leti — Inteligencia Artificial</div>
+          <ul class="leti-list">
+            <li>Primer contacto y bienvenida en todos los canales</li>
+            <li>Orientación en el proceso de inicio</li>
+            <li>Apoyo al matching con el psicólogo</li>
+            <li>Recordatorios de sesiones</li>
+            <li>Seguimiento post-sesión ("¿Cómo estás?")</li>
+            <li>Preguntas administrativas: horarios, pagos, reagendamiento</li>
+            <li>En crisis: reconoce la urgencia y conecta con soporte humano inmediatamente</li>
+          </ul>
+        </div>
+        <div class="leti-col doesnt">
+          <div class="leti-col-title">El Psicólogo</div>
+          <ul class="leti-list">
+            <li>Conduce toda la terapia y el acompañamiento clínico</li>
+            <li>Evaluación inicial y definición del enfoque terapéutico</li>
+            <li>Todas las sesiones — sin excepción</li>
+            <li>Interpretación de experiencias y síntomas</li>
+            <li>Decisiones sobre el proceso terapéutico</li>
+            <li>Acompañamiento humano en momentos críticos</li>
+            <li>Continuidad y progreso del proceso</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="twrap">
+        <table class="dt">
+          <thead>
+            <tr><th>Situación</th><th>Leti actúa</th><th>Psicólogo actúa</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Primer mensaje del usuario</td>
+              <td>✓ Responde con calidez inmediata</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Pregunta sobre precio u opciones</td>
+              <td>✓ Orienta y abre la conversación</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Usuario expresa angustia emocional</td>
+              <td>✓ Valida, acompaña, orienta hacia sesión</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Crisis o emergencia</td>
+              <td>✓ Reconoce urgencia y conecta</td>
+              <td>✓ Asume inmediatamente</td>
+            </tr>
+            <tr>
+              <td>Sesión terapéutica</td>
+              <td>—</td>
+              <td>✓ Conduce íntegramente</td>
+            </tr>
+            <tr>
+              <td>Reagendar o cambiar horario</td>
+              <td>✓ Gestiona completamente</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Seguimiento post-sesión</td>
+              <td>✓ "¿Cómo estás?"</td>
+              <td>—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- MÉTRICAS -->
+    <section class="doc-sec" id="s07">
+      <div class="sec-tag"><span class="sec-tag-n">Métricas</span></div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Cómo se mide el éxito en cada fase</h2>
+      <p>Cada fase del journey tiene sus propias métricas de éxito. Optimizar la métrica incorrecta puede producir resultados que no se traducen en retención — la única métrica que realmente importa a largo plazo.</p>
+
+      <div class="metric-grid">
+        <div class="metric-card">
+          <div class="metric-phase" style="color:var(--sage-dark);">Fase 01 — Posicionamiento</div>
+          <div class="metric-name">Alcance y engagement emocional</div>
+          <p class="metric-desc">Alcance, impresiones, comentarios de identificación y shares. Los follows importan menos que los compartidos.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-phase">Fase 02 — Gancho</div>
+          <div class="metric-name">CTR y tiempo de visualización</div>
+          <p class="metric-desc">Click-through rate, tiempo promedio de visualización en video, comentarios con identificación explícita.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-phase" style="color:var(--lav-deep);">Fase 03 — Conversión</div>
+          <div class="metric-name">Tasa de conversión y costo por lead</div>
+          <p class="metric-desc">% de usuarios que inician proceso, costo por lead, tiempo desde primer contacto hasta primera sesión.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-phase" style="color:var(--purple-dark);">Fase 04 — Experiencia</div>
+          <div class="metric-name">Retención a 4 semanas</div>
+          <p class="metric-desc">% de usuarios que completan al menos 4 sesiones en las primeras 4 semanas. La métrica más importante.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-phase" style="color:var(--purple-dark);">Largo plazo</div>
+          <div class="metric-name">Sesiones promedio por usuario</div>
+          <p class="metric-desc">Número promedio de sesiones por usuario. Mide si se están iniciando procesos o vendiendo sesiones sueltas.</p>
+        </div>
+        <div class="metric-card">
+          <div class="metric-phase" style="color:var(--purple-dark);">Largo plazo</div>
+          <div class="metric-name">NPS — Net Promoter Score</div>
+          <p class="metric-desc">¿Recomendaría claritia? El indicador más limpio de calidad de experiencia. Meta: usuarios que la comparten con alguien que la necesita.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:40px;">
+        <p>"Convertir no es vender una sesión. Es iniciar un proceso."</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno. No distribuir sin autorización.</div>
+  <div class="fr">
+    <div class="fbadge">04 — Proceso</div>
+    <div class="fnav">
+      <a href="claritiatone.html">← Tono y Copy</a>
+      <span class="fnav-sep">/</span>
+      <a href="claritialeti.html">Leti — IA →</a>
+      <span class="fnav-sep">/</span>
+      <a href="index.html">Vault</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.doc-sec[id]');
+  const links = document.querySelectorAll('.sb-nav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
 
 </body>
 </html>
