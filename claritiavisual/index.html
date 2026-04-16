@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>claritia — Próximamente</title>
+  <title>claritia — Identidad Visual</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     :root {
       --lav:         #B8B4D4;
+      --lav-light:   #D4D1E8;
       --lav-xlight:  #ECEAF6;
       --lav-deep:    #534AB7;
       --sage:        #8FA89A;
+      --sage-dark:   #6B8C7D;
       --grad-start:  #C4C0DC;
       --grad-end:    #9AABA0;
       --purple-dark: #3D3860;
@@ -31,8 +35,7 @@
       background: var(--off-white);
       color: var(--charcoal);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
 
     /* ── TOPBAR ── */
@@ -49,189 +52,992 @@
       font-size: 18px; color: var(--charcoal);
       text-decoration: none; letter-spacing: -0.01em;
     }
-    .topbar-back {
-      font-size: 11px; font-weight: 500;
-      color: var(--lav-deep); text-decoration: none;
-    }
-    .topbar-back:hover { text-decoration: underline; }
-
-    /* ── MAIN ── */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 64px 24px;
-      text-align: center;
-    }
-
-    /* ── MEME ── */
-    .meme-wrap {
-      position: relative;
-      margin-bottom: 40px;
-      animation: floatIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-    .meme-img {
-      width: 220px;
-      border-radius: 12px;
-      box-shadow: 0 12px 40px rgba(61,56,96,0.18);
-      display: block;
-    }
-    .meme-badge {
-      position: absolute;
-      top: -10px; right: -12px;
-      background: linear-gradient(130deg, var(--grad-start), var(--lav));
-      color: var(--purple-dark);
-      font-size: 9px; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 20px;
-      white-space: nowrap;
-      box-shadow: 0 2px 8px rgba(184,180,212,0.35);
-    }
-
-    /* ── TEXT ── */
-    .cs-label {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--lav); margin-bottom: 10px;
-      animation: fadeUp 0.5s 0.2s ease both;
-    }
-    .cs-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 400; color: var(--charcoal);
-      line-height: 1.1; letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      animation: fadeUp 0.5s 0.25s ease both;
-    }
-    .cs-desc {
-      max-width: 380px;
-      font-size: 14px; font-weight: 300;
-      color: var(--mid); line-height: 1.75;
-      margin-bottom: 36px;
-      animation: fadeUp 0.5s 0.30s ease both;
-    }
-
-    /* ── BACK BUTTON ── */
-    .back-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--purple-dark);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 12px; font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 12px 24px; border-radius: 8px;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      animation: fadeUp 0.5s 0.35s ease both;
-    }
-    .back-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-
-    /* ── PROGRESS DOTS ── */
-    .progress {
+    .topbar-crumb {
+      font-size: 11px; font-weight: 400; color: var(--mid);
       display: flex; align-items: center; gap: 8px;
-      margin-top: 48px;
-      animation: fadeUp 0.5s 0.40s ease both;
     }
-    .prog-label {
-      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--mid); margin-right: 4px;
-    }
-    .prog-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-    }
-    .prog-dot.done { background: var(--lav-deep); }
-    .prog-dot.active { background: var(--lav); }
-    .prog-dot.pending {
-      background: transparent;
-      border: 1.5px solid var(--light);
-    }
-    .prog-page-label {
-      font-size: 10px; font-weight: 300; color: var(--light);
-      margin-left: 4px;
-    }
-
-    /* ── FOOTER ── */
-    .page-footer {
-      border-top: 1px solid var(--rule);
-      padding: 20px 48px;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .fl { font-size: 11px; font-weight: 300; color: var(--mid); }
-    .fbadge {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 4px;
+    .topbar-crumb a { color: var(--mid); text-decoration: none; }
+    .topbar-crumb a:hover { color: var(--lav-deep); }
+    .topbar-sep { color: var(--light); }
+    .topbar-cur { color: var(--lav-deep); font-weight: 500; }
+    .topbar-badge {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px;
       background: var(--lav-xlight); color: var(--lav-deep);
     }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
+      padding: 64px 48px 72px; overflow: hidden;
     }
-    @keyframes floatIn {
-      from { opacity: 0; transform: scale(0.85) translateY(20px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
+    .hero::before {
+      content:''; position:absolute;
+      width:340px; height:340px; border-radius:50%;
+      background:rgba(255,255,255,0.08); top:-90px; right:-70px;
+    }
+    .hero::after {
+      content:''; position:absolute;
+      width:160px; height:160px; border-radius:50%;
+      background:rgba(255,255,255,0.07); bottom:-40px; left:35%;
+    }
+    .cdeco { position:absolute; border-radius:50%; background:rgba(255,255,255,0.12); pointer-events:none; }
+    .cd1{width:52px;height:52px;top:28px;right:220px;}
+    .cd2{width:28px;height:28px;top:72px;right:284px;}
+    .cd3{width:38px;height:38px;bottom:44px;right:140px;}
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:10px; font-weight:600; letter-spacing:0.18em;
+      text-transform:uppercase; color:rgba(255,255,255,0.60); margin-bottom:20px;
+    }
+    .hero-eyebrow span {
+      width:6px; height:6px; border-radius:50%;
+      background:rgba(255,255,255,0.50); display:inline-block;
+    }
+    .hero-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(40px,5.5vw,68px); font-weight:400; color:var(--white);
+      line-height:1.05; letter-spacing:-0.02em; margin-bottom:8px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-sub {
+      font-size:11px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.60); margin-bottom:24px;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    .hero-desc {
+      max-width:560px; font-size:14px; font-weight:300;
+      color:rgba(255,255,255,0.80); line-height:1.75;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+    .hero-collab {
+      margin-top:32px; font-size:10px; font-weight:500;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.40); animation: fadeUp 0.5s 0.22s ease both;
     }
 
-    @media(max-width:600px){
-      .topbar { padding: 0 20px; }
-      .page-footer { padding: 16px 20px; }
-      .progress { flex-wrap: wrap; justify-content: center; }
+    /* ── STORYBOARD BANNER ── */
+    .storyboard-banner {
+      background: var(--purple-dark);
+      padding: 14px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .sb-banner-text {
+      font-size: 12.5px; font-weight: 300;
+      color: rgba(255,255,255,0.70); line-height: 1.5;
+    }
+    .sb-banner-text strong { font-weight: 500; color: var(--white); }
+    .sb-banner-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.20);
+      border-radius: 6px; padding: 8px 16px;
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.15s ease;
+    }
+    .sb-banner-link:hover { background: rgba(255,255,255,0.20); }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display:grid; grid-template-columns:220px 1fr;
+      max-width:1140px; margin:0 auto;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position:sticky; top:52px; height:calc(100vh - 52px);
+      overflow-y:auto; padding:40px 0 40px 48px;
+      border-right:1px solid var(--rule);
+    }
+    .sb-label {
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--mid); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--rule);
+    }
+    .sb-nav { list-style:none; display:flex; flex-direction:column; gap:2px; }
+    .sb-nav a {
+      display:flex; align-items:baseline; gap:8px;
+      font-size:12px; font-weight:400; color:var(--mid);
+      text-decoration:none; padding:6px 12px 6px 0;
+      border-radius:4px; transition:color 0.15s ease; line-height:1.4;
+    }
+    .sb-nav a:hover { color:var(--lav-deep); }
+    .sb-nav a.active { color:var(--lav-deep); font-weight:500; }
+    .nav-n { font-size:9px; color:var(--lav); font-weight:600; min-width:18px; }
+
+    /* ── CONTENT ── */
+    .content { padding:56px 64px 100px 56px; max-width:760px; }
+
+    /* ── SECTIONS ── */
+    .doc-sec {
+      margin-bottom:72px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .doc-sec:nth-child(1){animation-delay:0.05s}
+    .doc-sec:nth-child(2){animation-delay:0.10s}
+    .doc-sec:nth-child(3){animation-delay:0.15s}
+    .doc-sec:nth-child(4){animation-delay:0.20s}
+    .doc-sec:nth-child(5){animation-delay:0.25s}
+    .doc-sec:nth-child(6){animation-delay:0.30s}
+    .doc-sec:nth-child(7){animation-delay:0.35s}
+
+    .sec-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--lav-deep); background:var(--lav-xlight);
+      padding:4px 12px; border-radius:4px; margin-bottom:16px;
+    }
+    .sec-tag-n { color:var(--lav); }
+    .sec-rule { width:40px; height:2px; background:linear-gradient(90deg,var(--lav),var(--sage)); border-radius:2px; margin-bottom:20px; }
+
+    h2.sh1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(28px,3.5vw,38px); font-weight:400; color:var(--charcoal);
+      line-height:1.1; letter-spacing:-0.01em; margin-bottom:20px;
+    }
+    h3.sh2 {
+      font-family:'DM Serif Display',serif;
+      font-size:22px; font-weight:400; color:var(--charcoal);
+      margin-top:40px; margin-bottom:14px;
+      padding-bottom:10px; border-bottom:1px solid var(--rule);
+    }
+    p {
+      font-size:14px; font-weight:300; line-height:1.80;
+      color:var(--charcoal); margin-bottom:16px;
+    }
+    p:last-child { margin-bottom:0; }
+    strong { font-weight:500; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      margin:24px 0; padding:18px 22px;
+      border-left:3px solid var(--lav);
+      background:var(--lav-xlight); border-radius:0 8px 8px 0;
+    }
+    .callout p {
+      font-family:'DM Serif Display',serif; font-style:italic;
+      font-size:16px; color:var(--purple-dark); margin:0; line-height:1.5;
+    }
+
+    /* ── GRADIENT LIVE PREVIEW ── */
+    .gradient-preview {
+      border-radius: 12px; overflow: hidden;
+      margin: 20px 0; position: relative;
+    }
+    .gp-swatch {
+      height: 120px;
+      background: linear-gradient(130deg, #C4C0DC 0%, #B8B4D4 40%, #9AABA0 100%);
+      position: relative; overflow: hidden;
+    }
+    .gp-circle {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.12); pointer-events: none;
+    }
+    .gp-label {
+      position: absolute; bottom: 14px; left: 18px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.65);
+    }
+    .gp-formula {
+      background: var(--white); border: 1px solid var(--rule);
+      border-top: none;
+      padding: 14px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+    }
+    .gp-code {
+      font-family: monospace; font-size: 12px; color: var(--lav-deep);
+      background: var(--lav-xlight); padding: 4px 10px; border-radius: 4px;
+    }
+    .gp-note { font-size: 11px; font-weight: 300; color: var(--mid); }
+
+    /* ── COLOUR SWATCHES ── */
+    .swatch-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 10px; margin: 20px 0;
+    }
+    .swatch {
+      border-radius: 8px; overflow: hidden;
+      border: 1px solid var(--rule);
+      transition: transform 0.12s ease;
+    }
+    .swatch:hover { transform: translateY(-2px); }
+    .sw-color { height: 56px; }
+    .sw-info { background: var(--white); padding: 9px 11px; }
+    .sw-name { font-size: 11.5px; font-weight: 500; color: var(--charcoal); line-height:1.2; margin-bottom: 1px; }
+    .sw-hex  { font-size: 10.5px; color: var(--mid); font-family: monospace; }
+    .sw-use  { font-size: 10px; font-weight: 300; color: var(--light); margin-top: 2px; line-height: 1.35; }
+
+    /* ── TYPOGRAPHY DEMO ── */
+    .type-stack {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+      margin: 20px 0;
+    }
+    .type-row {
+      padding: 18px 20px; border-bottom: 1px solid var(--rule);
+      display: grid; grid-template-columns: 130px 1fr;
+      align-items: start; gap: 16px;
+    }
+    .type-row:last-child { border-bottom: none; }
+    .type-row:hover { background: var(--lav-xlight); }
+    .type-meta {}
+    .type-meta-font {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.10em;
+      text-transform: uppercase; color: var(--lav-deep); margin-bottom: 3px;
+    }
+    .type-meta-detail {
+      font-size: 10px; font-weight: 300; color: var(--mid); line-height: 1.5;
+    }
+    .type-sample {}
+
+    /* ── ICON SYSTEM ── */
+    .icon-demo {
+      background: var(--white); border: 1px solid var(--rule);
+      border-radius: 10px; padding: 24px 22px; margin: 20px 0;
+    }
+    .icon-row {
+      display: flex; align-items: flex-end; gap: 32px;
+      flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .icon-item {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .icon-circle {
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+    .ic-lav {
+      border: 1.5px solid var(--lav);
+      background: rgba(184,180,212,0.15);
+    }
+    .ic-sage {
+      border: 1.5px solid var(--sage);
+      background: rgba(143,168,154,0.15);
+    }
+    .ic-light {
+      border: 1px solid var(--lav-light);
+      background: rgba(212,209,232,0.12);
+    }
+    .icon-label {
+      font-size: 9px; font-weight: 500; color: var(--mid);
+      text-align: center; line-height: 1.3;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .icon-cluster-live {
+      display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+      padding-top: 16px; border-top: 1px solid var(--rule);
+    }
+    .cluster {
+      position: relative;
+    }
+    .c-item {
+      position: absolute; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .icon-rule {
+      font-size: 11px; font-weight: 300; color: var(--mid);
+      font-style: italic; line-height: 1.55;
+      background: var(--lav-xlight); padding: 10px 14px; border-radius: 6px;
+      margin-top: 16px;
+    }
+
+    /* ── DO / DON'T ── */
+    .dont-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 1px solid var(--rule); border-radius: 10px; overflow: hidden;
+      margin: 20px 0;
+    }
+    .dg-col { padding: 18px 20px; }
+    .dg-col.do   { background: rgba(236,234,246,0.25); }
+    .dg-col.dont { background: rgba(240,236,236,0.30); border-left: 1px solid var(--rule); }
+    .dg-head {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; margin-bottom: 12px; display: block;
+    }
+    .dg-col.do   .dg-head { color: var(--lav-deep); }
+    .dg-col.dont .dg-head { color: #a07070; }
+    .dg-item {
+      font-size: 12.5px; font-weight: 300; line-height: 1.6;
+      display: flex; align-items: flex-start; gap: 9px;
+      margin-bottom: 7px; color: var(--charcoal);
+    }
+    .dg-item:last-child { margin-bottom: 0; }
+    .dg-item::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      margin-top: 7px; flex-shrink: 0;
+    }
+    .dg-col.do   .dg-item { color: var(--charcoal); }
+    .dg-col.do   .dg-item::before { background: var(--lav); }
+    .dg-col.dont .dg-item { color: #5a3a3a; }
+    .dg-col.dont .dg-item::before { background: #c09090; }
+
+    /* ── LOGO DEMOS ── */
+    .logo-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      margin: 20px 0;
+    }
+    .logo-card {
+      border-radius: 10px; padding: 24px 22px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .logo-card.light {
+      background: var(--white); border: 1px solid var(--rule);
+    }
+    .logo-card.dark {
+      background: var(--purple-dark);
+    }
+    .logo-card.grad {
+      background: linear-gradient(130deg, var(--grad-start), var(--lav) 45%, var(--grad-end));
+    }
+    .logo-card.offwhite {
+      background: var(--off-white); border: 1px solid var(--rule);
+    }
+    .logo-card-label {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .logo-card.light .logo-card-label,
+    .logo-card.offwhite .logo-card-label { color: var(--mid); }
+    .logo-card.dark  .logo-card-label { color: rgba(255,255,255,0.35); }
+    .logo-card.grad  .logo-card-label { color: rgba(255,255,255,0.50); }
+
+    .logo-mark {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .lm-icons {
+      position: relative; width: 40px; height: 34px; flex-shrink: 0;
+    }
+    .lm-i {
+      position: absolute; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lm-wordmark {
+      font-family: 'DM Serif Display', serif;
+      letter-spacing: -0.01em; line-height: 1;
+    }
+    .lm-tagline {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-top: 2px;
+      font-size: 7px;
+    }
+    .logo-rule {
+      font-size: 10px; font-weight: 300; line-height: 1.5;
+    }
+    .logo-card.light .logo-rule,
+    .logo-card.offwhite .logo-rule { color: var(--mid); }
+    .logo-card.dark  .logo-rule { color: rgba(255,255,255,0.40); }
+    .logo-card.grad  .logo-rule { color: rgba(255,255,255,0.55); }
+
+    /* ── GENERIC LISTS ── */
+    ul.dl {
+      list-style:none; margin:16px 0;
+      display:flex; flex-direction:column; gap:8px;
+    }
+    ul.dl li {
+      display:flex; align-items:flex-start; gap:12px;
+      font-size:13.5px; font-weight:300; line-height:1.65; color:var(--charcoal);
+    }
+    ul.dl li::before {
+      content:''; width:6px; height:6px; border-radius:50%;
+      background:var(--lav); margin-top:7px; flex-shrink:0;
+    }
+
+    /* ── DATA TABLE ── */
+    .twrap { border:1px solid var(--rule); border-radius:8px; overflow:hidden; margin:16px 0; }
+    table.dt { width:100%; border-collapse:collapse; font-size:13px; }
+    table.dt th {
+      background:var(--purple-dark); color:var(--white);
+      font-family:'Poppins',sans-serif; font-weight:500;
+      font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+      padding:11px 16px; text-align:left;
+    }
+    table.dt td {
+      padding:11px 16px; border-bottom:1px solid var(--rule);
+      vertical-align:top; line-height:1.65; font-weight:300; color:var(--charcoal);
+    }
+    table.dt tr:last-child td { border-bottom:none; }
+    table.dt tr:nth-child(even) td { background:rgba(236,234,246,0.18); }
+    table.dt td:first-child { font-weight:500; color:var(--purple-dark); white-space:nowrap; font-size:12px; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      border-top:1px solid var(--rule); padding:28px 48px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    }
+    .fl { font-size:11px; font-weight:300; color:var(--mid); }
+    .fr { display:flex; align-items:center; gap:12px; }
+    .fbadge {
+      font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+      padding:4px 10px; border-radius:4px; background:var(--lav-xlight); color:var(--lav-deep);
+    }
+    .fnav { display:flex; align-items:center; gap:16px; }
+    .fnav a { font-size:11px; color:var(--lav-deep); text-decoration:none; font-weight:500; }
+    .fnav a:hover { text-decoration:underline; }
+    .fnav-sep { color:var(--light); font-size:11px; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .page-body { grid-template-columns:1fr; }
+      .sidebar { display:none; }
+      .content { padding:40px 28px 80px; }
+      .hero { padding:48px 28px 60px; }
+      .topbar { padding:0 24px; }
+      .topbar-badge { display:none; }
+      .storyboard-banner { padding:14px 24px; }
+      .swatch-grid { grid-template-columns:repeat(2,1fr); }
+      .dont-grid { grid-template-columns:1fr; }
+      .dg-col.dont { border-left:none; border-top:1px solid var(--rule); }
+      .logo-grid { grid-template-columns:1fr; }
+      .type-row { grid-template-columns:1fr; }
+      .page-footer { padding:24px 28px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOPBAR -->
-  <nav class="topbar">
-    <a href="index.html" class="topbar-brand">claritia</a>
-    <a href="index.html" class="topbar-back">← Volver al Vault</a>
-  </nav>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <div class="meme-wrap">
-      <img
-        class="meme-img"
-        src="1776293349515_image.png"
-        alt="Estoy cansado, jefe"
-      />
-      <div class="meme-badge">En construcción</div>
-    </div>
-
-    <div class="cs-label">Marketing Vault — claritia</div>
-    <h1 class="cs-title">Próximamente.</h1>
-    <p class="cs-desc">
-      Esta sección está en proceso de construcción. Vuelve pronto — o mejor aún, vuelve al vault y revisa lo que ya está listo.
-    </p>
-
-    <a href="index.html" class="back-btn">
-      ← Volver al Marketing Vault
-    </a>
-
-    <!-- PROGRESS TRACKER -->
-    <div class="progress">
-      <span class="prog-label">Progreso</span>
-      <div class="prog-dot done" title="Consistencia de Marca"></div>
-      <div class="prog-dot done" title="Perfil de Cliente Ideal"></div>
-      <div class="prog-dot done" title="Tono y Copy"></div>
-      <div class="prog-dot active" title="En construcción"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <span class="prog-page-label">3 / 8 completos</span>
-    </div>
-
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="index.html" class="topbar-brand">claritia</a>
+  <div class="topbar-crumb">
+    <a href="index.html">Marketing Vault</a>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-cur">Identidad Visual</span>
   </div>
+  <div class="topbar-badge">06 — Diseño</div>
+</nav>
 
-  <!-- FOOTER -->
-  <footer class="page-footer">
-    <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno.</div>
-    <div class="fbadge">Próximamente</div>
-  </footer>
+<!-- HERO -->
+<header class="hero">
+  <div class="cdeco cd1"></div>
+  <div class="cdeco cd2"></div>
+  <div class="cdeco cd3"></div>
+  <div class="hero-eyebrow"><span></span>Identidad Visual</div>
+  <h1 class="hero-title">Cómo se ve<br/>claritia.</h1>
+  <div class="hero-sub">Terapia Clínica Online</div>
+  <p class="hero-desc">
+    Sistema visual confirmado por focus group y construido en Adobe Illustrator. Esta página es la referencia rápida de uso diario — colores, tipografía, logo, gradiente e iconografía. Para el sistema completo ver el storyboard.
+  </p>
+  <div class="hero-collab">JRZ Consulting Solutions &nbsp;×&nbsp; claritia</div>
+</header>
+
+<!-- STORYBOARD BANNER -->
+<div class="storyboard-banner">
+  <div class="sb-banner-text">
+    <strong>Storyboard visual completo disponible</strong> — exploración detallada de todos los componentes, variantes de logo, dirección de imágenes y aplicaciones web.
+  </div>
+  <a href="claritia_storyboard.html" class="sb-banner-link">
+    Ver storyboard completo →
+  </a>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-label">Contenido</div>
+    <ul class="sb-nav">
+      <li><a href="#s01"><span class="nav-n">01</span> El gradiente</a></li>
+      <li><a href="#s02"><span class="nav-n">02</span> Paleta de color</a></li>
+      <li><a href="#s03"><span class="nav-n">03</span> Tipografía</a></li>
+      <li><a href="#s04"><span class="nav-n">04</span> Logo</a></li>
+      <li><a href="#s05"><span class="nav-n">05</span> Iconografía</a></li>
+      <li><a href="#s06"><span class="nav-n">06</span> Imágenes</a></li>
+      <li><a href="#s07"><span class="nav-n">07</span> Do / Don't</a></li>
+    </ul>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- 01 GRADIENT -->
+    <section class="doc-sec" id="s01">
+      <div class="sec-tag"><span class="sec-tag-n">01</span> El Gradiente Signature</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">El elemento más reconocible de claritia</h2>
+      <p>El gradiente diagonal lavanda→sage es la firma visual de claritia. Aparece en cada superficie de alto impacto — hero sections, portadas, cards destacadas. Fue el elemento más reconocido y preferido en el estudio de focus group.</p>
+
+      <div class="gradient-preview">
+        <div class="gp-swatch">
+          <div class="gp-circle" style="width:200px;height:200px;top:-60px;right:-40px;"></div>
+          <div class="gp-circle" style="width:80px;height:80px;bottom:-20px;left:25%;"></div>
+          <div class="gp-circle" style="width:44px;height:44px;top:20px;right:180px;"></div>
+          <div class="gp-circle" style="width:26px;height:26px;top:56px;right:234px;"></div>
+          <!-- Logo preview on gradient -->
+          <div style="position:absolute;top:50%;left:32px;transform:translateY(-50%);">
+            <div style="font-family:'DM Serif Display',serif;font-size:36px;color:#fff;line-height:1;letter-spacing:-0.01em;">claritia</div>
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:3px;">Terapia Clínica Online</div>
+          </div>
+          <div class="gp-label">Gradiente — focus group tested</div>
+        </div>
+        <div class="gp-formula">
+          <div class="gp-code">linear-gradient(130deg, #C4C0DC 0%, #B8B4D4 40%, #9AABA0 100%)</div>
+          <div class="gp-note">Siempre 130° diagonal. Nunca horizontal ni vertical.</div>
+        </div>
+      </div>
+
+      <ul class="dl">
+        <li>Siempre en ángulo <strong>130 grados</strong> — nunca horizontal, nunca vertical</li>
+        <li>Los <strong>círculos flotantes</strong> (12–15% opacidad) siempre acompañan al gradiente</li>
+        <li>Funciona en hero sections, cards destacadas y portadas</li>
+        <li>La variante oscura usa <strong>#3D3860 → #5A566E</strong> para cards de citas</li>
+      </ul>
+    </section>
+
+    <!-- 02 PALETTE -->
+    <section class="doc-sec" id="s02">
+      <div class="sec-tag"><span class="sec-tag-n">02</span> Paleta de Color</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Los únicos colores que claritia usa</h2>
+      <p>Lavanda y sage son los pilares. El carbón reemplaza al negro. <strong>Nunca verde hospitalario, nunca azul corporativo frío, nunca negro puro #000.</strong></p>
+
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="sw-color" style="background:#B8B4D4;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Lavanda</div>
+            <div class="sw-hex">#B8B4D4</div>
+            <div class="sw-use">Primario — UI, bordes, acentos, círculos</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#D4D1E8;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Lavanda Claro</div>
+            <div class="sw-hex">#D4D1E8</div>
+            <div class="sw-use">Gradiente start, fondos suaves</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#ECEAF6;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Lavanda Xlight</div>
+            <div class="sw-hex">#ECEAF6</div>
+            <div class="sw-use">Cards, callouts, tags, badges</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#534AB7;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Lavanda Deep</div>
+            <div class="sw-hex">#534AB7</div>
+            <div class="sw-use">CTAs, labels activos, énfasis</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#8FA89A;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Sage</div>
+            <div class="sw-hex">#8FA89A</div>
+            <div class="sw-use">Secundario — gradiente end, dividers</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#6B8C7D;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Sage Dark</div>
+            <div class="sw-hex">#6B8C7D</div>
+            <div class="sw-use">Taglines, texto sobre sage claro</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#3D3860;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Púrpura Oscuro</div>
+            <div class="sw-hex">#3D3860</div>
+            <div class="sw-use">Dark cards, headers, nav activo</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#2C2C2C;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Carbón</div>
+            <div class="sw-hex">#2C2C2C</div>
+            <div class="sw-use">Texto principal — nunca negro puro</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="sw-color" style="background:#F8F8FA;border:1px solid #e0dded;"></div>
+          <div class="sw-info">
+            <div class="sw-name">Off-White</div>
+            <div class="sw-hex">#F8F8FA</div>
+            <div class="sw-use">Fondo principal — espacio para respirar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 TYPOGRAPHY -->
+    <section class="doc-sec" id="s03">
+      <div class="sec-tag"><span class="sec-tag-n">03</span> Tipografía</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Apax Medium + Poppins</h2>
+      <p>Dos fuentes. Roles estrictamente separados. Nunca intercambiar. <strong>Apax Medium</strong> (web: DM Serif Display) solo para títulos y logo. <strong>Poppins 300–500</strong> para todo lo demás.</p>
+
+      <div class="type-stack">
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-font">Display / Logo</div>
+            <div class="type-meta-detail">Apax Medium<br/>Web: DM Serif Display<br/>Peso: 400<br/>Uso: Hero, logo, títulos</div>
+          </div>
+          <div class="type-sample">
+            <div style="font-family:'DM Serif Display',serif;font-size:42px;color:var(--charcoal);line-height:1;letter-spacing:-0.02em;">claritia</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--charcoal);line-height:1.1;letter-spacing:-0.015em;margin-top:8px;">El bienestar mental<br/>no es un lujo.</div>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-font">Citas / Callouts</div>
+            <div class="type-meta-detail">DM Serif Display<br/>Italic 400<br/>Uso: Frases destacadas</div>
+          </div>
+          <div class="type-sample">
+            <div style="font-family:'DM Serif Display',serif;font-style:italic;font-size:20px;color:var(--purple-dark);line-height:1.4;">"Convertir no es vender una sesión.<br/>Es iniciar un proceso."</div>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-font">Cuerpo de texto</div>
+            <div class="type-meta-detail">Poppins 300<br/>Tamaño: 14px<br/>Line-height: 1.80</div>
+          </div>
+          <div class="type-sample">
+            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:300;color:var(--charcoal);line-height:1.80;">La gente no busca terapia. Busca dejar de sentirse así. Todo el copy parte de este lenguaje emocional — nunca del lenguaje clínico ni del lenguaje de servicio.</div>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-font">Labels / UI</div>
+            <div class="type-meta-detail">Poppins 600<br/>Todo caps, tracking<br/>Uso: Etiquetas, tags</div>
+          </div>
+          <div class="type-sample">
+            <div style="font-family:'Poppins',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.20em;text-transform:uppercase;color:var(--lav-deep);">Terapia Clínica Online &nbsp;—&nbsp; Documento Base</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-dark);margin-top:8px;">06 — Identidad Visual</div>
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-meta">
+            <div class="type-meta-font">Tamaños mínimos</div>
+            <div class="type-meta-detail">Digital: 14px<br/>Impreso: 11pt<br/>Nunca más pequeño</div>
+          </div>
+          <div class="type-sample">
+            <div style="font-size:14px;font-weight:300;color:var(--charcoal);">14px — mínimo digital ✓</div>
+            <div style="font-size:12px;font-weight:300;color:var(--mid);margin-top:4px;">12px — solo para notas y metadata</div>
+            <div style="font-size:10px;font-weight:300;color:var(--light);margin-top:4px;">10px — solo labels en mayúsculas con tracking</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 LOGO -->
+    <section class="doc-sec" id="s04">
+      <div class="sec-tag"><span class="sec-tag-n">04</span> Logo</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">El wordmark y sus variantes</h2>
+      <p>El logo es siempre <strong>"claritia"</strong> en minúsculas, con el cluster de tres círculos a la izquierda. Cuatro variantes de uso según el fondo.</p>
+
+      <div class="logo-grid">
+        <!-- Light on white -->
+        <div class="logo-card light">
+          <div class="logo-card-label">Sobre fondo blanco / off-white</div>
+          <div class="logo-mark">
+            <div class="lm-icons">
+              <div class="lm-i" style="width:20px;height:20px;top:0;left:0;border:1.5px solid var(--lav);background:rgba(184,180,212,0.18);">
+                <svg viewBox="0 0 16 16" fill="none" width="9" height="9"><circle cx="8" cy="6" r="3" stroke="#534AB7" stroke-width="1.5"/><rect x="6.5" y="8" width="3" height="4" rx="1" fill="#534AB7"/></svg>
+              </div>
+              <div class="lm-i" style="width:14px;height:14px;top:6px;left:14px;border:1.5px solid var(--sage);background:rgba(143,168,154,0.15);">
+                <svg viewBox="0 0 16 16" fill="none" width="7" height="7"><rect x="2" y="2" width="5" height="5" rx="0.5" stroke="#6B8C7D" stroke-width="1.5"/><circle cx="11" cy="11" r="3" fill="#6B8C7D"/></svg>
+              </div>
+              <div class="lm-i" style="width:10px;height:10px;top:16px;left:4px;border:1px solid var(--lav-light);background:rgba(212,209,232,0.12);"></div>
+            </div>
+            <div>
+              <div class="lm-wordmark" style="font-size:28px;color:var(--charcoal);">claritia</div>
+              <div class="lm-tagline" style="color:var(--sage-dark);">Terapia Clínica Online</div>
+            </div>
+          </div>
+          <div class="logo-rule">Uso estándar — documentos, website, materiales impresos en blanco.</div>
+        </div>
+
+        <!-- Dark card -->
+        <div class="logo-card dark">
+          <div class="logo-card-label">Sobre fondo oscuro / púrpura</div>
+          <div class="logo-mark">
+            <div class="lm-icons">
+              <div class="lm-i" style="width:20px;height:20px;top:0;left:0;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.12);"></div>
+              <div class="lm-i" style="width:14px;height:14px;top:6px;left:14px;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.08);"></div>
+              <div class="lm-i" style="width:10px;height:10px;top:16px;left:4px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);"></div>
+            </div>
+            <div>
+              <div class="lm-wordmark" style="font-size:28px;color:#fff;">claritia</div>
+              <div class="lm-tagline" style="color:rgba(255,255,255,0.45);">Terapia Clínica Online</div>
+            </div>
+          </div>
+          <div class="logo-rule">Cards oscuras, hero sections con fondo púrpura.</div>
+        </div>
+
+        <!-- Gradient -->
+        <div class="logo-card grad">
+          <div class="logo-card-label">Sobre gradiente</div>
+          <div class="logo-mark">
+            <div style="font-family:'DM Serif Display',serif;font-size:28px;color:#fff;letter-spacing:-0.01em;">claritia</div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:4px;">
+            <div style="width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);"></div>
+            <div style="width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);margin-top:3px;"></div>
+            <div style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);margin-top:6px;"></div>
+          </div>
+          <div class="logo-rule">Hero sections. Texto y círculos siempre blancos.</div>
+        </div>
+
+        <!-- Compact inline -->
+        <div class="logo-card offwhite">
+          <div class="logo-card-label">Compacto — versión horizontal</div>
+          <div style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+            <div style="display:flex;gap:3px;align-items:center;">
+              <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid var(--lav);background:rgba(184,180,212,0.15);"></div>
+              <div style="width:11px;height:11px;border-radius:50%;border:1px solid var(--sage);background:rgba(143,168,154,0.12);"></div>
+              <div style="width:8px;height:8px;border-radius:50%;border:1px solid var(--lav-light);background:rgba(212,209,232,0.08);"></div>
+            </div>
+            <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--charcoal);letter-spacing:-0.01em;">claritia</div>
+            <div style="font-size:7px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage-dark);line-height:1.3;">Terapia<br/>Clínica<br/>Online</div>
+          </div>
+          <div class="logo-rule">Headers compactos, topbar, favicon context.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>"claritia" — siempre en minúsculas. Nunca CLARITIA, nunca Claritia.</p>
+      </div>
+    </section>
+
+    <!-- 05 ICONS -->
+    <section class="doc-sec" id="s05">
+      <div class="sec-tag"><span class="sec-tag-n">05</span> Sistema de Iconografía</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Los tres círculos — firma visual de claritia</h2>
+      <p>El sistema de íconos es un cluster de tres círculos con íconos interiores. Siempre van juntos en grupos de 2–3, en diferentes tamaños, con <strong>10–20% de opacidad</strong>. Nunca solos. Nunca sólidos.</p>
+
+      <div class="icon-demo">
+        <!-- Three icon types -->
+        <div style="font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:14px;">Los tres íconos</div>
+        <div class="icon-row">
+          <div class="icon-item">
+            <div class="icon-circle ic-lav" style="width:48px;height:48px;">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                <circle cx="12" cy="9" r="4" stroke="#534AB7" stroke-width="1.5"/>
+                <rect x="9.5" y="12.5" width="5" height="7" rx="1.5" fill="#534AB7"/>
+              </svg>
+            </div>
+            <div class="icon-label">Keyhole<br/>Privacidad</div>
+          </div>
+          <div class="icon-item">
+            <div class="icon-circle ic-sage" style="width:48px;height:48px;">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                <rect x="2" y="2" width="8" height="8" rx="1" stroke="#6B8C7D" stroke-width="1.5"/>
+                <rect x="14" y="2" width="8" height="8" rx="1" stroke="#6B8C7D" stroke-width="1.5"/>
+                <rect x="2" y="14" width="8" height="8" rx="1" stroke="#6B8C7D" stroke-width="1.5"/>
+                <circle cx="18" cy="18" r="4" fill="#6B8C7D"/>
+              </svg>
+            </div>
+            <div class="icon-label">Focus<br/>Atención / Claridad</div>
+          </div>
+          <div class="icon-item">
+            <div class="icon-circle ic-light" style="width:48px;height:48px;">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20">
+                <path d="M5 12c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#B8B4D4" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="#B8B4D4" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="12" cy="12" r="2" fill="#B8B4D4"/>
+              </svg>
+            </div>
+            <div class="icon-label">Señal<br/>Conexión digital</div>
+          </div>
+
+          <!-- Size scale -->
+          <div style="display:flex;flex-direction:column;gap:4px;margin-left:16px;">
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--mid);margin-bottom:6px;">Escala</div>
+            <div style="display:flex;align-items:flex-end;gap:8px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <div style="width:52px;height:52px;border-radius:50%;border:1.5px solid var(--lav);background:rgba(184,180,212,0.14);"></div>
+                <div style="font-size:8px;color:var(--mid);">52px</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <div style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--lav);background:rgba(184,180,212,0.12);"></div>
+                <div style="font-size:8px;color:var(--mid);">36px</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <div style="width:24px;height:24px;border-radius:50%;border:1px solid var(--lav);background:rgba(184,180,212,0.10);"></div>
+                <div style="font-size:8px;color:var(--mid);">24px</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+                <div style="width:16px;height:16px;border-radius:50%;border:1px solid var(--lav-light);background:rgba(212,209,232,0.08);"></div>
+                <div style="font-size:8px;color:var(--mid);">16px</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cluster examples -->
+        <div style="font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin:16px 0 12px;padding-top:16px;border-top:1px solid var(--rule);">Clusters en contexto</div>
+        <div style="display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;">
+          <!-- On gradient -->
+          <div>
+            <div style="font-size:8px;color:var(--mid);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Sobre gradiente</div>
+            <div style="background:linear-gradient(130deg,var(--grad-start),var(--lav) 45%,var(--grad-end));width:120px;height:70px;border-radius:8px;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:8px;right:30px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.20);"></div>
+              <div style="position:absolute;top:22px;right:10px;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);"></div>
+              <div style="position:absolute;bottom:10px;right:44px;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);"></div>
+            </div>
+          </div>
+          <!-- On white -->
+          <div>
+            <div style="font-size:8px;color:var(--mid);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Sobre blanco</div>
+            <div style="background:var(--white);width:120px;height:70px;border-radius:8px;position:relative;overflow:hidden;border:1px solid var(--rule);">
+              <div style="position:absolute;top:8px;right:26px;width:32px;height:32px;border-radius:50%;background:rgba(184,180,212,0.15);border:1.5px solid var(--lav);"></div>
+              <div style="position:absolute;top:20px;right:8px;width:20px;height:20px;border-radius:50%;background:rgba(143,168,154,0.12);border:1.5px solid var(--sage);"></div>
+              <div style="position:absolute;bottom:10px;right:40px;width:14px;height:14px;border-radius:50%;background:rgba(212,209,232,0.10);border:1px solid var(--lav-light);"></div>
+            </div>
+          </div>
+          <!-- On dark -->
+          <div>
+            <div style="font-size:8px;color:var(--mid);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Sobre oscuro</div>
+            <div style="background:var(--purple-dark);width:120px;height:70px;border-radius:8px;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:8px;right:26px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);"></div>
+              <div style="position:absolute;top:20px;right:8px;width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);"></div>
+              <div style="position:absolute;bottom:10px;right:40px;width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.10);"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="icon-rule">Regla: siempre 2–3 círculos juntos, en tamaños distintos, opacidad 10–20%. Nunca un solo círculo suelto. Nunca relleno sólido.</div>
+      </div>
+    </section>
+
+    <!-- 06 IMAGERY -->
+    <section class="doc-sec" id="s06">
+      <div class="sec-tag"><span class="sec-tag-n">06</span> Dirección de Imágenes</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Qué tipo de imágenes usa claritia</h2>
+      <p>Las imágenes del PDF de estrategia confirman la dirección visual: cotidiano, real, suave. <strong>Lo opuesto a lo clínico.</strong> Lo opuesto a lo aspiracional.</p>
+
+      <div class="twrap">
+        <table class="dt">
+          <thead><tr><th>Categoría</th><th>Descripción</th><th>Ejemplos del PDF</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Personas reales</td>
+              <td>Cotidianas, en reposo o movimiento natural. Sin posado ni actuación. Diversidad real de América Latina.</td>
+              <td>Mujer con hoodie lavanda, sonriendo naturalmente</td>
+            </tr>
+            <tr>
+              <td>Naturaleza / calma</td>
+              <td>Cielos, nubes, elementos orgánicos suaves. Transmiten apertura y tranquilidad. Sin connotación clínica.</td>
+              <td>Cielo azul con nubes blancas a través de espejo ovalado</td>
+            </tr>
+            <tr>
+              <td>Ilustración / whimsy</td>
+              <td>Elementos ilustrados en colores de la paleta. Suaves, accesibles, confirman que la marca no es solemne.</td>
+              <td>Ovejas ilustradas en blanco sobre cielo azul</td>
+            </tr>
+            <tr>
+              <td>Abstracto</td>
+              <td>Formas orgánicas, sombras suaves, texturas que evocan calma. Siempre en paleta lavanda/sage.</td>
+              <td>Gradientes, círculos superpuestos, luz difusa</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sh2">Nunca usar</h3>
+      <ul class="dl">
+        <li>Stock genérico de "personas felices posando" con sonrisa forzada</li>
+        <li>Imágenes que asocien salud mental con hospitales, clínicas, o instrumental médico</li>
+        <li>Personas en actitud de crisis dramatizada (cabeza entre manos, lágrimas)</li>
+        <li>Fondos blancos asépticos con iluminación de estudio clínico</li>
+        <li>Imágenes de cerebros, anatomía, o iconografía médica</li>
+      </ul>
+    </section>
+
+    <!-- 07 DO/DON'T -->
+    <section class="doc-sec" id="s07">
+      <div class="sec-tag"><span class="sec-tag-n">07</span> Do / Don't</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Reglas absolutas de identidad visual</h2>
+      <p>Estas reglas no tienen excepciones. Cualquier pieza visual — web, social, impreso — debe cumplirlas antes de publicarse.</p>
+
+      <div class="dont-grid">
+        <div class="dg-col do">
+          <span class="dg-head">✓ claritia siempre</span>
+          <div class="dg-item">Gradiente 130° lavanda → sage en superficies de alto impacto</div>
+          <div class="dg-item">Círculos flotantes en clusters de 2–3, opacidad 10–20%</div>
+          <div class="dg-item">DM Serif Display / Apax Medium solo para títulos y logo</div>
+          <div class="dg-item">Espacio en blanco generoso — el diseño respira</div>
+          <div class="dg-item">Texto principal en carbón #2C2C2C, nunca negro puro</div>
+          <div class="dg-item">"claritia" en minúsculas siempre</div>
+          <div class="dg-item">Personas reales, cotidianas, diversas</div>
+          <div class="dg-item">Bordes y divisores en lavanda, nunca en negro o gris oscuro</div>
+        </div>
+        <div class="dg-col dont">
+          <span class="dg-head">✗ claritia nunca</span>
+          <div class="dg-item">Verde hospitalario, azul corporativo frío, blanco aséptico</div>
+          <div class="dg-item">Negro puro #000 en ningún texto ni elemento</div>
+          <div class="dg-item">Arial, Roboto, Inter o system fonts como fuente display</div>
+          <div class="dg-item">Diseño denso sin espacio en blanco</div>
+          <div class="dg-item">CLARITIA en mayúsculas ni Claritia con inicial</div>
+          <div class="dg-item">Stock genérico ni imágenes de clínica / hospital</div>
+          <div class="dg-item">Un solo círculo decorativo suelto — siempre cluster</div>
+          <div class="dg-item">Serif en cuerpo de texto — solo display y citas</div>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:32px;">
+        <p>"El diseño de claritia respira. No llenamos cada centímetro."</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno. No distribuir sin autorización.</div>
+  <div class="fr">
+    <div class="fbadge">06 — Diseño</div>
+    <div class="fnav">
+      <a href="claritialeti.html">← Leti / Dani</a>
+      <span class="fnav-sep">/</span>
+      <a href="claritiamarket.html">Oportunidad →</a>
+      <span class="fnav-sep">/</span>
+      <a href="index.html">Vault</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.doc-sec[id]');
+  const links = document.querySelectorAll('.sb-nav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
 
 </body>
 </html>
