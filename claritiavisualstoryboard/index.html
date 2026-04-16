@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>claritia — Visual Brand Storyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --lav:          #B8B4D4;
+      --lav-light:    #D4D1E8;
+      --lav-xlight:   #ECEAF6;
+      --lav-deep:     #534AB7;
+      --sage:         #8FA89A;
+      --sage-dark:    #6B8C7D;
+      --sage-light:   #C4D4CC;
+      --grad-start:   #C4C0DC;
+      --grad-end:     #9AABA0;
+      --purple-dark:  #3D3860;
+      --purple-mid:   #5A566E;
+      --white:        #FFFFFF;
+      --off-white:    #F8F8FA;
+      --charcoal:     #2C2C2C;
+      --mid:          #6B6B6B;
+      --light:        #D0CDE0;
+      --rule:         rgba(184,180,212,0.25);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1A1820;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── BOARD HEADER ── */
+    .board-header {
+      padding: 48px 64px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 24px;
+      flex-wrap: wrap;
+    }
+    .board-title-wrap {}
+    .board-eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--lav); margin-bottom: 8px;
+    }
+    .board-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 4vw, 52px); font-weight: 400;
+      color: var(--white); line-height: 1.05; letter-spacing: -0.02em;
+    }
+    .board-sub {
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.45);
+      margin-top: 8px; line-height: 1.6; max-width: 480px;
+    }
+    .board-meta {
+      text-align: right;
+    }
+    .board-meta-label {
+      font-size: 9px; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 4px;
+    }
+    .board-meta-value {
+      font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.45);
+    }
+    .board-badge {
+      display: inline-block; margin-top: 8px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 4px;
+      background: rgba(184,180,212,0.15); color: var(--lav);
+      border: 1px solid rgba(184,180,212,0.25);
+    }
+
+    /* ── BOARD LAYOUT ── */
+    .board {
+      padding: 48px 64px 80px;
+      display: flex; flex-direction: column; gap: 80px;
+    }
+
+    /* ── STORY SECTION ── */
+    .story-sec {}
+    .story-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--lav);
+      margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
+    }
+    .story-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(184,180,212,0.15);
+    }
+    .story-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(22px, 2.8vw, 32px); font-weight: 400;
+      color: var(--white); margin-bottom: 8px; line-height: 1.1;
+    }
+    .story-desc {
+      font-size: 13px; font-weight: 300;
+      color: rgba(255,255,255,0.45); line-height: 1.7;
+      max-width: 560px; margin-bottom: 32px;
+    }
+
+    /* ── FRAME ── */
+    .frame-row {
+      display: grid; gap: 16px;
+    }
+    .frame-row.col-1 { grid-template-columns: 1fr; }
+    .frame-row.col-2 { grid-template-columns: 1fr 1fr; }
+    .frame-row.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .frame-row.col-4 { grid-template-columns: repeat(4, 1fr); }
+    .frame-row.col-2-1 { grid-template-columns: 2fr 1fr; }
+    .frame-row.col-1-2 { grid-template-columns: 1fr 2fr; }
+    .frame-row.col-3-2 { grid-template-columns: 3fr 2fr; }
+
+    .frame {
+      border-radius: 12px; overflow: hidden;
+      position: relative;
+    }
+    .frame-caption {
+      margin-top: 8px;
+      font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.30);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── 01 GRADIENT HERO FRAME ── */
+    .gradient-hero {
+      background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
+      padding: 52px 48px 60px;
+      min-height: 320px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative; overflow: hidden;
+    }
+    .gh-circle {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.10); pointer-events: none;
+    }
+    .gh-c1 { width:280px;height:280px; top:-80px;right:-60px; }
+    .gh-c2 { width:140px;height:140px; bottom:-30px;left:30%; }
+    .gh-c3 { width:50px;height:50px; top:28px;right:200px; }
+    .gh-c4 { width:28px;height:28px; top:68px;right:260px; }
+    .gh-c5 { width:36px;height:36px; bottom:48px;right:100px; }
+
+    .gh-eyebrow {
+      font-size:9px;font-weight:600;letter-spacing:0.2em;
+      text-transform:uppercase;color:rgba(255,255,255,0.55);
+      margin-bottom:12px;
+      display:flex;align-items:center;gap:6px;
+    }
+    .gh-dot {
+      width:5px;height:5px;border-radius:50%;
+      background:rgba(255,255,255,0.45);
+    }
+    .gh-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(36px,4.5vw,58px);font-weight:400;
+      color:var(--white);line-height:1.0;letter-spacing:-0.02em;
+      margin-bottom:14px;
+    }
+    .gh-body {
+      font-size:14px;font-weight:300;
+      color:rgba(255,255,255,0.78);line-height:1.7;
+      max-width:440px;margin-bottom:28px;
+    }
+    .gh-cta {
+      display:inline-block;
+      background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.30);
+      border-radius:8px;padding:11px 22px;
+      font-size:12px;font-weight:500;color:var(--white);
+      letter-spacing:0.04em;
+    }
+    .gh-collab {
+      position:absolute;bottom:20px;right:24px;
+      font-size:9px;font-weight:500;letter-spacing:0.14em;
+      text-transform:uppercase;color:rgba(255,255,255,0.30);
+    }
+
+    /* ── ICON SYSTEM FRAME ── */
+    .icon-system {
+      background: var(--off-white);
+      padding: 40px 36px;
+      display: flex; flex-direction: column; gap: 28px;
+      min-height: 320px;
+    }
+    .is-label {
+      font-size:9px;font-weight:700;letter-spacing:0.18em;
+      text-transform:uppercase;color:var(--mid);
+    }
+    .icon-cluster-demo {
+      display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+    }
+    .icon-trio {
+      display:flex;align-items:flex-end;gap:-6px;position:relative;
+      width:80px;height:64px;
+    }
+    .ic {
+      position:absolute;
+      display:flex;align-items:center;justify-content:center;
+      border-radius:50%;
+    }
+    /* keyhole */
+    .ic-keyhole {
+      width:38px;height:38px;
+      background:rgba(184,180,212,0.25);
+      border:1.5px solid var(--lav);
+      top:0;left:0;
+    }
+    /* focus bracket */
+    .ic-focus {
+      width:28px;height:28px;
+      background:rgba(143,168,154,0.20);
+      border:1.5px solid var(--sage);
+      top:12px;left:26px;
+    }
+    /* rss */
+    .ic-rss {
+      width:22px;height:22px;
+      background:rgba(184,180,212,0.15);
+      border:1.5px solid var(--lav-light);
+      top:28px;left:8px;
+    }
+
+    /* SVG icons inside circles */
+    .ic svg { width:14px;height:14px; }
+    .ic-keyhole svg { color:var(--lav-deep); }
+    .ic-focus svg   { color:var(--sage-dark); }
+    .ic-rss svg     { color:var(--lav); }
+
+    .icon-sizes {
+      display:flex;align-items:center;gap:14px;
+    }
+    .ic-sz {
+      display:flex;align-items:center;justify-content:center;
+      border-radius:50%;
+      border:1.5px solid var(--lav);
+      background:rgba(184,180,212,0.12);
+    }
+    .icon-size-labels {
+      display:flex;gap:14px;margin-top:6px;
+    }
+    .isl { font-size:9px;font-weight:400;color:var(--mid);text-align:center; }
+
+    /* ── LOGO FRAME ── */
+    .logo-frame {
+      background: var(--white);
+      padding: 36px 36px;
+      display: flex; flex-direction: column; gap: 28px;
+    }
+    .logo-variant {
+      display:flex;flex-direction:column;gap:4px;
+    }
+    .logo-variant-label {
+      font-size:8px;font-weight:600;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--mid);margin-bottom:8px;
+    }
+    .logo-mark {
+      display:flex;align-items:center;gap:10px;
+    }
+    .logo-icon-cluster {
+      display:flex;gap:-4px;position:relative;width:42px;height:34px;flex-shrink:0;
+    }
+    .li1 {
+      position:absolute;width:20px;height:20px;border-radius:50%;
+      background:rgba(184,180,212,0.20);border:1px solid var(--lav);
+      top:0;left:0;display:flex;align-items:center;justify-content:center;
+    }
+    .li2 {
+      position:absolute;width:14px;height:14px;border-radius:50%;
+      background:rgba(143,168,154,0.18);border:1px solid var(--sage);
+      top:6px;left:14px;display:flex;align-items:center;justify-content:center;
+    }
+    .li3 {
+      position:absolute;width:11px;height:11px;border-radius:50%;
+      background:rgba(184,180,212,0.12);border:1px solid var(--lav-light);
+      top:16px;left:4px;
+    }
+    .logo-text-wrap {}
+    .logo-wordmark {
+      font-family:'DM Serif Display',serif;
+      letter-spacing:-0.01em;line-height:1;
+    }
+    .logo-tagline-text {
+      font-family:'Poppins',sans-serif;
+      font-weight:600;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--sage-dark);
+      margin-top:2px;
+    }
+
+    /* dark logo variant */
+    .logo-dark {
+      background:var(--purple-dark);
+      padding:20px 24px;border-radius:8px;
+      display:inline-flex;align-items:center;gap:10px;
+    }
+
+    /* ── PALETTE FRAME ── */
+    .palette-frame {
+      background: var(--off-white);
+      padding: 32px 32px 28px;
+    }
+    .swatch-row {
+      display:flex;gap:8px;margin-bottom:20px;
+    }
+    .swatch-block {
+      flex:1;border-radius:8px;overflow:hidden;
+    }
+    .sw-color {
+      height:72px;
+    }
+    .sw-info {
+      background:var(--white);padding:8px 10px;
+    }
+    .sw-name { font-size:11px;font-weight:500;color:var(--charcoal);line-height:1.2; }
+    .sw-hex  { font-size:10px;color:var(--mid);font-family:monospace; }
+    .sw-use  { font-size:9px;color:var(--light);margin-top:2px;line-height:1.3; }
+
+    .gradient-strip {
+      height:48px;border-radius:8px;
+      background:linear-gradient(130deg,var(--grad-start) 0%,var(--lav) 40%,var(--grad-end) 100%);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .gs-label {
+      font-size:10px;font-weight:600;letter-spacing:0.14em;
+      text-transform:uppercase;color:rgba(255,255,255,0.70);
+    }
+
+    /* ── TYPOGRAPHY FRAME ── */
+    .type-frame {
+      background: var(--white);
+      padding: 36px 36px;
+      display:flex;flex-direction:column;gap:24px;
+    }
+    .type-row {
+      border-bottom:1px solid var(--rule);
+      padding-bottom:20px;
+    }
+    .type-row:last-child { border-bottom:none; padding-bottom:0; }
+    .type-meta {
+      font-size:9px;font-weight:600;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--mid);
+      margin-bottom:8px;display:flex;gap:12px;
+    }
+    .tm-font { color:var(--lav-deep); }
+    .tm-weight { color:var(--sage-dark); }
+    .tm-size { color:var(--mid); }
+
+    /* ── CARD COMPONENT FRAME ── */
+    .card-frame {
+      background:var(--off-white);
+      padding:28px 28px;
+      display:flex;flex-direction:column;gap:14px;
+    }
+
+    .ui-card {
+      background:var(--white);
+      border:1px solid var(--rule);
+      border-radius:10px;
+      padding:18px 20px;
+      position:relative;overflow:hidden;
+    }
+    .ui-card::before {
+      content:'';position:absolute;top:0;left:0;right:0;height:2.5px;
+      background:linear-gradient(90deg,var(--lav),var(--sage));
+    }
+    .uc-tag {
+      font-size:8px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+      color:var(--lav-deep);background:var(--lav-xlight);
+      padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:8px;
+    }
+    .uc-title {
+      font-family:'DM Serif Display',serif;
+      font-size:17px;color:var(--charcoal);margin-bottom:5px;line-height:1.2;
+    }
+    .uc-body {
+      font-size:12px;font-weight:300;color:var(--mid);line-height:1.6;margin:0;
+    }
+
+    .ui-card-dark {
+      background:linear-gradient(130deg,var(--purple-dark),var(--purple-mid));
+      border:none;border-radius:10px;padding:18px 20px;
+    }
+    .ucd-tag {
+      font-size:8px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+      color:rgba(255,255,255,0.40);margin-bottom:8px;display:block;
+    }
+    .ucd-title {
+      font-family:'DM Serif Display',serif;font-style:italic;
+      font-size:16px;color:var(--white);margin-bottom:5px;line-height:1.3;
+    }
+    .ucd-body {
+      font-size:11.5px;font-weight:300;color:rgba(255,255,255,0.60);line-height:1.6;
+    }
+
+    /* ── TONE SCALE DEMO ── */
+    .tone-demo {
+      background:var(--white);
+      padding:28px 28px;
+    }
+    .td-item {
+      display:grid;grid-template-columns:70px 1fr 70px;
+      align-items:center;gap:10px;margin-bottom:16px;
+    }
+    .td-item:last-child { margin-bottom:0; }
+    .td-left { font-size:11px;font-weight:300;color:var(--mid);text-align:right; }
+    .td-right { font-size:11px;font-weight:300;color:var(--mid); }
+    .td-track {
+      position:relative;height:5px;
+      background:var(--lav-xlight);border-radius:3px;
+    }
+    .td-marker {
+      position:absolute;top:50%;transform:translate(-50%,-50%);
+      width:13px;height:13px;border-radius:50%;
+      background:var(--lav-deep);
+      border:2px solid var(--white);
+      box-shadow:0 0 0 2px var(--lav);
+    }
+    .td-label {
+      font-size:8px;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--lav-deep);
+      grid-column:1/-1;margin-bottom:-8px;
+    }
+
+    /* ── MESSAGING FRAME ── */
+    .msg-frame {
+      background:#F0EEF8;
+      padding:24px 20px;
+      display:flex;flex-direction:column;gap:10px;
+      min-height:200px;
+    }
+    .mf-header {
+      background:var(--purple-dark);
+      border-radius:10px 10px 0 0;
+      padding:12px 16px;
+      display:flex;align-items:center;gap:10px;
+      margin:-24px -20px 12px;
+    }
+    .mf-avatar {
+      width:32px;height:32px;border-radius:50%;
+      background:linear-gradient(135deg,var(--lav),var(--sage));
+      display:flex;align-items:center;justify-content:center;
+      font-family:'DM Serif Display',serif;font-size:13px;color:var(--white);
+    }
+    .mf-name { font-size:12px;font-weight:500;color:var(--white); }
+    .mf-status { font-size:9px;font-weight:300;color:rgba(255,255,255,0.50); }
+
+    .mf-bubble-row { display:flex;gap:8px;align-items:flex-end; }
+    .mf-bubble-row.u { justify-content:flex-end; }
+    .mf-avatar-sm {
+      width:22px;height:22px;border-radius:50%;flex-shrink:0;
+      background:var(--purple-dark);
+      display:flex;align-items:center;justify-content:center;
+      font-size:8px;font-weight:600;color:rgba(255,255,255,0.80);
+      margin-bottom:2px;
+    }
+    .mf-bubble {
+      max-width:75%;padding:9px 12px 7px;
+      border-radius:14px;font-size:12px;font-weight:300;line-height:1.5;
+    }
+    .mf-bubble.u {
+      background:var(--white);color:var(--charcoal);
+      border-radius:14px 14px 4px 14px;
+    }
+    .mf-bubble.d {
+      background:var(--lav-xlight);color:var(--purple-dark);
+      border-radius:14px 14px 14px 4px;font-style:italic;
+    }
+    .mf-time { font-size:9px;color:rgba(61,56,96,0.30);text-align:right;margin-top:2px; }
+
+    /* ── MOTION NOTES FRAME ── */
+    .motion-frame {
+      background:var(--off-white);
+      padding:28px 28px;
+      display:flex;flex-direction:column;gap:16px;
+    }
+    .motion-item {
+      display:flex;align-items:flex-start;gap:14px;
+      padding:14px 16px;
+      background:var(--white);border:1px solid var(--rule);border-radius:8px;
+    }
+    .motion-icon-wrap {
+      width:36px;height:36px;border-radius:50%;
+      background:var(--lav-xlight);flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .motion-title { font-size:12px;font-weight:500;color:var(--charcoal);margin-bottom:3px; }
+    .motion-desc  { font-size:11.5px;font-weight:300;color:var(--mid);line-height:1.55;margin:0; }
+
+    /* ── IMAGERY DIRECTION ── */
+    .imagery-frame {
+      display:flex;flex-direction:column;gap:0;border-radius:12px;overflow:hidden;
+    }
+    .img-card {
+      padding:24px 26px;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .img-card.bg-grad {
+      background:linear-gradient(130deg,var(--grad-start),var(--lav) 45%,var(--grad-end));
+    }
+    .img-card.bg-white { background:var(--white); }
+    .img-card.bg-dark  { background:var(--purple-dark); }
+    .img-label {
+      font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+    }
+    .img-card.bg-grad  .img-label { color:rgba(255,255,255,0.50); }
+    .img-card.bg-white .img-label { color:var(--mid); }
+    .img-card.bg-dark  .img-label { color:rgba(255,255,255,0.40); }
+    .img-desc {
+      font-size:12.5px;font-weight:300;line-height:1.6;
+    }
+    .img-card.bg-grad  .img-desc { color:rgba(255,255,255,0.80); }
+    .img-card.bg-white .img-desc { color:var(--charcoal); }
+    .img-card.bg-dark  .img-desc { color:rgba(255,255,255,0.65); }
+
+    .img-tags { display:flex;flex-wrap:wrap;gap:6px; }
+    .img-tag {
+      font-size:9px;font-weight:500;letter-spacing:0.08em;
+      padding:3px 8px;border-radius:20px;
+    }
+    .img-card.bg-grad  .img-tag { background:rgba(255,255,255,0.14);color:rgba(255,255,255,0.75); }
+    .img-card.bg-white .img-tag { background:var(--lav-xlight);color:var(--lav-deep); }
+    .img-card.bg-dark  .img-tag { background:rgba(255,255,255,0.10);color:rgba(255,255,255,0.55); }
+
+    /* ── ABSTRACT IMAGERY SVG PANELS ── */
+    .abstract-panel {
+      border-radius:10px;overflow:hidden;
+      position:relative;
+    }
+    .ap-gradient {
+      background:linear-gradient(130deg,var(--grad-start),var(--lav) 45%,var(--grad-end));
+    }
+    .ap-sage {
+      background:linear-gradient(150deg,var(--sage-light),var(--sage));
+    }
+    .ap-dark {
+      background:linear-gradient(130deg,var(--purple-dark),var(--purple-mid));
+    }
+    .ap-body {
+      padding:32px 28px;
+      position:relative;z-index:1;
+    }
+    .ap-quote {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(16px,2vw,22px);font-style:italic;
+      color:var(--white);line-height:1.4;margin-bottom:12px;
+    }
+    .ap-attr {
+      font-size:10px;font-weight:500;letter-spacing:0.1em;
+      color:rgba(255,255,255,0.45);text-transform:uppercase;
+    }
+
+    /* floating circles on panels */
+    .ap-deco {
+      position:absolute;border-radius:50%;
+      background:rgba(255,255,255,0.10);pointer-events:none;
+    }
+
+    /* ── DO/DON'T VISUAL ── */
+    .dont-grid {
+      display:grid;grid-template-columns:1fr 1fr;gap:0;
+      border-radius:10px;overflow:hidden;
+    }
+    .dg-col { padding:20px 20px; }
+    .dg-col.do   { background:var(--lav-xlight); }
+    .dg-col.dont { background:rgba(240,236,236,0.60); }
+    .dg-label {
+      font-size:9px;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;margin-bottom:12px;display:block;
+    }
+    .dg-col.do   .dg-label { color:var(--lav-deep); }
+    .dg-col.dont .dg-label { color:#a07070; }
+    .dg-item {
+      font-size:12px;font-weight:300;line-height:1.6;
+      display:flex;align-items:flex-start;gap:8px;margin-bottom:8px;
+    }
+    .dg-item:last-child { margin-bottom:0; }
+    .dg-item::before {
+      content:'';width:5px;height:5px;border-radius:50%;margin-top:7px;flex-shrink:0;
+    }
+    .dg-col.do   .dg-item { color:var(--charcoal); }
+    .dg-col.do   .dg-item::before { background:var(--lav); }
+    .dg-col.dont .dg-item { color:#5a3a3a; }
+    .dg-col.dont .dg-item::before { background:#c09090; }
+
+    /* ── BOARD FOOTER ── */
+    .board-footer {
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding:24px 64px;
+      display:flex;justify-content:space-between;align-items:center;
+      flex-wrap:wrap;gap:12px;
+    }
+    .bf-left { font-size:11px;font-weight:300;color:rgba(255,255,255,0.25); }
+    .bf-right {
+      font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+      padding:4px 10px;border-radius:4px;
+      background:rgba(184,180,212,0.12);color:var(--lav);
+      border:1px solid rgba(184,180,212,0.20);
+    }
+
+    @media(max-width:900px){
+      .board-header,.board,.board-footer { padding-left:28px;padding-right:28px; }
+      .frame-row.col-2,.frame-row.col-3,.frame-row.col-4,
+      .frame-row.col-2-1,.frame-row.col-1-2,.frame-row.col-3-2 {
+        grid-template-columns:1fr;
+      }
+      .dont-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BOARD HEADER -->
+<div class="board-header">
+  <div class="board-title-wrap">
+    <div class="board-eyebrow">Visual Brand Storyboard</div>
+    <h1 class="board-title">claritia</h1>
+    <p class="board-sub">Sistema visual basado en los assets del estudio estrategia.pdf — focus-group tested. Referencia de identidad para diseño de website y producción de materiales.</p>
+  </div>
+  <div class="board-meta">
+    <div class="board-meta-label">Fuente</div>
+    <div class="board-meta-value">claritia_estrategia.pdf<br/>Adobe Illustrator 30.3</div>
+    <div class="board-badge">Assets confirmados por focus group</div>
+  </div>
+</div>
+
+<div class="board">
+
+  <!-- ══ 01 GRADIENT HERO ══ -->
+  <div class="story-sec">
+    <div class="story-label">01 — El Gradiente Signature</div>
+    <h2 class="story-title">El elemento visual más reconocible de claritia</h2>
+    <p class="story-desc">El gradiente diagonal lavanda→sage es el fondo de cada superficie de alto impacto — portadas, hero sections, cards destacadas. Confirmado como el elemento visual principal del estudio.</p>
+
+    <div class="frame-row col-3-2">
+      <div>
+        <div class="frame">
+          <div class="gradient-hero">
+            <div class="gh-circle gh-c1"></div>
+            <div class="gh-circle gh-c2"></div>
+            <div class="gh-circle gh-c3"></div>
+            <div class="gh-circle gh-c4"></div>
+            <div class="gh-circle gh-c5"></div>
+            <div class="gh-eyebrow"><div class="gh-dot"></div>Terapia Clínica Online</div>
+            <div class="gh-title">El bienestar mental<br/>no es un lujo.</div>
+            <div class="gh-body">Conectamos personas que necesitan apoyo con psicólogos verificados — a través de una experiencia 100% digital, fluida y accesible.</div>
+            <div class="gh-cta">Empieza cuando quieras →</div>
+            <div class="gh-collab">claritia × JRZ</div>
+          </div>
+        </div>
+        <div class="frame-caption">Hero principal — gradient 130° con círculos flotantes</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <div class="frame" style="background:linear-gradient(130deg,var(--grad-start),var(--lav) 40%,var(--grad-end));padding:28px 24px;min-height:120px;position:relative;overflow:hidden;">
+            <div class="gh-circle" style="width:100px;height:100px;top:-30px;right:-20px;background:rgba(255,255,255,0.10);"></div>
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.50);margin-bottom:8px;">Card destacada</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--white);line-height:1.2;">Cuidador Moderno<br/>+ Everyman</div>
+          </div>
+          <div class="frame-caption">Card oscura — mismo gradiente</div>
+        </div>
+        <div>
+          <div class="frame" style="background:linear-gradient(130deg,var(--purple-dark),var(--purple-mid));padding:24px;position:relative;overflow:hidden;">
+            <div class="gh-circle" style="width:80px;height:80px;top:-20px;right:-10px;background:rgba(255,255,255,0.08);"></div>
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Variante oscura</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:18px;font-style:italic;color:var(--white);line-height:1.3;">"Convertir no es vender una sesión."</div>
+          </div>
+          <div class="frame-caption">Variante dark purple — para citas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 02 LOGO + ICON SYSTEM ══ -->
+  <div class="story-sec">
+    <div class="story-label">02 — Logo e Iconografía</div>
+    <h2 class="story-title">El sistema de marca — wordmark + ícono circular</h2>
+    <p class="story-desc">El logo usa Apax Medium (DM Serif Display en web) siempre en minúsculas. El sistema de tres círculos — keyhole, focus bracket, señal — son la firma visual decorativa que aparece en clusters junto al logo y en fondos.</p>
+
+    <div class="frame-row col-2">
+      <!-- Logo variants -->
+      <div>
+        <div class="frame logo-frame">
+          <!-- Light version -->
+          <div class="logo-variant">
+            <div class="logo-variant-label">Versión clara — sobre fondo blanco / off-white</div>
+            <div class="logo-mark">
+              <div class="logo-icon-cluster">
+                <div class="li1">
+                  <svg viewBox="0 0 16 16" fill="none" width="10" height="10">
+                    <circle cx="8" cy="6" r="3" stroke="#534AB7" stroke-width="1.5"/>
+                    <rect x="6.5" y="8" width="3" height="4" rx="1" fill="#534AB7"/>
+                  </svg>
+                </div>
+                <div class="li2">
+                  <svg viewBox="0 0 16 16" fill="none" width="8" height="8">
+                    <rect x="2" y="2" width="4" height="4" stroke="#6B8C7D" stroke-width="1.5" rx="0.5"/>
+                    <rect x="10" y="2" width="4" height="4" stroke="#6B8C7D" stroke-width="1.5" rx="0.5"/>
+                    <rect x="2" y="10" width="4" height="4" stroke="#6B8C7D" stroke-width="1.5" rx="0.5"/>
+                    <circle cx="12" cy="12" r="2" fill="#6B8C7D"/>
+                  </svg>
+                </div>
+                <div class="li3"></div>
+              </div>
+              <div class="logo-text-wrap">
+                <div class="logo-wordmark" style="font-size:34px;color:var(--charcoal);">claritia</div>
+                <div class="logo-tagline-text" style="font-size:8px;">Terapia Clínica Online</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inline variant -->
+          <div class="logo-variant">
+            <div class="logo-variant-label">Versión compacta — horizontal</div>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="display:flex;gap:4px;align-items:center;">
+                <div style="width:16px;height:16px;border-radius:50%;background:rgba(184,180,212,0.25);border:1.5px solid var(--lav);display:flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 16 16" fill="none" width="8" height="8"><circle cx="8" cy="6" r="3" stroke="#534AB7" stroke-width="1.5"/><rect x="6.5" y="8" width="3" height="4" rx="1" fill="#534AB7"/></svg>
+                </div>
+                <div style="width:12px;height:12px;border-radius:50%;background:rgba(143,168,154,0.18);border:1px solid var(--sage);"></div>
+                <div style="width:9px;height:9px;border-radius:50%;background:rgba(184,180,212,0.12);border:1px solid var(--lav-light);"></div>
+              </div>
+              <div style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--charcoal);letter-spacing:-0.01em;">claritia</div>
+              <div style="font-size:7px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage-dark);line-height:1.2;">Terapia<br/>Clínica<br/>Online</div>
+            </div>
+          </div>
+
+          <!-- Dark version -->
+          <div class="logo-variant">
+            <div class="logo-variant-label">Versión oscura — sobre fondos gradient / purple</div>
+            <div class="logo-dark">
+              <div style="display:flex;gap:3px;align-items:center;">
+                <div style="width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.30);"></div>
+                <div style="width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);"></div>
+                <div style="width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);"></div>
+              </div>
+              <div>
+                <div style="font-family:'DM Serif Display',serif;font-size:26px;color:var(--white);letter-spacing:-0.01em;line-height:1;">claritia</div>
+                <div style="font-size:7px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-top:2px;">Terapia Clínica Online</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-caption">Logo — tres variantes confirmadas del PDF</div>
+      </div>
+
+      <!-- Icon system detail -->
+      <div>
+        <div class="frame icon-system">
+          <div class="is-label">Sistema de iconos circulares — firma visual</div>
+
+          <!-- Cluster large -->
+          <div>
+            <div style="font-size:9px;font-weight:500;color:var(--mid);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;">Cluster decorativo</div>
+            <div style="display:flex;align-items:flex-end;gap:16px;">
+              <!-- large cluster -->
+              <div style="position:relative;width:80px;height:70px;">
+                <div style="position:absolute;top:0;left:0;width:44px;height:44px;border-radius:50%;background:rgba(184,180,212,0.20);border:1.5px solid var(--lav);display:flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><circle cx="12" cy="9" r="4" stroke="#534AB7" stroke-width="1.5"/><rect x="9.5" y="12" width="5" height="7" rx="1.5" fill="#534AB7"/></svg>
+                </div>
+                <div style="position:absolute;top:14px;left:32px;width:30px;height:30px;border-radius:50%;background:rgba(143,168,154,0.18);border:1.5px solid var(--sage);display:flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><rect x="2" y="2" width="8" height="8" rx="1" stroke="#6B8C7D" stroke-width="1.5"/><rect x="14" y="2" width="8" height="8" rx="1" stroke="#6B8C7D" stroke-width="1.5"/><rect x="2" y="14" width="8" height="8" rx="1" stroke="#6B8C7D" stroke-width="1.5"/><circle cx="18" cy="18" r="4" fill="#6B8C7D"/></svg>
+                </div>
+                <div style="position:absolute;top:40px;left:8px;width:24px;height:24px;border-radius:50%;background:rgba(184,180,212,0.12);border:1px solid var(--lav-light);display:flex;align-items:center;justify-content:center;">
+                  <svg viewBox="0 0 24 24" fill="none" width="10" height="10"><path d="M5 12c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#B8B4D4" stroke-width="1.5" stroke-linecap="round"/><path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="#B8B4D4" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="#B8B4D4"/></svg>
+                </div>
+              </div>
+              <!-- descriptions -->
+              <div style="display:flex;flex-direction:column;gap:8px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:var(--lav);flex-shrink:0;"></div>
+                  <div style="font-size:11px;font-weight:400;color:var(--charcoal);">Keyhole — privacidad</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:var(--sage);flex-shrink:0;"></div>
+                  <div style="font-size:11px;font-weight:400;color:var(--charcoal);">Focus — atención, claridad</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:var(--lav-light);flex-shrink:0;"></div>
+                  <div style="font-size:11px;font-weight:400;color:var(--charcoal);">Señal — conexión digital</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Size scale -->
+          <div>
+            <div style="font-size:9px;font-weight:500;color:var(--mid);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;">Escala de tamaños</div>
+            <div style="display:flex;align-items:flex-end;gap:10px;">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="width:56px;height:56px;border-radius:50%;border:1.5px solid var(--lav);background:rgba(184,180,212,0.15);"></div>
+                <div style="font-size:8px;color:var(--mid);">56px</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="width:40px;height:40px;border-radius:50%;border:1.5px solid var(--lav);background:rgba(184,180,212,0.15);"></div>
+                <div style="font-size:8px;color:var(--mid);">40px</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="width:28px;height:28px;border-radius:50%;border:1px solid var(--lav);background:rgba(184,180,212,0.12);"></div>
+                <div style="font-size:8px;color:var(--mid);">28px</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+                <div style="width:20px;height:20px;border-radius:50%;border:1px solid var(--lav-light);background:rgba(184,180,212,0.08);"></div>
+                <div style="font-size:8px;color:var(--mid);">20px</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:12px 14px;background:var(--lav-xlight);border-radius:6px;font-size:11px;font-weight:300;color:var(--purple-dark);font-style:italic;line-height:1.55;">
+            Los círculos siempre van en clusters de 2–3. Nunca solos. Opacidad entre 10–20%. Nunca sólidos.
+          </div>
+        </div>
+        <div class="frame-caption">Sistema de ícono circular — extraído del PDF</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 03 PALETTE ══ -->
+  <div class="story-sec">
+    <div class="story-label">03 — Paleta de Color</div>
+    <h2 class="story-title">Los únicos colores que claritia usa</h2>
+    <p class="story-desc">Lavanda y sage son los pilares. El gradiente los une. El carbón reemplaza al negro. Nunca verde hospitalario, nunca azul corporativo frío, nunca negro puro.</p>
+
+    <div class="frame-row col-1">
+      <div>
+        <div class="frame palette-frame">
+          <div class="swatch-row">
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#B8B4D4;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Lavanda</div>
+                <div class="sw-hex">#B8B4D4</div>
+                <div class="sw-use">Primario — UI, bordes, acentos, círculos</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#D4D1E8;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Lav. Claro</div>
+                <div class="sw-hex">#D4D1E8</div>
+                <div class="sw-use">Gradient start, fondos suaves</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#ECEAF6;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Lav. Xlight</div>
+                <div class="sw-hex">#ECEAF6</div>
+                <div class="sw-use">Cards, callouts, tags</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#534AB7;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Lav. Deep</div>
+                <div class="sw-hex">#534AB7</div>
+                <div class="sw-use">CTAs, labels, énfasis</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#8FA89A;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Sage</div>
+                <div class="sw-hex">#8FA89A</div>
+                <div class="sw-use">Secundario — gradient end</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#6B8C7D;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Sage Dark</div>
+                <div class="sw-hex">#6B8C7D</div>
+                <div class="sw-use">Taglines, dividers</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#3D3860;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Púrpura</div>
+                <div class="sw-hex">#3D3860</div>
+                <div class="sw-use">Dark cards, headers</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#2C2C2C;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Carbón</div>
+                <div class="sw-hex">#2C2C2C</div>
+                <div class="sw-use">Texto — nunca negro puro</div>
+              </div>
+            </div>
+            <div class="swatch-block">
+              <div class="sw-color" style="background:#F8F8FA;border:1px solid #e0dded;"></div>
+              <div class="sw-info">
+                <div class="sw-name">Off-White</div>
+                <div class="sw-hex">#F8F8FA</div>
+                <div class="sw-use">Fondo principal</div>
+              </div>
+            </div>
+          </div>
+          <div class="gradient-strip">
+            <div class="gs-label">El gradiente — linear-gradient(130deg, #C4C0DC → #B8B4D4 → #9AABA0)</div>
+          </div>
+        </div>
+        <div class="frame-caption">Paleta completa — extraída directamente de la estrategia.pdf</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 04 TYPOGRAPHY ══ -->
+  <div class="story-sec">
+    <div class="story-label">04 — Tipografía</div>
+    <h2 class="story-title">Apax Medium + Poppins — la pareja de fuentes</h2>
+    <p class="story-desc">Apax Medium para display y logo. Poppins 300–500 para todo el cuerpo. La jerarquía es deliberada — nunca intercambiar roles.</p>
+
+    <div class="frame-row col-2">
+      <div>
+        <div class="frame type-frame">
+          <div class="type-row">
+            <div class="type-meta">
+              <span class="tm-font">DM Serif Display</span>
+              <span class="tm-weight">400</span>
+              <span class="tm-size">Hero / Display</span>
+            </div>
+            <div style="font-family:'DM Serif Display',serif;font-size:48px;color:var(--charcoal);line-height:1.0;letter-spacing:-0.02em;">claritia</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:36px;color:var(--charcoal);line-height:1.05;letter-spacing:-0.015em;margin-top:8px;">No estás solo/a<br/>en esto.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">
+              <span class="tm-font">DM Serif Display Italic</span>
+              <span class="tm-weight">400 italic</span>
+              <span class="tm-size">Citas / callouts</span>
+            </div>
+            <div style="font-family:'DM Serif Display',serif;font-style:italic;font-size:22px;color:var(--purple-dark);line-height:1.4;">"Convertir no es vender una sesión.<br/>Es iniciar un proceso."</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">
+              <span class="tm-font">Poppins</span>
+              <span class="tm-weight">300</span>
+              <span class="tm-size">Body copy</span>
+            </div>
+            <div style="font-family:'Poppins',sans-serif;font-size:14px;font-weight:300;color:var(--charcoal);line-height:1.80;">La gente no busca terapia. Busca dejar de sentirse así. Todo el copy parte de este lenguaje emocional — nunca de lenguaje clínico.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">
+              <span class="tm-font">Poppins</span>
+              <span class="tm-weight">600</span>
+              <span class="tm-size">Labels / UI</span>
+            </div>
+            <div style="font-family:'Poppins',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.20em;text-transform:uppercase;color:var(--lav-deep);">Terapia Clínica Online &nbsp;×&nbsp; Documento Base</div>
+          </div>
+        </div>
+        <div class="frame-caption">Escala tipográfica — uso correcto de cada nivel</div>
+      </div>
+
+      <div>
+        <div class="frame" style="background:var(--off-white);padding:28px;display:flex;flex-direction:column;gap:16px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:4px;">Nunca usar</div>
+          <div style="background:#fff;border:1px solid var(--rule);border-radius:8px;padding:16px 18px;">
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a07070;margin-bottom:8px;">✗ Demasiado clínico</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:13px;font-weight:400;color:#777;line-height:1.6;">Arial / Roboto / Inter como fuente display. Sans-serif sin pareja serif. Texto en negro puro (#000).</div>
+          </div>
+          <div style="background:#fff;border:1px solid var(--rule);border-radius:8px;padding:16px 18px;">
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a07070;margin-bottom:8px;">✗ Jerarquía incorrecta</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:11px;color:#777;line-height:1.6;">Serif en cuerpo de texto — solo es para títulos y citas.</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;color:#777;margin-top:6px;">POPPINS BOLD EN HERO</div>
+          </div>
+          <div style="background:var(--lav-xlight);border-radius:8px;padding:14px 16px;">
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--lav-deep);margin-bottom:6px;">✓ Siempre</div>
+            <div style="font-size:12px;font-weight:300;color:var(--purple-dark);line-height:1.60;">Mínimo 14px digital. Mínimo 11pt impreso. Texto principal siempre en carbón #2C2C2C.</div>
+          </div>
+        </div>
+        <div class="frame-caption">Reglas de aplicación tipográfica</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 05 COMPONENTS ══ -->
+  <div class="story-sec">
+    <div class="story-label">05 — Componentes de UI</div>
+    <h2 class="story-title">Cards, callouts y mensajería — el sistema de componentes</h2>
+    <p class="story-desc">Cada componente refleja los mismos principios: espacio generoso, borde lavanda sutil, acento gradiente en la parte superior, tipografía clara.</p>
+
+    <div class="frame-row col-2">
+      <div>
+        <div class="frame card-frame">
+          <div style="font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;">Card estándar — light</div>
+          <div class="ui-card">
+            <div class="uc-tag">02 — Audiencia</div>
+            <div class="uc-title">Perfil de Cliente Ideal</div>
+            <p class="uc-body">Segmentos de entrada, contextos emocionales y búsquedas reales de la audiencia.</p>
+          </div>
+          <div class="ui-card">
+            <div class="uc-tag">04 — Proceso</div>
+            <div class="uc-title">Journey del Cliente</div>
+            <p class="uc-body">Las cuatro fases del proceso de conversión — de awareness a retención.</p>
+          </div>
+          <div style="font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid);margin-top:16px;margin-bottom:8px;">Card oscura — cita / callout</div>
+          <div class="ui-card-dark">
+            <span class="ucd-tag">Principio rector</span>
+            <div class="ucd-title">"La gente no busca terapia. Busca dejar de sentirse así."</div>
+            <div class="ucd-body">Todo el copy parte de este insight — nunca del lenguaje clínico.</div>
+          </div>
+        </div>
+        <div class="frame-caption">Cards — variante clara y oscura</div>
+      </div>
+
+      <!-- Chat mockup -->
+      <div>
+        <div class="frame msg-frame" style="padding:0;">
+          <div class="mf-header">
+            <div class="mf-avatar">D</div>
+            <div>
+              <div class="mf-name">Dani · claritia</div>
+              <div class="mf-status">En línea · LETI platform</div>
+            </div>
+          </div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:10px;background:#F0EEF8;min-height:260px;">
+            <div class="mf-bubble-row u">
+              <div class="mf-bubble u">Me siento muy mal últimamente.<div class="mf-time">10:42 am</div></div>
+            </div>
+            <div class="mf-bubble-row">
+              <div class="mf-avatar-sm">D</div>
+              <div class="mf-bubble d">Gracias por escribir. Lo que sientes importa. ¿Quieres contarme un poco más?<div class="mf-time">10:42 am</div></div>
+            </div>
+            <div class="mf-bubble-row u">
+              <div class="mf-bubble u">No sé si esto es para mí, nunca fui a terapia.<div class="mf-time">10:43 am</div></div>
+            </div>
+            <div class="mf-bubble-row">
+              <div class="mf-avatar-sm">D</div>
+              <div class="mf-bubble d">No tienes que tener todo claro para empezar. Muchas personas que hoy están en proceso sintieron exactamente eso.<div class="mf-time">10:43 am</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-caption">Componente de chat — Dani / LETI platform</div>
+      </div>
+    </div>
+
+    <!-- Tone scale visual -->
+    <div style="margin-top:16px;">
+      <div class="frame-row col-2">
+        <div>
+          <div class="frame tone-demo">
+            <div style="font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;">Escala de tono — posicionamiento de claritia</div>
+            <div class="td-item">
+              <div class="td-label">Lenguaje</div>
+              <div class="td-left">Casual</div>
+              <div class="td-track"><div class="td-marker" style="left:65%"></div></div>
+              <div class="td-right">Profesional</div>
+            </div>
+            <div class="td-item">
+              <div class="td-label">Estética</div>
+              <div class="td-left">Exclusivo</div>
+              <div class="td-track"><div class="td-marker" style="left:70%"></div></div>
+              <div class="td-right">Accesible</div>
+            </div>
+            <div class="td-item">
+              <div class="td-label">Complejidad</div>
+              <div class="td-left">Simple</div>
+              <div class="td-track"><div class="td-marker" style="left:28%"></div></div>
+              <div class="td-right">Técnico</div>
+            </div>
+            <div class="td-item">
+              <div class="td-label">Rol</div>
+              <div class="td-left">Experto</div>
+              <div class="td-track"><div class="td-marker" style="left:68%"></div></div>
+              <div class="td-right">Acompañante</div>
+            </div>
+            <div class="td-item">
+              <div class="td-label">Actitud</div>
+              <div class="td-left">Irreal</div>
+              <div class="td-track"><div class="td-marker" style="left:73%"></div></div>
+              <div class="td-right">Realismo</div>
+            </div>
+          </div>
+          <div class="frame-caption">Posicionamiento de tono — visual del PDF estrategia</div>
+        </div>
+
+        <!-- Do/Don't -->
+        <div>
+          <div class="frame" style="overflow:hidden;border-radius:12px;">
+            <div class="dont-grid">
+              <div class="dg-col do">
+                <span class="dg-label">✓ claritia sí usa</span>
+                <div class="dg-item">Gradiente 130° lavanda → sage</div>
+                <div class="dg-item">Círculos flotantes en clusters de 2–3</div>
+                <div class="dg-item">DM Serif Display en títulos únicamente</div>
+                <div class="dg-item">Espacio en blanco generoso</div>
+                <div class="dg-item">Personas reales, cotidianas</div>
+                <div class="dg-item">Texto en carbón #2C2C2C</div>
+                <div class="dg-item">"claritia" siempre en minúsculas</div>
+              </div>
+              <div class="dg-col dont">
+                <span class="dg-label">✗ claritia nunca usa</span>
+                <div class="dg-item">Verde hospitalario o azul corporativo</div>
+                <div class="dg-item">Negro puro #000 en texto</div>
+                <div class="dg-item">Stock de personas felices posando</div>
+                <div class="dg-item">Arial / Roboto / Inter como display</div>
+                <div class="dg-item">CLARITIA en mayúsculas</div>
+                <div class="dg-item">Diseño denso sin espacio en blanco</div>
+                <div class="dg-item">Fondos blancos + texto negro sin acento</div>
+              </div>
+            </div>
+          </div>
+          <div class="frame-caption">Do / Don't — reglas absolutas de identidad visual</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 06 MOOD / IMAGERY DIRECTION ══ -->
+  <div class="story-sec">
+    <div class="story-label">06 — Dirección de Imágenes</div>
+    <h2 class="story-title">Qué tipo de imágenes usa claritia</h2>
+    <p class="story-desc">Las imágenes del PDF cuentan la historia visual: personas reales en momentos cotidianos, nubes, ovejas ilustradas — suave, no clínico, no aspiracional. Lo que le pasa al que nos necesita, no lo que quiere ser.</p>
+
+    <div class="frame-row col-3">
+      <div>
+        <div class="frame imagery-frame">
+          <div class="img-card bg-grad" style="min-height:160px;justify-content:flex-end;">
+            <!-- Abstract cloud / calm imagery suggestion -->
+            <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);opacity:0.35;">
+              <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
+                <ellipse cx="60" cy="40" rx="50" ry="20" fill="rgba(255,255,255,0.6)"/>
+                <ellipse cx="45" cy="32" rx="28" ry="16" fill="rgba(255,255,255,0.5)"/>
+                <ellipse cx="75" cy="30" rx="22" ry="14" fill="rgba(255,255,255,0.5)"/>
+                <ellipse cx="60" cy="28" rx="18" ry="12" fill="rgba(255,255,255,0.6)"/>
+              </svg>
+            </div>
+            <div class="img-label">Naturaleza / calma</div>
+            <div class="img-desc">Cielos, nubes, elementos naturales suaves. Transmiten apertura y tranquilidad sin connotación clínica.</div>
+            <div class="img-tags">
+              <div class="img-tag">nubes</div>
+              <div class="img-tag">cielo</div>
+              <div class="img-tag">apertura</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-caption">Imágenes de naturaleza — del PDF</div>
+      </div>
+
+      <div>
+        <div class="frame imagery-frame">
+          <div class="img-card bg-dark" style="min-height:160px;justify-content:flex-end;">
+            <!-- Abstract person silhouette -->
+            <div style="position:absolute;top:16px;left:50%;transform:translateX(-50%);opacity:0.25;">
+              <svg width="80" height="100" viewBox="0 0 80 100" fill="none">
+                <circle cx="40" cy="22" r="18" fill="rgba(255,255,255,0.8)"/>
+                <path d="M10 100 C10 70 20 55 40 55 C60 55 70 70 70 100" fill="rgba(255,255,255,0.6)"/>
+              </svg>
+            </div>
+            <div class="img-label">Personas reales</div>
+            <div class="img-desc">Cotidianas, en reposo, en movimiento natural. Como la mujer con hoodie lavanda del PDF — no posada, real.</div>
+            <div class="img-tags">
+              <div class="img-tag">casual</div>
+              <div class="img-tag">real</div>
+              <div class="img-tag">cotidiano</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-caption">Personas — cotidianas, no aspiracionales</div>
+      </div>
+
+      <div>
+        <div class="frame imagery-frame">
+          <div class="img-card bg-white" style="min-height:160px;justify-content:flex-end;background:var(--lav-xlight);">
+            <!-- Abstract illustration sheep/whimsy hint -->
+            <div style="position:absolute;top:12px;left:50%;transform:translateX(-50%);opacity:0.30;">
+              <svg width="100" height="80" viewBox="0 0 100 80" fill="none">
+                <ellipse cx="50" cy="50" rx="30" ry="20" fill="#B8B4D4"/>
+                <circle cx="30" cy="42" r="12" fill="#D4D1E8"/>
+                <circle cx="50" cy="36" r="14" fill="#D4D1E8"/>
+                <circle cx="68" cy="42" r="11" fill="#D4D1E8"/>
+                <circle cx="42" cy="50" r="10" fill="#C4C0DC"/>
+                <circle cx="58" cy="48" r="9" fill="#C4C0DC"/>
+                <line x1="42" y1="68" x2="42" y2="78" stroke="#8FA89A" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="50" y1="70" x2="50" y2="80" stroke="#8FA89A" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="58" y1="68" x2="58" y2="78" stroke="#8FA89A" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="img-label" style="color:var(--mid);">Ilustración / whimsy</div>
+            <div class="img-desc" style="color:var(--charcoal);">Elementos ilustrados suaves. Ovejas, formas orgánicas — accesible y cálido. Confirma que la marca no es solemne.</div>
+            <div class="img-tags">
+              <div class="img-tag">ilustración</div>
+              <div class="img-tag">suave</div>
+              <div class="img-tag">accesible</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-caption">Ilustración — ovejas y formas orgánicas del PDF</div>
+      </div>
+    </div>
+
+    <!-- Quotes on gradient -->
+    <div style="margin-top:16px;">
+      <div class="frame-row col-2">
+        <div>
+          <div class="frame abstract-panel ap-gradient" style="min-height:160px;position:relative;overflow:hidden;">
+            <div class="ap-deco" style="width:200px;height:200px;top:-60px;right:-50px;"></div>
+            <div class="ap-deco" style="width:80px;height:80px;bottom:-20px;left:20px;"></div>
+            <!-- floating circles -->
+            <div style="position:absolute;top:20px;right:80px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.20);"></div>
+            <div style="position:absolute;top:50px;right:52px;width:25px;height:25px;border-radius:50%;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);"></div>
+            <div class="ap-body">
+              <div class="ap-quote">"La terapia no debería<br/>ser un lujo."</div>
+              <div class="ap-attr">claritia — Estrategia Fase 1</div>
+            </div>
+          </div>
+          <div class="frame-caption">Cita sobre gradiente — tratamiento del PDF</div>
+        </div>
+        <div>
+          <div class="frame abstract-panel ap-dark" style="min-height:160px;position:relative;overflow:hidden;">
+            <div style="position:absolute;top:-30px;right:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+            <div style="position:absolute;bottom:10px;left:20px;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.06);"></div>
+            <div class="ap-body">
+              <div class="ap-quote">"Convertir no es vender<br/>una sesión. Es iniciar<br/>un proceso."</div>
+              <div class="ap-attr">Principio rector — claritia</div>
+            </div>
+          </div>
+          <div class="frame-caption">Cita sobre dark purple — tratamiento del PDF</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 07 WEBSITE DIRECTION ══ -->
+  <div class="story-sec">
+    <div class="story-label">07 — Dirección del Website</div>
+    <h2 class="story-title">Cómo el sistema visual se aplica al website</h2>
+    <p class="story-desc">El website será el hub central de conversión. Cuando la CEO encuentre una referencia de estructura que le guste, se extrae el código base y se aplica este sistema visual encima. Estos son los principios de aplicación.</p>
+
+    <div class="frame-row col-3">
+      <div>
+        <div class="frame" style="background:var(--white);padding:20px;border-radius:12px;border:1px solid var(--rule);">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--lav-deep);margin-bottom:10px;">Hero section</div>
+          <div style="background:linear-gradient(130deg,var(--grad-start),var(--lav) 45%,var(--grad-end));border-radius:8px;padding:20px 16px;position:relative;overflow:hidden;margin-bottom:10px;">
+            <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.08);"></div>
+            <div style="font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.50);margin-bottom:6px;">claritia</div>
+            <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--white);line-height:1.15;margin-bottom:8px;">El bienestar mental no es un lujo.</div>
+            <div style="font-size:10px;font-weight:300;color:rgba(255,255,255,0.70);margin-bottom:10px;line-height:1.5;">Habla con un psicólogo. Desde casa.</div>
+            <div style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:5px;padding:7px 12px;display:inline-block;font-size:10px;font-weight:500;color:var(--white);">Empieza hoy →</div>
+          </div>
+          <div style="font-size:10px;font-weight:300;color:var(--mid);line-height:1.5;">Gradiente full-width. Círculos flotantes. Logo arriba. Headline serif grande. CTA cálido.</div>
+        </div>
+        <div class="frame-caption">Hero — estructura de aplicación web</div>
+      </div>
+
+      <div>
+        <div class="frame" style="background:var(--off-white);padding:20px;border-radius:12px;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--lav-deep);margin-bottom:10px;">Cards de contenido</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:12px;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--lav),var(--sage));"></div>
+              <div style="font-size:8px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--lav);margin-bottom:5px;">01</div>
+              <div style="font-family:'DM Serif Display',serif;font-size:13px;color:var(--charcoal);line-height:1.2;">Habla con alguien</div>
+            </div>
+            <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:12px;position:relative;overflow:hidden;">
+              <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--lav),var(--sage));"></div>
+              <div style="font-size:8px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--lav);margin-bottom:5px;">02</div>
+              <div style="font-family:'DM Serif Display',serif;font-size:13px;color:var(--charcoal);line-height:1.2;">Desde tu casa</div>
+            </div>
+            <div style="background:var(--purple-dark);border-radius:8px;padding:12px;grid-column:1/-1;">
+              <div style="font-size:8px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:4px;">Precio</div>
+              <div style="font-family:'DM Serif Display',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,0.85);line-height:1.3;">"Pensado para que no sea una barrera."</div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-caption">Grid de features — cards con acento gradiente</div>
+      </div>
+
+      <div>
+        <div class="frame" style="background:var(--white);padding:20px;border-radius:12px;border:1px solid var(--rule);">
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--lav-deep);margin-bottom:12px;">Componente chat / Dani</div>
+          <div style="background:var(--purple-dark);border-radius:8px 8px 0 0;padding:10px 12px;display:flex;align-items:center;gap:8px;">
+            <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--lav),var(--sage));display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:10px;color:var(--white);">D</div>
+            <div style="font-size:11px;font-weight:500;color:var(--white);">Dani · claritia</div>
+          </div>
+          <div style="background:#F0EEF8;padding:12px;min-height:80px;display:flex;flex-direction:column;gap:8px;">
+            <div style="align-self:flex-end;background:var(--white);border-radius:10px 10px 2px 10px;padding:7px 10px;font-size:10px;font-weight:300;color:var(--charcoal);">Hola, ¿cómo funcionan?</div>
+            <div style="align-self:flex-start;background:var(--lav-xlight);border-radius:10px 10px 10px 2px;padding:7px 10px;font-size:10px;font-weight:300;color:var(--purple-dark);font-style:italic;">Aquí estoy. ¿Qué te trajo hoy?</div>
+          </div>
+          <div style="background:var(--white);border-radius:0 0 8px 8px;border:1px solid var(--rule);border-top:none;padding:8px 12px;display:flex;gap:8px;align-items:center;">
+            <div style="flex:1;height:28px;background:var(--off-white);border:1px solid var(--rule);border-radius:14px;"></div>
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--lav-deep);"></div>
+          </div>
+        </div>
+        <div class="frame-caption">Widget de chat — Dani / LETI flotante</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOARD FOOTER -->
+<div class="board-footer">
+  <div class="bf-left"><strong style="color:rgba(255,255,255,0.60);">claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Visual Brand Storyboard · Assets extraídos de claritia_estrategia.pdf</div>
+  <div class="bf-right">Focus-Group Tested</div>
+</div>
+
+</body>
+</html>
