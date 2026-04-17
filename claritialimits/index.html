@@ -3,18 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>claritia — Próximamente</title>
+  <title>claritia — Líneas que No Cruzamos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     :root {
       --lav:         #B8B4D4;
+      --lav-light:   #D4D1E8;
       --lav-xlight:  #ECEAF6;
       --lav-deep:    #534AB7;
       --sage:        #8FA89A;
+      --sage-dark:   #6B8C7D;
       --grad-start:  #C4C0DC;
       --grad-end:    #9AABA0;
       --purple-dark: #3D3860;
@@ -24,6 +28,10 @@
       --mid:         #6B6B6B;
       --light:       #D0CDE0;
       --rule:        rgba(184,180,212,0.25);
+      --limit-soft:  rgba(176,80,80,0.07);
+      --limit-border:#e8d5d5;
+      --limit-accent:#b05050;
+      --limit-text:  #5a3030;
     }
 
     body {
@@ -31,8 +39,7 @@
       background: var(--off-white);
       color: var(--charcoal);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      overflow-x: hidden;
     }
 
     /* ── TOPBAR ── */
@@ -49,189 +56,681 @@
       font-size: 18px; color: var(--charcoal);
       text-decoration: none; letter-spacing: -0.01em;
     }
-    .topbar-back {
-      font-size: 11px; font-weight: 500;
-      color: var(--lav-deep); text-decoration: none;
-    }
-    .topbar-back:hover { text-decoration: underline; }
-
-    /* ── MAIN ── */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 64px 24px;
-      text-align: center;
-    }
-
-    /* ── MEME ── */
-    .meme-wrap {
-      position: relative;
-      margin-bottom: 40px;
-      animation: floatIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-    .meme-img {
-      width: 220px;
-      border-radius: 12px;
-      box-shadow: 0 12px 40px rgba(61,56,96,0.18);
-      display: block;
-    }
-    .meme-badge {
-      position: absolute;
-      top: -10px; right: -12px;
-      background: linear-gradient(130deg, var(--grad-start), var(--lav));
-      color: var(--purple-dark);
-      font-size: 9px; font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 20px;
-      white-space: nowrap;
-      box-shadow: 0 2px 8px rgba(184,180,212,0.35);
-    }
-
-    /* ── TEXT ── */
-    .cs-label {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--lav); margin-bottom: 10px;
-      animation: fadeUp 0.5s 0.2s ease both;
-    }
-    .cs-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 400; color: var(--charcoal);
-      line-height: 1.1; letter-spacing: -0.02em;
-      margin-bottom: 16px;
-      animation: fadeUp 0.5s 0.25s ease both;
-    }
-    .cs-desc {
-      max-width: 380px;
-      font-size: 14px; font-weight: 300;
-      color: var(--mid); line-height: 1.75;
-      margin-bottom: 36px;
-      animation: fadeUp 0.5s 0.30s ease both;
-    }
-
-    /* ── BACK BUTTON ── */
-    .back-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--purple-dark);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 12px; font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 12px 24px; border-radius: 8px;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      animation: fadeUp 0.5s 0.35s ease both;
-    }
-    .back-btn:hover { opacity: 0.85; transform: translateY(-1px); }
-
-    /* ── PROGRESS DOTS ── */
-    .progress {
+    .topbar-crumb {
+      font-size: 11px; font-weight: 400; color: var(--mid);
       display: flex; align-items: center; gap: 8px;
-      margin-top: 48px;
-      animation: fadeUp 0.5s 0.40s ease both;
     }
-    .prog-label {
-      font-size: 10px; font-weight: 500; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--mid); margin-right: 4px;
+    .topbar-crumb a { color: var(--mid); text-decoration: none; }
+    .topbar-crumb a:hover { color: var(--lav-deep); }
+    .topbar-sep { color: var(--light); }
+    .topbar-cur { color: var(--lav-deep); font-weight: 500; }
+    .topbar-badge {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px;
+      background: var(--limit-soft);
+      color: var(--limit-accent);
+      border: 1px solid var(--limit-border);
     }
-    .prog-dot {
-      width: 8px; height: 8px; border-radius: 50%;
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
+      padding: 64px 48px 72px; overflow: hidden;
     }
-    .prog-dot.done { background: var(--lav-deep); }
-    .prog-dot.active { background: var(--lav); }
-    .prog-dot.pending {
-      background: transparent;
-      border: 1.5px solid var(--light);
+    .hero::before {
+      content:''; position:absolute; width:340px; height:340px; border-radius:50%;
+      background:rgba(255,255,255,0.08); top:-90px; right:-70px;
     }
-    .prog-page-label {
-      font-size: 10px; font-weight: 300; color: var(--light);
-      margin-left: 4px;
+    .hero::after {
+      content:''; position:absolute; width:160px; height:160px; border-radius:50%;
+      background:rgba(255,255,255,0.07); bottom:-40px; left:35%;
     }
+    .cdeco { position:absolute; border-radius:50%; background:rgba(255,255,255,0.12); pointer-events:none; }
+    .cd1{width:52px;height:52px;top:28px;right:220px;}
+    .cd2{width:28px;height:28px;top:72px;right:284px;}
+    .cd3{width:38px;height:38px;bottom:44px;right:140px;}
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:10px; font-weight:600; letter-spacing:0.18em;
+      text-transform:uppercase; color:rgba(255,255,255,0.60); margin-bottom:20px;
+    }
+    .hero-eyebrow span { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.50); display:inline-block; }
+    .hero-title {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(40px,5.5vw,68px); font-weight:400; color:var(--white);
+      line-height:1.05; letter-spacing:-0.02em; margin-bottom:8px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-sub {
+      font-size:11px; font-weight:500; letter-spacing:0.2em; text-transform:uppercase;
+      color:rgba(255,255,255,0.60); margin-bottom:24px;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    .hero-desc {
+      max-width:560px; font-size:14px; font-weight:300;
+      color:rgba(255,255,255,0.80); line-height:1.75;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+    .hero-collab {
+      margin-top:32px; font-size:10px; font-weight:500;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(255,255,255,0.40); animation: fadeUp 0.5s 0.22s ease both;
+    }
+
+    /* ── MANDATE BAND ── */
+    .mandate-band {
+      background: var(--purple-dark);
+      padding: 20px 48px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .mb-icon {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.20);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; color: var(--white); font-weight: 700;
+    }
+    .mb-text { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.70); line-height: 1.6; }
+    .mb-text strong { font-weight: 600; color: var(--white); }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      display:grid; grid-template-columns:220px 1fr;
+      max-width:1140px; margin:0 auto;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      position:sticky; top:52px; height:calc(100vh - 52px);
+      overflow-y:auto; padding:40px 0 40px 48px;
+      border-right:1px solid var(--rule);
+    }
+    .sb-label {
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--mid); margin-bottom:16px; padding-bottom:8px; border-bottom:1px solid var(--rule);
+    }
+    .sb-nav { list-style:none; display:flex; flex-direction:column; gap:2px; }
+    .sb-nav a {
+      display:flex; align-items:baseline; gap:8px;
+      font-size:12px; font-weight:400; color:var(--mid);
+      text-decoration:none; padding:6px 12px 6px 0;
+      border-radius:4px; transition:color 0.15s ease; line-height:1.4;
+    }
+    .sb-nav a:hover { color:var(--lav-deep); }
+    .sb-nav a.active { color:var(--lav-deep); font-weight:500; }
+    .nav-n { font-size:9px; color:var(--lav); font-weight:600; min-width:18px; }
+
+    /* ── CONTENT ── */
+    .content { padding:56px 64px 100px 56px; max-width:760px; }
+
+    /* ── SECTIONS ── */
+    .doc-sec { margin-bottom:72px; animation: fadeUp 0.5s ease both; }
+    .doc-sec:nth-child(1){animation-delay:0.05s}
+    .doc-sec:nth-child(2){animation-delay:0.10s}
+    .doc-sec:nth-child(3){animation-delay:0.15s}
+    .doc-sec:nth-child(4){animation-delay:0.20s}
+    .doc-sec:nth-child(5){animation-delay:0.25s}
+    .doc-sec:nth-child(6){animation-delay:0.30s}
+
+    .sec-tag {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:9px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--lav-deep); background:var(--lav-xlight);
+      padding:4px 12px; border-radius:4px; margin-bottom:16px;
+    }
+    .sec-tag-n { color:var(--lav); }
+    .sec-rule { width:40px; height:2px; background:linear-gradient(90deg,var(--lav),var(--sage)); border-radius:2px; margin-bottom:20px; }
+
+    h2.sh1 {
+      font-family:'DM Serif Display',serif;
+      font-size:clamp(28px,3.5vw,38px); font-weight:400; color:var(--charcoal);
+      line-height:1.1; letter-spacing:-0.01em; margin-bottom:20px;
+    }
+    h3.sh2 {
+      font-family:'DM Serif Display',serif; font-size:20px; font-weight:400; color:var(--charcoal);
+      margin-top:40px; margin-bottom:14px; padding-bottom:10px; border-bottom:1px solid var(--rule);
+    }
+    p { font-size:14px; font-weight:300; line-height:1.80; color:var(--charcoal); margin-bottom:16px; }
+    p:last-child { margin-bottom:0; }
+    strong { font-weight:500; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      margin:28px 0; padding:20px 24px;
+      border-left:3px solid var(--lav);
+      background:var(--lav-xlight); border-radius:0 8px 8px 0;
+    }
+    .callout p {
+      font-family:'DM Serif Display',serif; font-style:italic;
+      font-size:17px; color:var(--purple-dark); margin:0; line-height:1.5;
+    }
+
+    /* ── LIMIT CARD ── */
+    .limit-stack { display:flex; flex-direction:column; gap:8px; margin:20px 0; }
+    .limit-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--limit-border);
+      border-radius: 0 8px 8px 0;
+      display: grid; grid-template-columns: 72px 1fr;
+      overflow: hidden;
+      transition: border-left-color 0.15s ease, background 0.15s ease;
+    }
+    .limit-card:hover { border-left-color: var(--limit-accent); background: var(--limit-soft); }
+    .limit-card-marker {
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px 0; border-right: 1px solid var(--rule);
+      background: var(--limit-soft);
+      transition: background 0.15s ease;
+    }
+    .limit-card:hover .limit-card-marker { background: rgba(176,80,80,0.12); }
+    .limit-nunca {
+      font-size: 8px; font-weight: 800; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--limit-accent);
+      writing-mode: vertical-lr; text-orientation: mixed; transform: rotate(180deg);
+    }
+    .limit-card-body { padding: 15px 18px; }
+    .limit-rule { font-size: 13px; font-weight: 500; color: var(--charcoal); line-height: 1.4; margin-bottom: 4px; }
+    .limit-why { font-size: 12px; font-weight: 300; color: var(--mid); line-height: 1.60; margin: 0; }
+
+    /* ── CONTRAST PAIR ── */
+    .contrast-pair {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin: 12px 0;
+    }
+    .cp-col { padding: 16px 18px; }
+    .cp-col.wrong { background: var(--limit-soft); border-right: 1px solid var(--rule); }
+    .cp-col.right  { background: var(--lav-xlight); }
+    .cp-label {
+      font-size: 8px; font-weight: 800; letter-spacing: 0.16em;
+      text-transform: uppercase; margin-bottom: 8px; display: block;
+    }
+    .cp-col.wrong .cp-label { color: var(--limit-accent); }
+    .cp-col.right .cp-label { color: var(--lav-deep); }
+    .cp-copy {
+      font-family: 'DM Serif Display', serif; font-style: italic;
+      font-size: 14px; line-height: 1.45;
+    }
+    .cp-col.wrong .cp-copy { color: var(--limit-text); }
+    .cp-col.right .cp-copy { color: var(--purple-dark); }
+
+    /* ── ABS RULE BANNER ── */
+    .abs-rule {
+      background: var(--purple-dark); border-radius: 8px; padding: 16px 20px;
+      margin: 20px 0; display: flex; align-items: flex-start; gap: 14px;
+    }
+    .abs-rule-icon {
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.20);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--white); margin-top: 1px;
+    }
+    .abs-rule-text { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.65; }
+    .abs-rule-text strong { font-weight: 600; color: var(--white); }
+
+    /* ── CLOSING ── */
+    .closing {
+      background: linear-gradient(130deg, var(--purple-dark) 0%, #5A566E 100%);
+      border-radius: 12px; padding: 36px 36px 32px;
+      margin: 32px 0; position: relative; overflow: hidden;
+    }
+    .closing-deco { position:absolute; border-radius:50%; background:rgba(255,255,255,0.06); pointer-events:none; }
+    .closing-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px;
+    }
+    .closing-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(20px, 2.6vw, 28px); color: var(--white); line-height: 1.25; margin-bottom: 18px;
+    }
+    .closing-items { display:flex; flex-direction:column; gap:10px; }
+    .closing-item { display:flex; align-items:flex-start; gap:12px; }
+    .closing-item-dot { width:6px; height:6px; border-radius:50%; background:var(--lav); margin-top:7px; flex-shrink:0; }
+    .closing-item-text { font-size:13px; font-weight:300; color:rgba(255,255,255,0.70); line-height:1.60; }
+    .closing-item-text strong { font-weight:500; color:var(--white); }
+
+    /* ── VAULT COMPLETE ── */
+    .vault-complete {
+      text-align: center; padding: 40px 0 20px;
+      border-top: 1px solid var(--rule); margin-top: 40px;
+    }
+    .vc-badge {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--lav-xlight); border: 1px solid var(--lav);
+      border-radius: 8px; padding: 12px 20px; margin-bottom: 14px;
+    }
+    .vc-dots { display:flex; gap:5px; }
+    .vc-dot { width:9px; height:9px; border-radius:50%; background:var(--lav-deep); }
+    .vc-label { font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--lav-deep); }
+    .vc-sub { font-size:12px; font-weight:300; color:var(--mid); line-height:1.65; }
 
     /* ── FOOTER ── */
     .page-footer {
-      border-top: 1px solid var(--rule);
-      padding: 20px 48px;
-      display: flex; justify-content: space-between; align-items: center;
+      border-top:1px solid var(--rule); padding:28px 48px;
+      display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
     }
-    .fl { font-size: 11px; font-weight: 300; color: var(--mid); }
+    .fl { font-size:11px; font-weight:300; color:var(--mid); }
+    .fr { display:flex; align-items:center; gap:12px; }
     .fbadge {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 4px;
-      background: var(--lav-xlight); color: var(--lav-deep);
+      font-size:10px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase;
+      padding:4px 10px; border-radius:4px;
+      background:var(--limit-soft); color:var(--limit-accent); border:1px solid var(--limit-border);
     }
+    .fnav { display:flex; align-items:center; gap:16px; }
+    .fnav a { font-size:11px; color:var(--lav-deep); text-decoration:none; font-weight:500; }
+    .fnav a:hover { text-decoration:underline; }
+    .fnav-sep { color:var(--light); font-size:11px; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes floatIn {
-      from { opacity: 0; transform: scale(0.85) translateY(20px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
-    @media(max-width:600px){
-      .topbar { padding: 0 20px; }
-      .page-footer { padding: 16px 20px; }
-      .progress { flex-wrap: wrap; justify-content: center; }
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .page-body { grid-template-columns:1fr; }
+      .sidebar { display:none; }
+      .content { padding:40px 28px 80px; }
+      .hero { padding:48px 28px 60px; }
+      .topbar { padding:0 24px; }
+      .topbar-badge { display:none; }
+      .mandate-band { padding:16px 24px; }
+      .contrast-pair { grid-template-columns:1fr; }
+      .cp-col.wrong { border-right:none; border-bottom:1px solid var(--rule); }
+      .page-footer { padding:24px 28px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- TOPBAR -->
-  <nav class="topbar">
-    <a href="index.html" class="topbar-brand">claritia</a>
-    <a href="index.html" class="topbar-back">← Volver al Vault</a>
-  </nav>
-
-  <!-- MAIN -->
-  <div class="main">
-
-    <div class="meme-wrap">
-      <img
-        class="meme-img"
-        src="1776293349515_image.png"
-        alt="Estoy cansado, jefe"
-      />
-      <div class="meme-badge">En construcción</div>
-    </div>
-
-    <div class="cs-label">Marketing Vault — claritia</div>
-    <h1 class="cs-title">Próximamente.</h1>
-    <p class="cs-desc">
-      Esta sección está en proceso de construcción. Vuelve pronto — o mejor aún, vuelve al vault y revisa lo que ya está listo.
-    </p>
-
-    <a href="index.html" class="back-btn">
-      ← Volver al Marketing Vault
-    </a>
-
-    <!-- PROGRESS TRACKER -->
-    <div class="progress">
-      <span class="prog-label">Progreso</span>
-      <div class="prog-dot done" title="Consistencia de Marca"></div>
-      <div class="prog-dot done" title="Perfil de Cliente Ideal"></div>
-      <div class="prog-dot done" title="Tono y Copy"></div>
-      <div class="prog-dot active" title="En construcción"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <div class="prog-dot pending" title="Pendiente"></div>
-      <span class="prog-page-label">3 / 8 completos</span>
-    </div>
-
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a href="index.html" class="topbar-brand">claritia</a>
+  <div class="topbar-crumb">
+    <a href="index.html">Marketing Vault</a>
+    <span class="topbar-sep">/</span>
+    <span class="topbar-cur">Líneas que No Cruzamos</span>
   </div>
+  <div class="topbar-badge">08 — Límites</div>
+</nav>
 
-  <!-- FOOTER -->
-  <footer class="page-footer">
-    <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno.</div>
-    <div class="fbadge">Próximamente</div>
-  </footer>
+<!-- HERO -->
+<header class="hero">
+  <div class="cdeco cd1"></div>
+  <div class="cdeco cd2"></div>
+  <div class="cdeco cd3"></div>
+  <div class="hero-eyebrow"><span></span>Líneas que No Cruzamos</div>
+  <h1 class="hero-title">Lo que claritia<br/>nunca hace.</h1>
+  <div class="hero-sub">Terapia Clínica Online</div>
+  <p class="hero-desc">
+    Estas reglas no tienen excepciones. No importa el canal, el formato, el objetivo de conversión ni quién lo pide. Son el límite de lo que claritia es — y lo que garantiza que siga siendo digno de confianza.
+  </p>
+  <div class="hero-collab">JRZ Consulting Solutions &nbsp;×&nbsp; claritia</div>
+</header>
+
+<!-- MANDATE BAND -->
+<div class="mandate-band">
+  <div class="mb-icon">!</div>
+  <div class="mb-text">
+    <strong>Reglas absolutas.</strong> Cada límite en este documento aplica en todos los canales, formatos y contextos — website, redes sociales, anuncios, emails, scripts de Dani, materiales impresos. Sin excepciones, sin contexto que las justifique.
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <aside class="sidebar">
+    <div class="sb-label">Contenido</div>
+    <ul class="sb-nav">
+      <li><a href="#s01"><span class="nav-n">01</span> Por qué estos límites</a></li>
+      <li><a href="#s02"><span class="nav-n">02</span> En copy y comunicación</a></li>
+      <li><a href="#s03"><span class="nav-n">03</span> En diseño</a></li>
+      <li><a href="#s04"><span class="nav-n">04</span> En la experiencia</a></li>
+      <li><a href="#s05"><span class="nav-n">05</span> En Dani — la IA</a></li>
+      <li><a href="#s06"><span class="nav-n">06</span> El compromiso</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <!-- 01 -->
+    <section class="doc-sec" id="s01">
+      <div class="sec-tag"><span class="sec-tag-n">01</span> Por Qué Existen Estos Límites</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">claritia opera en el espacio de la salud mental. Eso exige más, no menos.</h2>
+      <p>La persona que llega a claritia está pasando por algo difícil. Está en un estado de vulnerabilidad real. Lo que claritia dice, muestra y hace tiene un impacto directo en cómo esa persona se siente — para bien o para mal.</p>
+      <p>Estas reglas existen porque <strong>la confianza es el único activo que importa</strong> en este negocio. Se construye con años de consistencia y se destruye con un solo mensaje equivocado. Cada límite en este documento es una promesa que claritia le hace a cada persona que decide escribirle.</p>
+
+      <div class="callout">
+        <p>"Tratar al usuario como un ticket de soporte, nunca. Siempre como una persona."</p>
+      </div>
+
+      <div class="abs-rule">
+        <div class="abs-rule-icon">→</div>
+        <div class="abs-rule-text">
+          <strong>Cómo usar este documento:</strong> Antes de publicar cualquier pieza de comunicación — anuncio, post, copy de website, script de Dani, email, material impreso — verificar que no viola ninguna de las reglas de esta página. Si hay duda, la respuesta es no publicar.
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="doc-sec" id="s02">
+      <div class="sec-tag"><span class="sec-tag-n">02</span> En Copy y Comunicación</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Lo que claritia nunca dice</h2>
+      <p>Cada regla aquí tiene una razón clínica, ética o comercial. No son preferencias de estilo — son límites que protegen a los usuarios y la integridad de la marca.</p>
+
+      <div class="limit-stack">
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Usar el miedo como mecanismo de conversión</div>
+            <p class="limit-why">"Si no atiendes tu ansiedad ahora, puede empeorar" — prohibido. El miedo puede generar clics pero destruye la confianza a largo plazo. Una persona en vulnerabilidad merece invitación, no amenaza.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Prometer resultados terapéuticos específicos</div>
+            <p class="limit-why">"En 8 sesiones estarás mejor" — nunca. claritia no puede garantizar resultados. La terapia es un proceso — acompañamos, no prometemos destinos. Prometemos presencia, no curas.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Trivializar la salud mental con humor inadecuado</div>
+            <p class="limit-why">Memes o contenido que reduzca la experiencia de quienes sufren a entretenimiento. La salud mental no es contenido viral — es la razón por la que claritia existe.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Usar testimonios fabricados o estadísticas sin fuente verificable</div>
+            <p class="limit-why">Un solo dato fabricado descubre a toda la marca. Si no hay fuente verificable, el dato no se usa. La credibilidad de claritia depende de la honestidad absoluta.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Usar lenguaje que estigmatice condiciones de salud mental</div>
+            <p class="limit-why">Palabras que implican debilidad, locura o peligro asociados a quien busca ayuda. claritia habla de experiencias humanas — nunca de etiquetas que avergüenzan.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Usar urgencia artificial — "¡cupos limitados!", "¡no esperes más!", "¡actúa ya!"</div>
+            <p class="limit-why">La presión de escasez es incompatible con el tono de acompañamiento. claritia invita, no presiona. La persona decide cuándo — esa autonomía es parte de lo que claritia les devuelve.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Llamar "paciente" al usuario en comunicación externa</div>
+            <p class="limit-why">"Paciente" implica jerarquía clínica y rol pasivo. claritia habla con personas, no atiende pacientes. El lenguaje es "persona", "tú", "quien nos escribe" — siempre.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sh2">La diferencia en la práctica</h3>
+      <div class="contrast-pair">
+        <div class="cp-col wrong">
+          <span class="cp-label">✗ Prohibido</span>
+          <div class="cp-copy">"¡La terapia te va a cambiar la vida! ¡Regístrate ya antes de que se agoten los cupos!"</div>
+        </div>
+        <div class="cp-col right">
+          <span class="cp-label">✓ claritia</span>
+          <div class="cp-copy">"Las cosas pueden mejorar. No de un día para otro — pero con alguien a tu lado, pueden."</div>
+        </div>
+      </div>
+      <div class="contrast-pair">
+        <div class="cp-col wrong">
+          <span class="cp-label">✗ Prohibido</span>
+          <div class="cp-copy">"¿Sufres de ansiedad crónica o depresión mayor? ¡Tenemos la solución que necesitas!"</div>
+        </div>
+        <div class="cp-col right">
+          <span class="cp-label">✓ claritia</span>
+          <div class="cp-copy">"Sentirte abrumado no significa que algo está mal contigo. Aquí estamos cuando estés listo."</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="doc-sec" id="s03">
+      <div class="sec-tag"><span class="sec-tag-n">03</span> En Diseño</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Lo que claritia nunca muestra</h2>
+      <p>La identidad visual de claritia fue focus-group tested. Cualquier desviación hacia los patrones listados aquí contradice directamente lo que el estudio confirmó que funciona.</p>
+
+      <div class="limit-stack">
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Imágenes que asocien salud mental con debilidad, locura o peligro</div>
+            <p class="limit-why">Personas con la cabeza entre las manos, siluetas en la oscuridad, imagery de crisis dramatizada. Estas imágenes refuerzan el estigma que claritia existe para desmantelar.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Paleta clínica — verde hospitalario, azul corporativo frío, blanco aséptico</div>
+            <p class="limit-why">La paleta de claritia es lavanda y sage por razón específica. Cualquier desviación hacia colores clínicos rompe el posicionamiento confirmado por el estudio.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Stock fotográfico genérico de "personas felices posando"</div>
+            <p class="limit-why">La audiencia de claritia está pasando por algo real. Imágenes de sonrisas perfectas se perciben inmediatamente como falsas y destruyen la identificación emocional que el funnel necesita.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Diseño denso que abrume — el espacio en blanco no es desperdicio</div>
+            <p class="limit-why">La persona que llega a claritia ya está abrumada. Un diseño sobrecargado reproduce exactamente la sensación que quiere escapar. El espacio en blanco es parte del mensaje.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">"CLARITIA" en mayúsculas o "Claritia" con inicial mayúscula</div>
+            <p class="limit-why">El logo es "claritia" — siempre en minúsculas. Parte de la identidad confirmada por focus group. Sin excepciones de ningún tipo.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Negro puro #000000 en texto o elementos de diseño</div>
+            <p class="limit-why">claritia usa carbón #2C2C2C. El negro puro es visualmente agresivo y contradice la suavidad que la paleta establece. Este detalle es parte del sistema visual.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="doc-sec" id="s04">
+      <div class="sec-tag"><span class="sec-tag-n">04</span> En la Experiencia del Usuario</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Lo que claritia nunca hace en el proceso</h2>
+      <p>La experiencia de usuario es una extensión directa de la promesa de marca. Cada punto de fricción innecesario es una contradicción con lo que claritia dice ser.</p>
+
+      <div class="limit-stack">
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Hacer que el proceso de inicio sea complicado</div>
+            <p class="limit-why">Cada paso extra es una persona que se va — alguien que necesitaba ayuda y encontró una barrera donde prometimos no tenerlas. El onboarding completo toma menos de 2 minutos desde el primer mensaje.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Pedir formularios extensos antes del primer contacto humano</div>
+            <p class="limit-why">La calidez es primero. Los datos son después. Exigir información antes de que el usuario sienta que está siendo escuchado es el error de onboarding más dañino en salud mental.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Dejar un mensaje sin respuesta por tiempo prolongado</div>
+            <p class="limit-why">Una persona que escribe en un momento de vulnerabilidad y no recibe respuesta no solo se va — se va con la confirmación de que buscar ayuda no vale la pena.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Vender sesiones sueltas como objetivo primario</div>
+            <p class="limit-why">claritia se sostiene en la continuidad terapéutica. Vender una sesión y no retener al usuario es un fracaso operativo y ético simultáneo.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Tratar a un usuario como un ticket de soporte</div>
+            <p class="limit-why">Números de caso, tiempos de espera formales, respuestas de plantilla. Cada usuario es una persona con una historia y un estado emocional real. El trato es siempre personal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="doc-sec" id="s05">
+      <div class="sec-tag"><span class="sec-tag-n">05</span> En Dani — La IA</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Lo que Dani nunca hace o dice</h2>
+      <p>Dani es la primera voz que escucha la mayoría de los usuarios. Un error en su tono o sus límites tiene impacto directo en personas reales en un momento difícil. Los límites de Dani son los más críticos del documento.</p>
+
+      <div class="limit-stack">
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Hacer terapia, dar consejos clínicos ni interpretar síntomas</div>
+            <p class="limit-why">Dani no es terapeuta. Diagnosticar o dar consejos clínicos sin licencia no solo es un riesgo legal — puede causar daño real a una persona vulnerable. La línea entre Dani y el psicólogo no se cruza nunca.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Minimizar lo que el usuario está sintiendo</div>
+            <p class="limit-why">"No es para tanto", "intenta pensar en positivo" — dañinas en cualquier contexto. En salud mental son inaceptables. Siempre validar primero, sin excepción.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Usar respuestas genéricas de bot o call center</div>
+            <p class="limit-why">"Entiendo tu consulta. Un agente te atenderá pronto." — destruye en un segundo la confianza construida en todo el funnel. Dani suena como una persona real empática, siempre.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Ignorar o demorar la respuesta ante señales de crisis</div>
+            <p class="limit-why">Cuando un usuario expresa una crisis, todo lo demás se detiene. Sin flujos de onboarding, sin preguntas admin. Presencia → validación → conexión inmediata con soporte humano. En ese orden, siempre.</p>
+          </div>
+        </div>
+        <div class="limit-card">
+          <div class="limit-card-marker"><div class="limit-nunca">nunca</div></div>
+          <div class="limit-card-body">
+            <div class="limit-rule">Prometer confidencialidad absoluta sin fundamento legal</div>
+            <p class="limit-why">Dani no puede hacer promesas legales sobre privacidad que el sistema no puede garantizar. Describe lo que claritia hace — sin promesas absolutas que no se puedan cumplir.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="abs-rule">
+        <div class="abs-rule-icon">!</div>
+        <div class="abs-rule-text">
+          <strong>Nota de configuración:</strong> Los flujos completos de Dani y los protocolos de escalamiento están pendientes del input directo de la CEO. Estos límites son absolutos desde ahora. La configuración técnica completa sigue pendiente.
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="doc-sec" id="s06">
+      <div class="sec-tag"><span class="sec-tag-n">06</span> El Compromiso</div>
+      <div class="sec-rule"></div>
+      <h2 class="sh1">Por qué estos límites son también la ventaja competitiva</h2>
+      <p>Estos límites no son restricciones al crecimiento — son la razón por la que claritia puede crecer. En un mercado donde la salud mental está siendo tratada como contenido viral o embudo de ventas agresivo, claritia existe exactamente en el opuesto.</p>
+
+      <div class="closing">
+        <div class="closing-deco" style="width:240px;height:240px;top:-80px;right:-60px;"></div>
+        <div class="closing-deco" style="width:100px;height:100px;bottom:-30px;left:40px;"></div>
+        <div class="closing-label">El compromiso de claritia</div>
+        <div class="closing-title">La confianza se gana respetando estos límites — sin excepciones, sin contexto que las justifique.</div>
+        <div class="closing-items">
+          <div class="closing-item">
+            <div class="closing-item-dot"></div>
+            <div class="closing-item-text"><strong>Nunca el miedo.</strong> Siempre la invitación.</div>
+          </div>
+          <div class="closing-item">
+            <div class="closing-item-dot"></div>
+            <div class="closing-item-text"><strong>Nunca la promesa de resultados.</strong> Siempre la promesa de presencia.</div>
+          </div>
+          <div class="closing-item">
+            <div class="closing-item-dot"></div>
+            <div class="closing-item-text"><strong>Nunca el estigma.</strong> Siempre la validación.</div>
+          </div>
+          <div class="closing-item">
+            <div class="closing-item-dot"></div>
+            <div class="closing-item-text"><strong>Nunca la fricción innecesaria.</strong> Siempre el camino más corto hacia el apoyo.</div>
+          </div>
+          <div class="closing-item">
+            <div class="closing-item-dot"></div>
+            <div class="closing-item-text"><strong>Nunca el ticket de soporte.</strong> Siempre la persona.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VAULT COMPLETE -->
+      <div class="vault-complete">
+        <div class="vc-badge">
+          <div class="vc-dots">
+            <div class="vc-dot"></div><div class="vc-dot"></div><div class="vc-dot"></div>
+            <div class="vc-dot"></div><div class="vc-dot"></div><div class="vc-dot"></div>
+            <div class="vc-dot"></div><div class="vc-dot"></div>
+          </div>
+          <div class="vc-label">Marketing Vault — 8 / 8 completo</div>
+        </div>
+        <div class="vc-sub">Todos los documentos del vault están completos.<br/>El siguiente paso es el website de claritia.</div>
+      </div>
+
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="fl"><strong>claritia</strong> &nbsp;×&nbsp; JRZ Consulting Solutions &nbsp;—&nbsp; Uso Interno. No distribuir sin autorización.</div>
+  <div class="fr">
+    <div class="fbadge">08 — Final</div>
+    <div class="fnav">
+      <a href="claritiamarket.html">← Oportunidad de Mercado</a>
+      <span class="fnav-sep">/</span>
+      <a href="index.html">← Vault</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.doc-sec[id]');
+  const links = document.querySelectorAll('.sb-nav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
 
 </body>
 </html>
