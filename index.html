@@ -13,22 +13,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
-    /* ─── TOKENS — estrategia.pdf palette ───────────── */
+    /* ─── TOKENS ─────────────────────────────────────── */
     :root {
-      --lav:        #B8B4D4;   /* lavender mid — matches pdf circles */
-      --lav-light:  #D4D1E8;   /* lighter lavender */
-      --lav-xlight: #ECEAF6;   /* near white lavender */
-      --sage:       #8FA89A;   /* sage-grey from pdf gradient end */
+      --lav:        #B8B4D4;
+      --lav-light:  #D4D1E8;
+      --lav-xlight: #ECEAF6;
+      --sage:       #8FA89A;
       --sage-dark:  #6B8C7D;
-      --grad-start: #C4C0DC;   /* pdf cover gradient left */
-      --grad-end:   #9AABA0;   /* pdf cover gradient right */
+      --grad-start: #C4C0DC;
+      --grad-end:   #9AABA0;
       --white:      #FFFFFF;
       --off-white:  #F8F8FA;
       --charcoal:   #2C2C2C;
       --mid:        #6B6B6B;
       --light:      #D0CDE0;
       --card-bg:    rgba(255,255,255,0.72);
-      --card-hover: rgba(255,255,255,0.92);
     }
 
     /* ─── BASE ───────────────────────────────────────── */
@@ -40,15 +39,13 @@
       overflow-x: hidden;
     }
 
-    /* ─── HERO — gradient from estrategia.pdf ───────── */
+    /* ─── HERO ───────────────────────────────────────── */
     .hero {
       position: relative;
       background: linear-gradient(130deg, var(--grad-start) 0%, var(--lav) 40%, var(--grad-end) 100%);
       padding: 72px 48px 80px;
       overflow: hidden;
     }
-
-    /* floating circles — echoing the pdf icon system */
     .hero::before,
     .hero::after {
       content: '';
@@ -56,32 +53,23 @@
       border-radius: 50%;
       background: rgba(255,255,255,0.10);
     }
-    .hero::before {
-      width: 320px; height: 320px;
-      top: -80px; right: -60px;
-    }
-    .hero::after {
-      width: 180px; height: 180px;
-      bottom: -40px; left: 30%;
-    }
+    .hero::before { width: 320px; height: 320px; top: -80px; right: -60px; }
+    .hero::after  { width: 180px; height: 180px; bottom: -40px; left: 30%; }
 
-    /* decorative circles — matching pdf aesthetic */
     .circle-deco {
       position: absolute;
       border-radius: 50%;
       background: rgba(255,255,255,0.13);
       pointer-events: none;
     }
-    .c1 { width: 56px;  height: 56px;  top: 32px;  right: 200px; }
-    .c2 { width: 30px;  height: 30px;  top: 80px;  right: 260px; }
+    .c1 { width: 56px;  height: 56px;  top: 32px;    right: 200px; }
+    .c2 { width: 30px;  height: 30px;  top: 80px;    right: 260px; }
     .c3 { width: 42px;  height: 42px;  bottom: 48px; right: 120px; }
-    .c4 { width: 22px;  height: 22px;  bottom: 60px; left: 48px;  }
+    .c4 { width: 22px;  height: 22px;  bottom: 60px; left: 48px;   }
 
-    /* icon circles matching pdf style */
     .icon-cluster {
       position: absolute;
-      top: 28px;
-      right: 48px;
+      top: 28px; right: 48px;
       display: flex;
       gap: 10px;
       opacity: 0.55;
@@ -102,7 +90,6 @@
       color: rgba(255,255,255,0.65);
       margin-bottom: 28px;
     }
-
     .hero-logo {
       font-family: 'DM Serif Display', serif;
       font-size: clamp(52px, 7vw, 80px);
@@ -113,7 +100,6 @@
       margin-bottom: 6px;
       animation: fadeUp 0.6s ease both;
     }
-
     .hero-sub {
       font-size: 11px;
       font-weight: 500;
@@ -123,7 +109,6 @@
       margin-bottom: 28px;
       animation: fadeUp 0.6s 0.1s ease both;
     }
-
     .hero-desc {
       max-width: 440px;
       font-size: 14px;
@@ -132,8 +117,6 @@
       line-height: 1.7;
       animation: fadeUp 0.6s 0.2s ease both;
     }
-
-    /* quote bar */
     .hero-quote {
       margin-top: 36px;
       padding: 14px 20px;
@@ -147,7 +130,7 @@
       animation: fadeUp 0.6s 0.3s ease both;
     }
 
-    /* ─── MAIN CONTENT ──────────────────────────────── */
+    /* ─── MAIN ───────────────────────────────────────── */
     .main {
       max-width: 1100px;
       margin: 0 auto;
@@ -166,6 +149,7 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--mid);
+      white-space: nowrap;
     }
     .section-rule {
       flex: 1;
@@ -173,7 +157,7 @@
       background: var(--light);
     }
 
-    /* ─── VAULT GRID ────────────────────────────────── */
+    /* ─── VAULT GRID ─────────────────────────────────── */
     .vault-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -202,8 +186,6 @@
       box-shadow: 0 12px 40px rgba(184,180,212,0.22);
       border-color: rgba(184,180,212,0.55);
     }
-
-    /* accent bar on top of each card */
     .vcard::before {
       content: '';
       position: absolute;
@@ -222,7 +204,7 @@
     .vcard--half   { grid-column: span 6; }
     .vcard--third  { grid-column: span 4; }
 
-    /* featured / dark card */
+    /* featured dark card */
     .vcard--featured {
       background: linear-gradient(130deg, #3D3860 0%, #5A566E 100%);
       border-color: transparent;
@@ -236,6 +218,21 @@
       background: linear-gradient(90deg, rgba(255,255,255,0.4), rgba(255,255,255,0.1));
     }
 
+    /* website card — sage green, distinct from strategy docs */
+    .vcard--website {
+      background: linear-gradient(130deg, #4a6249 0%, #5F7A5F 100%);
+      border-color: transparent;
+      color: var(--white);
+    }
+    .vcard--website:hover {
+      box-shadow: 0 16px 48px rgba(74,98,73,0.30);
+      border-color: transparent;
+      transform: translateY(-3px);
+    }
+    .vcard--website::before {
+      background: linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0.08));
+    }
+
     /* card internals */
     .card-num {
       font-size: 10px;
@@ -245,7 +242,8 @@
       color: var(--lav);
       margin-bottom: 14px;
     }
-    .vcard--featured .card-num { color: rgba(255,255,255,0.50); }
+    .vcard--featured .card-num,
+    .vcard--website  .card-num { color: rgba(255,255,255,0.50); }
 
     .card-title {
       font-family: 'DM Serif Display', serif;
@@ -256,6 +254,7 @@
       margin-bottom: 10px;
     }
     .vcard--featured .card-title { color: var(--white); font-size: 26px; }
+    .vcard--website  .card-title { color: var(--white); font-size: 22px; }
 
     .card-desc {
       font-size: 13px;
@@ -264,7 +263,8 @@
       line-height: 1.65;
       flex: 1;
     }
-    .vcard--featured .card-desc { color: rgba(255,255,255,0.65); }
+    .vcard--featured .card-desc,
+    .vcard--website  .card-desc { color: rgba(255,255,255,0.68); }
 
     .card-tag {
       display: inline-flex;
@@ -284,6 +284,35 @@
       background: rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.75);
     }
+    .vcard--website .card-tag {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* draft badge */
+    .card-draft-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.60);
+      align-self: flex-start;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .card-draft-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #f0c040;
+      flex-shrink: 0;
+    }
 
     .card-route {
       margin-top: 12px;
@@ -296,12 +325,12 @@
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .vcard:hover .card-route { opacity: 1; transform: translateY(0); }
-    .vcard--featured .card-route { color: rgba(255,255,255,0.45); }
+    .vcard--featured .card-route,
+    .vcard--website  .card-route { color: rgba(255,255,255,0.45); }
 
     .card-arrow {
       position: absolute;
-      bottom: 24px;
-      right: 24px;
+      bottom: 24px; right: 24px;
       width: 32px; height: 32px;
       border-radius: 50%;
       background: var(--lav-xlight);
@@ -313,12 +342,13 @@
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .vcard:hover .card-arrow { opacity: 1; transform: translateX(0); }
-    .vcard--featured .card-arrow {
+    .vcard--featured .card-arrow,
+    .vcard--website  .card-arrow {
       background: rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.80);
+      color: rgba(255,255,255,0.85);
     }
 
-    /* stagger animation delays */
+    /* stagger delays */
     .vcard:nth-child(1) { animation-delay: 0.05s; }
     .vcard:nth-child(2) { animation-delay: 0.10s; }
     .vcard:nth-child(3) { animation-delay: 0.15s; }
@@ -327,8 +357,20 @@
     .vcard:nth-child(6) { animation-delay: 0.30s; }
     .vcard:nth-child(7) { animation-delay: 0.35s; }
     .vcard:nth-child(8) { animation-delay: 0.40s; }
+    .vcard:nth-child(9) { animation-delay: 0.45s; }
 
-    /* ─── FOOTER ────────────────────────────────────── */
+    /* ─── DIVIDER between sections ───────────────────── */
+    .grid-divider {
+      grid-column: span 12;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding-top: 16px;
+    }
+    .grid-divider .section-label { color: var(--mid); }
+    .grid-divider .section-rule  { background: var(--light); }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
     .footer {
       border-top: 1px solid var(--light);
       padding: 28px 48px;
@@ -365,8 +407,8 @@
 
     /* ─── RESPONSIVE ─────────────────────────────────── */
     @media (max-width: 900px) {
-      .hero { padding: 48px 28px 64px; }
-      .main { padding: 40px 28px 64px; }
+      .hero  { padding: 48px 28px 64px; }
+      .main  { padding: 40px 28px 64px; }
       .footer { padding: 24px 28px; }
       .vcard--wide,
       .vcard--narrow,
@@ -376,7 +418,7 @@
     }
     @media (max-width: 600px) {
       .vcard--hero { grid-column: span 12; }
-      .hero-logo { font-size: 44px; }
+      .hero-logo   { font-size: 44px; }
     }
   </style>
 </head>
@@ -410,6 +452,7 @@
   <!-- ═══ MAIN VAULT ════════════════════════════════════ -->
   <main class="main">
 
+    <!-- Strategy documents -->
     <div class="section-header">
       <span class="section-label">Repositorio de Estrategia</span>
       <div class="section-rule"></div>
@@ -417,7 +460,7 @@
 
     <div class="vault-grid">
 
-      <!-- 01 — Brand Guide (featured full-width) -->
+      <!-- 01 — Brand Guide -->
       <a class="vcard vcard--featured vcard--hero" href="claritiaconsistency/">
         <div class="card-num">01 — Guía de Marca</div>
         <div class="card-title">Consistencia de Marca</div>
@@ -429,7 +472,7 @@
         <div class="card-arrow">&#8594;</div>
       </a>
 
-      <!-- 02 — ICP (wide) -->
+      <!-- 02 — ICP -->
       <a class="vcard vcard--wide" href="claritiaicp/">
         <div class="card-num">02 — Audiencia</div>
         <div class="card-title">Perfil de Cliente Ideal</div>
@@ -441,7 +484,7 @@
         <div class="card-arrow">&#8594;</div>
       </a>
 
-      <!-- 03 — Tone (narrow) -->
+      <!-- 03 — Tone -->
       <a class="vcard vcard--narrow" href="claritiatone/">
         <div class="card-num">03 — Comunicación</div>
         <div class="card-title">Tono y Lenguaje de Copy</div>
@@ -453,7 +496,7 @@
         <div class="card-arrow">&#8594;</div>
       </a>
 
-      <!-- 04 — Journey (half) -->
+      <!-- 04 — Journey -->
       <a class="vcard vcard--half" href="claritiajourney/">
         <div class="card-num">04 — Proceso</div>
         <div class="card-title">Journey del Cliente</div>
@@ -465,7 +508,7 @@
         <div class="card-arrow">&#8594;</div>
       </a>
 
-      <!-- 05 — Leti (half) -->
+      <!-- 05 — Leti -->
       <a class="vcard vcard--half" href="claritialeti/">
         <div class="card-num">05 — Inteligencia Artificial</div>
         <div class="card-title">Leti — Reglas de la IA</div>
@@ -477,7 +520,7 @@
         <div class="card-arrow">&#8594;</div>
       </a>
 
-      <!-- 06 — Visual (third) -->
+      <!-- 06 — Visual -->
       <a class="vcard vcard--third" href="claritiavisual/">
         <div class="card-num">06 — Diseño</div>
         <div class="card-title">Identidad Visual</div>
@@ -489,7 +532,7 @@
         <div class="card-arrow">&#8594;</div>
       </a>
 
-      <!-- 07 — Market (third) -->
+      <!-- 07 — Market -->
       <a class="vcard vcard--third" href="claritiamarket/">
         <div class="card-num">07 — Contexto</div>
         <div class="card-title">Oportunidad de Mercado</div>
@@ -501,7 +544,7 @@
         <div class="card-arrow">&#8594;</div>
       </a>
 
-      <!-- 08 — Limits (third) -->
+      <!-- 08 — Limits -->
       <a class="vcard vcard--third" href="claritialimits/">
         <div class="card-num">08 — Límites</div>
         <div class="card-title">Líneas que No Cruzamos</div>
@@ -510,6 +553,25 @@
         </div>
         <div class="card-tag">Reglas</div>
         <div class="card-route">/claritialimits</div>
+        <div class="card-arrow">&#8594;</div>
+      </a>
+
+      <!-- ── DIVIDER: Deliverables ── -->
+      <div class="grid-divider">
+        <span class="section-label">Entregables</span>
+        <div class="section-rule"></div>
+      </div>
+
+      <!-- 09 — Website Draft 1 -->
+      <a class="vcard vcard--website vcard--hero" href="website/">
+        <div class="card-num">09 — Sitio Web</div>
+        <div class="card-title">Landing Page — Draft 1</div>
+        <div class="card-desc">
+          Primer borrador del sitio web público de claritia. Copy reescrito desde los documentos de tono e ICP. Diseño mobile-optimizado con slideshow de imágenes en el hero, secciones de conversión y estructura UX según las recomendaciones del cliente.
+        </div>
+        <div class="card-tag">Website</div>
+        <div class="card-draft-badge">Draft 1 — En revisión</div>
+        <div class="card-route">/website</div>
         <div class="card-arrow">&#8594;</div>
       </a>
 
