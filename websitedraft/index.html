@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>claritia — Terapia Clínica Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --lavanda:     #C4C0DC;
+      --lavanda-mid: #B8B4D4;
+      --sage:        #9AABA0;
+      --sage-deep:   #5F7A5F;
+      --sage-light:  #E6EDE6;
+      --charcoal:    #2C2C2C;
+      --gray-mid:    #6B6B6B;
+      --white:       #FFFFFF;
+      --grad: linear-gradient(130deg, #C4C0DC, #B8B4D4, #9AABA0);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--charcoal);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────────── */
+    .serif { font-family: 'DM Serif Display', serif; }
+
+    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.15; }
+    h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+    h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
+    p  { font-size: 0.95rem; line-height: 1.75; color: var(--gray-mid); }
+
+    /* ─── NAV ──────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(196,192,220,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--charcoal);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span {
+      font-size: 0.6rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      display: block;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .nav-cta {
+      background: var(--sage-deep);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.55rem 1.4rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: #4a6249; transform: translateY(-1px); }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Image slideshow — sits behind everything */
+    .hero-slides {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-slide.active { opacity: 1; }
+
+    /* Overlay so copy stays readable over any image */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        110deg,
+        rgba(44, 44, 44, 0.52) 0%,
+        rgba(154, 171, 160, 0.35) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Static copy layer */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: clamp(2rem, 8vw, 7rem);
+      padding-top: 96px;
+      max-width: 700px;
+    }
+    .hero-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 1.2rem;
+    }
+    .hero-content h1 {
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    .hero-content p {
+      color: rgba(255,255,255,0.86);
+      font-size: clamp(1rem, 1.6vw, 1.1rem);
+      margin-bottom: 2rem;
+      max-width: 520px;
+    }
+
+    /* Slide dots — bottom left, same position as before */
+    .slide-dots {
+      position: absolute;
+      bottom: 2.5rem;
+      left: clamp(2rem, 8vw, 7rem);
+      display: flex;
+      gap: 0.5rem;
+      z-index: 3;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.38);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+    }
+    .dot.active { background: var(--white); transform: scale(1.4); }
+
+    /* ─── BUTTONS ───────────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--white);
+      color: var(--sage-deep);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.16); }
+
+    .btn-primary.dark {
+      background: var(--sage-deep);
+      color: var(--white);
+    }
+    .btn-primary.dark:hover { background: #4a6249; }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      transition: border-color 0.2s, background 0.2s;
+      margin-left: 0.75rem;
+    }
+    .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
+
+    /* ─── BADGE BAR ────────────────────────────────────────────── */
+    .badge-bar {
+      background: var(--white);
+      border-bottom: 1px solid var(--sage-light);
+      padding: 1.4rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      flex-wrap: wrap;
+    }
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--sage-deep);
+    }
+    .badge-icon {
+      width: 28px; height: 28px;
+      background: var(--sage-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .badge-icon svg { width: 14px; height: 14px; stroke: var(--sage-deep); fill: none; stroke-width: 1.8; }
+
+    /* ─── AFFIRMATION BAND ─────────────────────────────────────── */
+    .affirmation {
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+      text-align: center;
+    }
+    .affirmation.sage { background: var(--sage-deep); }
+    .affirmation.lavanda { background: var(--lavanda-mid); }
+
+    .affirmation blockquote {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.2rem, 2.8vw, 1.8rem);
+      font-style: italic;
+      line-height: 1.4;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .affirmation.sage blockquote { color: var(--white); }
+    .affirmation.lavanda blockquote { color: var(--charcoal); }
+
+    /* ─── SECTIONS BASE ────────────────────────────────────────── */
+    .section {
+      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 8vw, 7rem);
+      position: relative;
+    }
+    .section-label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--sage-deep);
+      margin-bottom: 1rem;
+    }
+    .section-title { margin-bottom: 1.4rem; color: var(--charcoal); }
+    .section-body { max-width: 560px; }
+    .section-body p + p { margin-top: 1.1rem; }
+
+    /* ─── WHAT IS CLARITIA ─────────────────────────────────────── */
+    .what-section {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+    @media (max-width: 768px) { .what-section { grid-template-columns: 1fr; } }
+
+    .what-image-block {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--sage-light);
+      aspect-ratio: 4/5;
+      display: flex;
+      align-items: flex-end;
+    }
+    .what-image-block img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    .what-image-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #d5d0ea, #b0bdb6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .what-image-placeholder span {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .what-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .pill {
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      background: var(--sage-light);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--sage-deep);
+    }
+
+    /* ─── 3 STEPS ──────────────────────────────────────────────── */
+    .steps-section { background: var(--sage-light); }
+    .steps-intro { max-width: 520px; margin-bottom: 4rem; }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; } }
+
+    .step-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: transform 0.25s;
+    }
+    .step-card:hover { transform: translateY(-4px); }
+
+    .step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3rem;
+      color: var(--lavanda);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .step-card h3 { color: var(--charcoal); margin-bottom: 0.6rem; }
+    .step-card p { font-size: 0.85rem; }
+
+    /* ─── PILLARS ──────────────────────────────────────────────── */
+    .pillars-bar {
+      background: var(--white);
+      display: flex;
+      align-items: stretch;
+      border-top: 1px solid var(--sage-light);
+      border-bottom: 1px solid var(--sage-light);
+    }
+    @media (max-width: 600px) { .pillars-bar { flex-direction: column; } }
+
+    .pillar {
+      flex: 1;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--sage-light);
+    }
+    .pillar:last-child { border-right: none; }
+
+    .pillar-icon {
+      width: 48px; height: 48px;
+      background: var(--grad);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .pillar-icon svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 1.8; }
+
+    .pillar h3 { font-size: 0.7rem; font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 0.5rem; }
+    .pillar p { font-size: 0.85rem; }
+
+    /* ─── PSYCHOLOGIST TRUST ───────────────────────────────────── */
+    .trust-section {
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+    @media (max-width: 768px) { .trust-section { grid-template-columns: 1fr; } }
+
+    .trust-image-block {
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: var(--sage-light);
+    }
+    .trust-image-block img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .trust-image-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(160deg, #9AABA0, #C4C0DC);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .trust-image-placeholder span {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .trust-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    /* ─── CLOSING CTA ──────────────────────────────────────────── */
+    .closing {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
+      background: var(--grad);
+    }
+    .closing h2 {
+      color: var(--white);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      max-width: 640px;
+      margin: 0 auto 1rem;
+    }
+    .closing p {
+      color: rgba(255,255,255,0.82);
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+      font-size: 1rem;
+    }
+    .closing .btn-primary { margin-right: 0.75rem; }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      background: var(--charcoal);
+      padding: 3rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-logo span {
+      font-size: 0.55rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      display: block;
+      margin-top: 3px;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+    }
+    .footer-links a {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.75); }
+    .footer-copy {
+      width: 100%;
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.25);
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ─── FADE-UP ANIMATION ────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: 0.1s; }
+    .fade-up.delay-2 { transition-delay: 0.2s; }
+    .fade-up.delay-3 { transition-delay: 0.3s; }
+
+    /* ─── MOBILE ───────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+
+      .nav-logo span { display: none; }
+      .nav-cta { font-size: 0.72rem; padding: 0.48rem 1rem; }
+
+      .hero-content { padding: 1.5rem; padding-top: 80px; padding-bottom: 5rem; }
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p  { font-size: 0.9rem; }
+      .hero-eyebrow { font-size: 0.65rem; }
+      .btn-primary, .btn-secondary {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        margin-bottom: 0.6rem;
+      }
+
+      .slide-dots { left: 1.5rem; bottom: 1.8rem; }
+
+      .badge-bar { gap: 0.9rem; padding: 1.2rem; justify-content: flex-start; }
+      .badge { font-size: 0.65rem; }
+
+      .affirmation { padding: 2.5rem 1.25rem; }
+      .affirmation blockquote { font-size: 1.1rem; }
+
+      .section { padding: 3rem 1.25rem; }
+
+      .what-image-block { aspect-ratio: 3/2; border-radius: 16px; }
+
+      .steps-intro { margin-bottom: 2rem; }
+      .step-card { padding: 2rem 1.5rem; }
+      .step-num { font-size: 2.4rem; }
+
+      .pillar { border-right: none; border-bottom: 1px solid var(--sage-light); padding: 2rem 1.25rem; }
+      .pillar:last-child { border-bottom: none; }
+
+      .trust-image-block { aspect-ratio: 3/2; border-radius: 16px; }
+
+      .closing { padding: 4rem 1.25rem; }
+      .closing h2 { font-size: 1.8rem; }
+      .closing .btn-primary,
+      .closing .btn-secondary {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+        margin-bottom: 0.6rem;
+      }
+
+      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.25rem; }
+      .footer-links { align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<nav>
+  <a href="#" class="nav-logo">
+    claritia
+    <span>Terapia Clínica Online</span>
+  </a>
+  <a href="#empieza" class="nav-cta">Empieza hoy</a>
+</nav>
+
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero" id="inicio">
+
+  <!-- Background image slideshow -->
+  <div class="hero-slides" aria-hidden="true">
+    <!-- STOCK IMAGE 1: stock-hero-woman-window-latam.jpg
+         Direction: person looking out a window, calm, natural light, introspective — not staged -->
+    <div class="hero-slide active" style="background-color: #9AABA0; background-image: url('images/stock-hero-woman-window-latam.jpg');"></div>
+    <!-- STOCK IMAGE 2: stock-hero-man-couch-phone-latam.jpg
+         Direction: person on a couch, looking at phone/laptop, relaxed home environment -->
+    <div class="hero-slide" style="background-color: #B8B4D4; background-image: url('images/stock-hero-man-couch-phone-latam.jpg');"></div>
+    <!-- STOCK IMAGE 3: stock-hero-outdoor-calm-latam.jpg
+         Direction: person outside, quiet moment, not performing emotion — just present -->
+    <div class="hero-slide" style="background-color: #C4C0DC; background-image: url('images/stock-hero-outdoor-calm-latam.jpg');"></div>
+  </div>
+
+  <!-- Dark overlay for readability -->
+  <div class="hero-overlay"></div>
+
+  <!-- Static copy — one message, always visible -->
+  <div class="hero-content">
+    <p class="hero-eyebrow">Terapia clínica online</p>
+    <h1>No tienes que tener todo claro para empezar.</h1>
+    <p>Muchas personas que hoy están en proceso sintieron exactamente lo mismo al inicio. Solo hace falta dar un paso.</p>
+    <a href="#empieza" class="btn-primary">Empieza hoy</a>
+    <a href="#empieza" class="btn-secondary">Hablar con alguien</a>
+  </div>
+
+  <!-- Dots show which background image is active -->
+  <div class="slide-dots">
+    <button class="dot active" onclick="goToSlide(0)" aria-label="Imagen 1"></button>
+    <button class="dot" onclick="goToSlide(1)" aria-label="Imagen 2"></button>
+    <button class="dot" onclick="goToSlide(2)" aria-label="Imagen 3"></button>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ BADGE BAR ═══════════════════ -->
+<div class="badge-bar">
+  <div class="badge">
+    <div class="badge-icon">
+      <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+    </div>
+    Sesiones online
+  </div>
+  <div class="badge">
+    <div class="badge-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/></svg>
+    </div>
+    Psicólogos verificados
+  </div>
+  <div class="badge">
+    <div class="badge-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    Confidencial
+  </div>
+  <div class="badge">
+    <div class="badge-icon">
+      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+    </div>
+    Precio accesible
+  </div>
+  <div class="badge">
+    <div class="badge-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    Desde casa
+  </div>
+</div>
+
+
+<!-- ═══════════════════ WHAT IS CLARITIA ═══════════════════ -->
+<section class="section what-section" id="que-es">
+  <div class="what-image-block fade-up">
+    <!-- STOCK IMAGE: stock-woman-home-relaxed-latam.jpg
+         Direction: woman at home, natural light, relaxed but pensive — not posing, not performing happiness -->
+    <div class="what-image-placeholder">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>stock-woman-home-relaxed-latam.jpg</span>
+    </div>
+  </div>
+
+  <div class="section-body fade-up delay-1">
+    <p class="section-label">Qué es claritia</p>
+    <h2 class="section-title">A veces solo necesitas hablar con alguien de verdad.</h2>
+    <p>No hace falta llegar a un punto límite para buscar apoyo. Si algo te pesa, si tu mente no para, si sientes que cargas con demasiado — eso es suficiente razón para empezar.</p>
+    <p>claritia conecta a personas como tú con psicólogos verificados, de forma completamente online, a un precio que no se convierte en otra preocupación más.</p>
+    <div class="what-pills">
+      <span class="pill">Sin desplazamientos</span>
+      <span class="pill">Sin juicios</span>
+      <span class="pill">Sin listas de espera</span>
+      <span class="pill">Con psicólogos reales</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ AFFIRMATION 1 ═══════════════════ -->
+<div class="affirmation sage">
+  <blockquote>Sentirte abrumado no significa que algo está mal contigo. Significa que eres humano.</blockquote>
+</div>
+
+
+<!-- ═══════════════════ PILLARS ═══════════════════ -->
+<div class="pillars-bar">
+  <div class="pillar fade-up">
+    <div class="pillar-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </div>
+    <h3>Flexible</h3>
+    <p>Sesiones en el horario que se adapte a tu vida, no al revés.</p>
+  </div>
+  <div class="pillar fade-up delay-1">
+    <div class="pillar-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <h3>Privado</h3>
+    <p>Lo que compartes aquí no sale de aquí. Confidencialidad total.</p>
+  </div>
+  <div class="pillar fade-up delay-2">
+    <div class="pillar-icon">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <h3>Humano</h3>
+    <p>Psicólogos reales. Nada de respuestas automáticas, nada de protocolos fríos.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ 3 STEPS ═══════════════════ -->
+<section class="section steps-section" id="como-funciona">
+  <div class="steps-intro fade-up">
+    <p class="section-label">Cómo funciona</p>
+    <h2 class="section-title">El primer paso es más fácil de lo que crees.</h2>
+    <p>No necesitas prepararte, ni saber exactamente qué decir. Solo cuéntanos cómo te sientes — de ahí en adelante, nosotros te acompañamos.</p>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card fade-up">
+      <div class="step-num">1</div>
+      <h3>Cuéntanos qué estás viviendo</h3>
+      <p>Sin formularios interminables. Dinos cómo te sientes y te orientamos hacia el psicólogo que mejor puede acompañarte.</p>
+    </div>
+    <div class="step-card fade-up delay-1">
+      <div class="step-num">2</div>
+      <h3>Elige cuándo conectarte</h3>
+      <p>Selecciona el día y hora que funcione para ti. Si algo cambia, puedes reagendar sin complicaciones.</p>
+    </div>
+    <div class="step-card fade-up delay-2">
+      <div class="step-num">3</div>
+      <h3>Habla desde donde estés</h3>
+      <p>Tu primera sesión sucede desde casa, desde la oficina, desde donde quieras. El proceso ya comenzó.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ TRUST / PSYCHOLOGISTS ═══════════════════ -->
+<section class="section trust-section" id="psicologos">
+  <div class="section-body fade-up">
+    <p class="section-label">Con quién vas a hablar</p>
+    <h2 class="section-title">Personas que eligieron esto porque les importa.</h2>
+    <p>Cada psicólogo en claritia pasó por un proceso de selección riguroso. Verificamos su formación, su experiencia y su capacidad para ofrecer una atención cercana y basada en evidencia.</p>
+    <p>Lo que no hacemos es poner un bot donde debería haber una persona. La terapia la conduce un profesional real, en cada sesión.</p>
+    <div class="trust-tags">
+      <span class="pill">Formación verificada</span>
+      <span class="pill">Terapia basada en evidencia</span>
+      <span class="pill">Supervisión continua</span>
+      <span class="pill">Atención humana siempre</span>
+    </div>
+    <a href="#empieza" class="btn-primary dark" style="margin-top:2rem; display:inline-block;">Empieza hoy</a>
+  </div>
+
+  <div class="trust-image-block fade-up delay-1">
+    <!-- STOCK IMAGE: stock-psychologist-warm-professional-latam.jpg
+         Direction: psychologist in a calm, natural setting — approachable, present, not posed behind a desk -->
+    <div class="trust-image-placeholder">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <span>stock-psychologist-warm-professional-latam.jpg</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ AFFIRMATION 2 ═══════════════════ -->
+<div class="affirmation lavanda">
+  <blockquote>La claridad no llega de golpe. Se construye, despacio, con el acompañamiento adecuado.</blockquote>
+</div>
+
+
+<!-- ═══════════════════ CLOSING CTA ═══════════════════ -->
+<section class="closing" id="empieza">
+  <div style="position:relative; z-index:1;">
+    <h2 class="fade-up">Cuando estés listo, aquí estamos.</h2>
+    <p class="fade-up delay-1">No tienes que tener todo claro. No tienes que estar en crisis. Solo tienes que querer empezar.</p>
+    <div class="fade-up delay-2">
+      <a href="#" class="btn-primary">Empieza hoy</a>
+      <a href="#" class="btn-secondary">Hablar con alguien</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ FOOTER ═══════════════════ -->
+<footer>
+  <a href="#" class="footer-logo">
+    claritia
+    <span>Terapia Clínica Online</span>
+  </a>
+  <div class="footer-links">
+    <a href="#">Política de privacidad</a>
+    <a href="#">Términos y condiciones</a>
+    <a href="#">Contacto</a>
+  </div>
+  <p class="footer-copy">© 2026 claritia. Todos los derechos reservados.</p>
+</footer>
+
+
+<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+<script>
+  // ── Hero image slideshow ───────────────────────────────────
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots   = document.querySelectorAll('.dot');
+  let timer;
+
+  function goToSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = n;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 6000);
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % slides.length);
+  }
+
+  timer = setInterval(nextSlide, 6000);
+
+  // ── Fade-up on scroll ──────────────────────────────────────
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
