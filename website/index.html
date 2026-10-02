@@ -4,844 +4,1053 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>claritia — Terapia Clínica Online</title>
+  <meta name="description" content="Terapia online con psicólogos verificados, desde tu casa y a un precio accesible. Escríbenos por WhatsApp y te acompañamos a dar el primer paso." />
+  <meta property="og:title" content="claritia — Terapia Clínica Online" />
+  <meta property="og:description" content="No tienes que tener todo claro para empezar. Escríbenos por WhatsApp." />
+  <meta name="theme-color" content="#F8F8FA" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='24' cy='24' r='18' fill='%23B8B4D4' fill-opacity='.35' stroke='%23534AB7' stroke-width='3'/%3E%3Ccircle cx='42' cy='34' r='13' fill='%238FA89A' fill-opacity='.3' stroke='%236B8C7D' stroke-width='3'/%3E%3Ccircle cx='26' cy='48' r='9' fill='%23D4D1E8' stroke='%23B8B4D4' stroke-width='3'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    /* ═════════════════════════════════════════════════════════════
+       claritia — website v2
+       Sistema visual: Marketing Vault 06 (Identidad Visual)
+       Reglas: Marketing Vault 08 (Líneas que No Cruzamos)
+       ═════════════════════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --lavanda:     #C4C0DC;
-      --lavanda-mid: #B8B4D4;
-      --sage:        #9AABA0;
-      --sage-deep:   #5F7A5F;
-      --sage-light:  #E6EDE6;
-      --charcoal:    #2C2C2C;
-      --gray-mid:    #6B6B6B;
-      --white:       #FFFFFF;
-      --grad: linear-gradient(130deg, #C4C0DC, #B8B4D4, #9AABA0);
+      --lav:        #B8B4D4;
+      --lav-light:  #D4D1E8;
+      --lav-xlight: #ECEAF6;
+      --lav-deep:   #534AB7;
+      --lav-deeper: #463EA0;
+      --sage:       #8FA89A;
+      --sage-dark:  #6B8C7D;
+      --sage-light: #E6EDE8;
+      --purple:     #3D3860;
+      --purple-2:   #5A566E;
+      --charcoal:   #2C2C2C;
+      --mid:        #626270;
+      --bg:         #F8F8FA;
+      --white:      #FFFFFF;
+      --grad:       linear-gradient(130deg, #C4C0DC 0%, #B8B4D4 40%, #9AABA0 100%);
+      --grad-dark:  linear-gradient(130deg, #3D3860 0%, #5A566E 100%);
+      --radius-lg:  32px;
+      --radius:     22px;
+      --shadow-sm:  0 1px 2px rgba(61,56,96,.06), 0 4px 16px rgba(61,56,96,.06);
+      --shadow:     0 2px 6px rgba(61,56,96,.06), 0 18px 48px rgba(61,56,96,.12);
+      --gutter:     clamp(1rem, 5vw, 4rem);
+      --ease:       cubic-bezier(.22,.8,.24,1);
     }
 
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Poppins', system-ui, sans-serif;
+      font-weight: 300;
       color: var(--charcoal);
-      background: var(--white);
+      background: var(--bg);
       overflow-x: hidden;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
+    img, svg { display: block; }
+    a { color: inherit; }
+    :focus-visible { outline: 2.5px solid var(--lav-deep); outline-offset: 3px; border-radius: 8px; }
 
-    /* ─── TYPOGRAPHY ───────────────────────────────────────────── */
-    .serif { font-family: 'DM Serif Display', serif; }
+    h1, h2, h3, .serif { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; line-height: 1.12; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(2.4rem, 5.6vw, 4.4rem); }
+    h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+    h3 { font-size: clamp(1.15rem, 1.8vw, 1.4rem); }
+    p  { font-size: 1rem; color: var(--mid); }
+    em.soft { font-style: italic; color: var(--lav-deep); }
 
-    h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.15; }
-    h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
-    h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
-    h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
-    p  { font-size: 0.95rem; line-height: 1.75; color: var(--gray-mid); }
+    .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); }
+    .label {
+      display: inline-flex; align-items: center; gap: .55rem;
+      font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--sage-dark); margin-bottom: 1.1rem;
+    }
+    .label::before { content: ""; width: 18px; height: 1.5px; background: currentColor; border-radius: 2px; }
+    .section { padding: clamp(4.5rem, 10vw, 8.5rem) 0; position: relative; }
+    .section-head { max-width: 640px; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+    .section-head h2 { margin-bottom: 1rem; }
+    .center { text-align: center; margin-left: auto; margin-right: auto; }
+    .center .label { justify-content: center; }
 
-    /* ─── NAV ──────────────────────────────────────────────────── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(196,192,220,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 clamp(1.5rem, 5vw, 4rem);
-      height: 64px;
-    }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.5rem;
-      color: var(--charcoal);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-    .nav-logo span {
-      font-size: 0.6rem;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gray-mid);
-      display: block;
-      line-height: 1;
-      margin-top: 2px;
-    }
-    .nav-cta {
-      background: var(--sage-deep);
-      color: var(--white);
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 0.55rem 1.4rem;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .nav-cta:hover { background: #4a6249; transform: translateY(-1px); }
+    /* ─── ICONS ─────────────────────────────────────────────────── */
+    .i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .i-wa { fill: currentColor; stroke: none; }
 
-    /* ─── HERO ─────────────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    /* Image slideshow — sits behind everything */
-    .hero-slides {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 1.2s ease;
-      background-size: cover;
-      background-position: center;
-    }
-    .hero-slide.active { opacity: 1; }
-
-    /* Overlay so copy stays readable over any image */
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        110deg,
-        rgba(44, 44, 44, 0.52) 0%,
-        rgba(154, 171, 160, 0.35) 100%
-      );
-      z-index: 1;
-    }
-
-    /* Static copy layer */
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding: clamp(2rem, 8vw, 7rem);
-      padding-top: 96px;
-      max-width: 700px;
-    }
-    .hero-eyebrow {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.72);
-      margin-bottom: 1.2rem;
-    }
-    .hero-content h1 {
-      color: var(--white);
-      margin-bottom: 1.2rem;
-    }
-    .hero-content p {
-      color: rgba(255,255,255,0.86);
-      font-size: clamp(1rem, 1.6vw, 1.1rem);
-      margin-bottom: 2rem;
-      max-width: 520px;
-    }
-
-    /* Slide dots — bottom left, same position as before */
-    .slide-dots {
-      position: absolute;
-      bottom: 2.5rem;
-      left: clamp(2rem, 8vw, 7rem);
-      display: flex;
-      gap: 0.5rem;
-      z-index: 3;
-    }
-    .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.38);
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      border: none;
-    }
-    .dot.active { background: var(--white); transform: scale(1.4); }
+    /* ─── LOGO (cluster de tres círculos + wordmark) ────────────── */
+    .logo { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; }
+    .logo-cluster { position: relative; width: 34px; height: 30px; flex-shrink: 0; }
+    .logo-cluster span { position: absolute; border-radius: 50%; }
+    .logo-cluster .c1 { width: 18px; height: 18px; top: 0; left: 0; background: rgba(184,180,212,.28); border: 1.5px solid var(--lav-deep); }
+    .logo-cluster .c2 { width: 13px; height: 13px; top: 6px; left: 15px; background: rgba(143,168,154,.25); border: 1.5px solid var(--sage-dark); }
+    .logo-cluster .c3 { width: 10px; height: 10px; top: 17px; left: 4px; background: rgba(212,209,232,.5); border: 1.5px solid var(--lav); }
+    .logo-word { font-family: 'DM Serif Display', serif; font-size: 1.6rem; line-height: 1; color: var(--charcoal); }
+    .logo-tag { display: block; font-family: 'Poppins', sans-serif; font-size: .56rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--sage-dark); margin-top: 4px; }
+    .logo.on-dark .logo-word { color: var(--white); }
+    .logo.on-dark .logo-tag { color: rgba(255,255,255,.55); }
+    .logo.on-dark .c1 { border-color: var(--lav-light); }
+    .logo.on-dark .c2 { border-color: var(--sage); }
 
     /* ─── BUTTONS ───────────────────────────────────────────────── */
-    .btn-primary {
-      display: inline-block;
-      background: var(--white);
-      color: var(--sage-deep);
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      padding: 0.85rem 2rem;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    .btn {
+      --bx: 0px; --by: 0px;
+      position: relative; isolation: isolate; overflow: hidden;
+      display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+      font-family: 'Poppins', sans-serif; font-size: .95rem; font-weight: 500; letter-spacing: .01em;
+      padding: 1rem 1.7rem; border-radius: 100px; border: 0; cursor: pointer;
+      text-decoration: none; white-space: nowrap;
+      transform: translate(var(--bx), var(--by));
+      transition: transform .35s var(--ease), box-shadow .3s, background .25s, color .25s;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.16); }
+    .btn-primary { background: var(--lav-deep); color: var(--white); box-shadow: 0 8px 24px rgba(83,74,183,.28); }
+    .btn-primary:hover { background: var(--lav-deeper); box-shadow: 0 12px 32px rgba(83,74,183,.34); }
+    /* brillo que cruza el botón (estilo Cult UI) */
+    .btn-primary::after {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.28) 50%, transparent 70%);
+      transform: translateX(-120%); transition: transform .9s var(--ease);
+    }
+    .btn-primary:hover::after { transform: translateX(120%); }
+    .btn-ghost { background: rgba(255,255,255,.55); color: var(--purple); border: 1px solid rgba(61,56,96,.14); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .btn-ghost:hover { background: var(--white); }
+    .btn-light { background: var(--white); color: var(--purple); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+    .btn-light:hover { background: var(--lav-xlight); }
+    .btn-sm { font-size: .82rem; padding: .62rem 1.15rem; }
+    .btn .i { width: 18px; height: 18px; }
+    .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; }
 
-    .btn-primary.dark {
-      background: var(--sage-deep);
-      color: var(--white);
+    /* ─── NAV ───────────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      padding: .85rem 0;
+      transition: background .3s, box-shadow .3s, padding .3s;
     }
-    .btn-primary.dark:hover { background: #4a6249; }
+    .nav.scrolled { background: rgba(248,248,250,.82); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4); box-shadow: 0 1px 0 rgba(61,56,96,.08); padding: .55rem 0; }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .nav-links { display: flex; gap: .3rem; list-style: none; }
+    .nav-links a { font-size: .85rem; font-weight: 400; color: var(--purple); text-decoration: none; padding: .5rem .85rem; border-radius: 100px; transition: background .2s; }
+    .nav-links a:hover { background: rgba(83,74,183,.08); }
+    @media (max-width: 860px) { .nav-links { display: none; } }
 
-    .btn-secondary {
-      display: inline-block;
-      background: transparent;
-      color: var(--white);
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 0.85rem 2rem;
-      border-radius: 100px;
-      text-decoration: none;
-      border: 1.5px solid rgba(255,255,255,0.6);
-      transition: border-color 0.2s, background 0.2s;
-      margin-left: 0.75rem;
-    }
-    .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
-
-    /* ─── BADGE BAR ────────────────────────────────────────────── */
-    .badge-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--sage-light);
-      padding: 1.4rem clamp(1.5rem, 5vw, 4rem);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(1.5rem, 4vw, 3.5rem);
-      flex-wrap: wrap;
-    }
-    .badge {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--sage-deep);
-    }
-    .badge-icon {
-      width: 28px; height: 28px;
-      background: var(--sage-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .badge-icon svg { width: 14px; height: 14px; stroke: var(--sage-deep); fill: none; stroke-width: 1.8; }
-
-    /* ─── AFFIRMATION BAND ─────────────────────────────────────── */
-    .affirmation {
-      padding: 3rem clamp(1.5rem, 5vw, 4rem);
-      text-align: center;
-    }
-    .affirmation.sage { background: var(--sage-deep); }
-    .affirmation.lavanda { background: var(--lavanda-mid); }
-
-    .affirmation blockquote {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.2rem, 2.8vw, 1.8rem);
-      font-style: italic;
-      line-height: 1.4;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .affirmation.sage blockquote { color: var(--white); }
-    .affirmation.lavanda blockquote { color: var(--charcoal); }
-
-    /* ─── SECTIONS BASE ────────────────────────────────────────── */
-    .section {
-      padding: clamp(4rem, 8vw, 8rem) clamp(1.5rem, 8vw, 7rem);
-      position: relative;
-    }
-    .section-label {
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--sage-deep);
-      margin-bottom: 1rem;
-    }
-    .section-title { margin-bottom: 1.4rem; color: var(--charcoal); }
-    .section-body { max-width: 560px; }
-    .section-body p + p { margin-top: 1.1rem; }
-
-    /* ─── WHAT IS CLARITIA ─────────────────────────────────────── */
-    .what-section {
-      background: var(--white);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(3rem, 6vw, 6rem);
-      align-items: center;
-    }
-    @media (max-width: 768px) { .what-section { grid-template-columns: 1fr; } }
-
-    .what-image-block {
-      position: relative;
-      border-radius: 24px;
-      overflow: hidden;
-      background: var(--sage-light);
-      aspect-ratio: 4/5;
-      display: flex;
-      align-items: flex-end;
-    }
-    .what-image-block img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-    .what-image-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(160deg, #d5d0ea, #b0bdb6);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    .what-image-placeholder span {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-    }
-
-    .what-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    }
-    .pill {
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      background: var(--sage-light);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--sage-deep);
-    }
-
-    /* ─── 3 STEPS ──────────────────────────────────────────────── */
-    .steps-section { background: var(--sage-light); }
-    .steps-intro { max-width: 520px; margin-bottom: 4rem; }
-
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    @media (max-width: 768px) { .steps-grid { grid-template-columns: 1fr; } }
-
-    .step-card {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      position: relative;
-      transition: transform 0.25s;
-    }
-    .step-card:hover { transform: translateY(-4px); }
-
-    .step-num {
-      font-family: 'DM Serif Display', serif;
-      font-size: 3rem;
-      color: var(--lavanda);
-      line-height: 1;
-      margin-bottom: 1.2rem;
-    }
-    .step-card h3 { color: var(--charcoal); margin-bottom: 0.6rem; }
-    .step-card p { font-size: 0.85rem; }
-
-    /* ─── PILLARS ──────────────────────────────────────────────── */
-    .pillars-bar {
-      background: var(--white);
-      display: flex;
-      align-items: stretch;
-      border-top: 1px solid var(--sage-light);
-      border-bottom: 1px solid var(--sage-light);
-    }
-    @media (max-width: 600px) { .pillars-bar { flex-direction: column; } }
-
-    .pillar {
-      flex: 1;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      border-right: 1px solid var(--sage-light);
-    }
-    .pillar:last-child { border-right: none; }
-
-    .pillar-icon {
-      width: 48px; height: 48px;
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero { padding: 5.2rem .75rem 0; }
+    .hero-panel {
+      position: relative; overflow: hidden;
+      max-width: 1400px; margin: 0 auto;
+      border-radius: var(--radius-lg);
       background: var(--grad);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1rem;
+      min-height: min(860px, calc(100svh - 6rem));
+      display: grid; align-items: center;
     }
-    .pillar-icon svg { width: 22px; height: 22px; stroke: var(--white); fill: none; stroke-width: 1.8; }
+    .hero-grid {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(2rem, 5vw, 5rem); align-items: center;
+      padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 6vw, 5.5rem);
+    }
+    .hero .eyebrow {
+      display: inline-flex; align-items: center; gap: .55rem;
+      background: rgba(255,255,255,.5); border: 1px solid rgba(255,255,255,.7);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      color: var(--purple); font-size: .78rem; font-weight: 500;
+      padding: .4rem .9rem .4rem .45rem; border-radius: 100px; margin-bottom: 1.6rem;
+    }
+    .pulse { width: 22px; height: 22px; border-radius: 50%; background: var(--white); display: grid; place-items: center; }
+    .pulse::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--sage-dark); box-shadow: 0 0 0 0 rgba(107,140,125,.5); animation: pulse 2.2s infinite; }
+    @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(107,140,125,0); } 100% { box-shadow: 0 0 0 0 rgba(107,140,125,0); } }
+    .hero h1 { color: var(--purple); margin-bottom: 1.4rem; max-width: 13ch; }
+    .hero h1 .word { display: inline-block; opacity: 0; filter: blur(8px); transform: translateY(14px); animation: wordIn .9s var(--ease) forwards; }
+    @keyframes wordIn { to { opacity: 1; filter: blur(0); transform: none; } }
+    .hero-sub { color: #3f3d52; font-size: clamp(1.02rem, 1.4vw, 1.15rem); max-width: 30rem; margin-bottom: 2.2rem; font-weight: 400; }
+    .hero-assure { display: flex; flex-wrap: wrap; gap: .4rem 1.3rem; margin-top: 1.8rem; }
+    .hero-assure span { display: inline-flex; align-items: center; gap: .45rem; font-size: .84rem; font-weight: 400; color: var(--purple); }
+    .hero-assure .i { width: 16px; height: 16px; color: var(--sage-dark); stroke-width: 2.2; }
 
-    .pillar h3 { font-size: 0.7rem; font-family: 'Poppins', sans-serif; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--charcoal); margin-bottom: 0.5rem; }
-    .pillar p { font-size: 0.85rem; }
+    /* círculos flotantes del sistema visual (12–15% opacidad) */
+    .orbs { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+    .orb { position: absolute; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.6); background: rgba(255,255,255,.13); animation: float 14s ease-in-out infinite; }
+    .orb.o1 { width: 340px; height: 340px; top: -90px; right: -60px; }
+    .orb.o2 { width: 200px; height: 200px; bottom: -50px; left: 38%; animation-delay: -4s; border-color: rgba(61,56,96,.12); background: rgba(61,56,96,.04); }
+    .orb.o3 { width: 120px; height: 120px; top: 18%; left: -30px; animation-delay: -8s; }
+    .orb.o4 { width: 64px; height: 64px; bottom: 16%; right: 44%; animation-delay: -2s; }
+    @keyframes float { 0%,100% { transform: translate(0,0); } 50% { transform: translate(10px,-16px); } }
 
-    /* ─── PSYCHOLOGIST TRUST ───────────────────────────────────── */
-    .trust-section {
+    /* ─── PHONE / WHATSAPP MOCK ─────────────────────────────────── */
+    .phone {
+      position: relative; justify-self: center;
+      width: min(100%, 360px);
+      background: #F4F1EC;
+      border-radius: 38px; padding: 10px;
+      box-shadow: 0 30px 80px rgba(61,56,96,.28), 0 0 0 1px rgba(255,255,255,.6) inset;
       background: var(--white);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(3rem, 6vw, 6rem);
-      align-items: center;
+      transform: rotate(1.5deg);
+      transition: transform .6s var(--ease);
     }
-    @media (max-width: 768px) { .trust-section { grid-template-columns: 1fr; } }
+    .phone:hover { transform: rotate(0deg) translateY(-4px); }
+    .phone-screen { border-radius: 30px; overflow: hidden; background: #EFEBE4; }
+    .chat-top { display: flex; align-items: center; gap: .7rem; padding: 1.05rem 1rem .85rem; background: var(--purple); color: var(--white); }
+    .chat-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--grad); display: grid; place-items: center; flex-shrink: 0; }
+    .chat-avatar .logo-cluster { transform: scale(.72); }
+    .chat-avatar .logo-cluster .c1 { border-color: var(--white); }
+    .chat-avatar .logo-cluster .c2 { border-color: var(--white); }
+    .chat-avatar .logo-cluster .c3 { border-color: rgba(255,255,255,.7); }
+    .chat-name { font-size: .92rem; font-weight: 500; line-height: 1.2; }
+    .chat-status { font-size: .72rem; opacity: .7; line-height: 1.2; }
+    .chat-body {
+      height: 420px; padding: 1rem .8rem 1.6rem; display: flex; flex-direction: column; gap: .5rem; justify-content: flex-end; overflow: hidden;
+      background-color: #EFEBE4;
+      background-image: radial-gradient(rgba(61,56,96,.05) 1px, transparent 1px);
+      background-size: 14px 14px;
+    }
+    .msg {
+      max-width: 84%; padding: .55rem .8rem .45rem; border-radius: 14px;
+      font-size: .86rem; line-height: 1.45; color: var(--charcoal); font-weight: 400;
+      box-shadow: 0 1px 1px rgba(0,0,0,.06);
+      opacity: 0; transform: translateY(10px) scale(.97); transform-origin: bottom left;
+      transition: opacity .45s var(--ease), transform .45s var(--ease);
+    }
+    .msg.show { opacity: 1; transform: none; }
+    .msg.in  { align-self: flex-start; background: var(--white); border-top-left-radius: 4px; }
+    .msg.out { align-self: flex-end; background: #E2DEF3; border-top-right-radius: 4px; transform-origin: bottom right; }
+    .msg time { display: block; text-align: right; font-size: .62rem; color: #8b8a96; margin-top: 2px; }
+    .msg .who { display: block; font-size: .68rem; font-weight: 600; color: var(--sage-dark); margin-bottom: 1px; }
+    .typing { align-self: flex-start; background: var(--white); border-radius: 14px; border-top-left-radius: 4px; padding: .7rem .85rem; display: none; gap: 4px; }
+    .typing.show { display: inline-flex; }
+    .typing i { width: 6px; height: 6px; border-radius: 50%; background: #a7a5b5; animation: blink 1.2s infinite; }
+    .typing i:nth-child(2) { animation-delay: .15s; } .typing i:nth-child(3) { animation-delay: .3s; }
+    @keyframes blink { 0%,60%,100% { opacity: .3; transform: none; } 30% { opacity: 1; transform: translateY(-3px); } }
+    .chat-input { display: flex; align-items: center; gap: .5rem; padding: .6rem .7rem .8rem; background: #EFEBE4; }
+    .chat-input div { flex: 1; background: var(--white); border-radius: 100px; padding: .55rem .9rem; font-size: .8rem; color: #9a99a6; }
+    .chat-input span { width: 38px; height: 38px; border-radius: 50%; background: var(--lav-deep); display: grid; place-items: center; color: var(--white); }
+    .phone-note { position: absolute; left: -2.2rem; bottom: -1.4rem; background: var(--white); border-radius: 16px; padding: .7rem .9rem; box-shadow: var(--shadow); display: flex; gap: .6rem; align-items: center; font-size: .78rem; font-weight: 400; color: var(--purple); max-width: 220px; line-height: 1.35; transform: rotate(-1.5deg); }
+    .phone-note .dot-ic { width: 32px; height: 32px; border-radius: 50%; background: var(--sage-light); color: var(--sage-dark); display: grid; place-items: center; flex-shrink: 0; }
+    .phone-note .i { width: 16px; height: 16px; }
 
-    .trust-image-block {
-      border-radius: 24px;
-      overflow: hidden;
-      aspect-ratio: 1;
-      background: var(--sage-light);
-    }
-    .trust-image-block img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .trust-image-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(160deg, #9AABA0, #C4C0DC);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-    .trust-image-placeholder span {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-    }
-
-    .trust-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 2rem;
-    }
-
-    /* ─── CLOSING CTA ──────────────────────────────────────────── */
-    .closing {
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: clamp(5rem, 10vw, 10rem) clamp(1.5rem, 5vw, 4rem);
-      background: var(--grad);
-    }
-    .closing h2 {
-      color: var(--white);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      max-width: 640px;
-      margin: 0 auto 1rem;
-    }
-    .closing p {
-      color: rgba(255,255,255,0.82);
-      max-width: 440px;
-      margin: 0 auto 2.5rem;
-      font-size: 1rem;
-    }
-    .closing .btn-primary { margin-right: 0.75rem; }
-
-    /* ─── FOOTER ───────────────────────────────────────────────── */
-    footer {
-      background: var(--charcoal);
-      padding: 3rem clamp(1.5rem, 5vw, 4rem);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    .footer-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      color: var(--white);
-      text-decoration: none;
-    }
-    .footer-logo span {
-      font-size: 0.55rem;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      display: block;
-      margin-top: 3px;
-    }
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      align-items: flex-end;
-    }
-    .footer-links a {
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-links a:hover { color: rgba(255,255,255,0.75); }
-    .footer-copy {
-      width: 100%;
-      font-size: 0.68rem;
-      color: rgba(255,255,255,0.25);
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.08);
+    @media (max-width: 920px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero h1 { max-width: 15ch; }
+      .phone { transform: none; }
+      .phone-note { left: auto; right: -.5rem; bottom: -1rem; }
     }
 
-    /* ─── FADE-UP ANIMATION ────────────────────────────────────── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+    /* ─── MARQUEE (estilo Skiper UI) ────────────────────────────── */
+    .feel { padding: clamp(3.5rem, 7vw, 5.5rem) 0 1rem; overflow: hidden; }
+    .feel-head { text-align: center; margin-bottom: 1.8rem; }
+    .feel-head p { font-size: .95rem; }
+    .marquee { display: flex; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+    .marquee + .marquee { margin-top: .8rem; }
+    .marquee-track { display: flex; gap: .8rem; padding-right: .8rem; flex-shrink: 0; animation: marquee 48s linear infinite; }
+    .marquee.rev .marquee-track { animation-direction: reverse; animation-duration: 56s; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee { to { transform: translateX(-100%); } }
+    .chip {
+      flex-shrink: 0; display: inline-flex; align-items: center; gap: .55rem;
+      font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.15rem; color: var(--purple);
+      padding: .7rem 1.3rem; border-radius: 100px; background: var(--white); border: 1px solid rgba(184,180,212,.55);
+      white-space: nowrap;
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .fade-up.delay-1 { transition-delay: 0.1s; }
-    .fade-up.delay-2 { transition-delay: 0.2s; }
-    .fade-up.delay-3 { transition-delay: 0.3s; }
+    .chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--lav); }
+    .marquee.rev .chip { background: var(--lav-xlight); border-color: transparent; }
+    .marquee.rev .chip::before { background: var(--sage); }
 
-    /* ─── MOBILE ───────────────────────────────────────────────── */
-    @media (max-width: 480px) {
+    /* ─── QUÉ ES (texto + bento) ───────────────────────────────── */
+    .what { display: grid; grid-template-columns: .95fr 1.05fr; gap: clamp(2.5rem, 6vw, 5.5rem); align-items: center; }
+    .what-copy p + p { margin-top: 1.1rem; }
+    .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: .9rem; }
+    .tile {
+      position: relative; overflow: hidden;
+      background: var(--white); border-radius: var(--radius); padding: 1.6rem;
+      box-shadow: var(--shadow-sm); border: 1px solid rgba(184,180,212,.3);
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+    }
+    .tile:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .tile h3 { margin: 1rem 0 .4rem; color: var(--purple); }
+    .tile p { font-size: .9rem; line-height: 1.6; }
+    .tile.wide { grid-column: span 4; }
+    .tile.narrow { grid-column: span 2; }
+    .tile.half { grid-column: span 3; }
+    .tile.grad { background: var(--grad); border: 0; }
+    .tile.grad h3 { color: var(--purple); }
+    .tile.grad p { color: #3f3d52; }
+    .tile.dark { background: var(--grad-dark); border: 0; }
+    .tile.dark h3 { color: var(--white); }
+    .tile.dark p { color: rgba(255,255,255,.75); }
+    .ic-cluster { position: relative; width: 56px; height: 46px; }
+    .ic-cluster b { position: absolute; border-radius: 50%; display: grid; place-items: center; }
+    .ic-cluster .b1 { width: 40px; height: 40px; top: 0; left: 0; background: rgba(184,180,212,.25); border: 1.5px solid var(--lav); color: var(--lav-deep); }
+    .ic-cluster .b2 { width: 22px; height: 22px; top: 22px; left: 30px; background: rgba(143,168,154,.2); border: 1.5px solid var(--sage); }
+    .ic-cluster .b1 .i { width: 18px; height: 18px; }
+    .tile.dark .ic-cluster .b1 { color: var(--white); border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.1); }
+    .tile.grad .ic-cluster .b1 { color: var(--purple); border-color: rgba(255,255,255,.8); background: rgba(255,255,255,.35); }
+    .tile .big { font-family: 'DM Serif Display', serif; font-size: clamp(2.2rem, 4vw, 3rem); line-height: 1; color: var(--white); }
+    .tile .ghost-orb { position: absolute; width: 160px; height: 160px; right: -50px; bottom: -60px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.35); background: rgba(255,255,255,.08); }
+    .pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
+    .pill { padding: .45rem 1rem; border-radius: 100px; background: var(--lav-xlight); font-size: .82rem; font-weight: 500; color: var(--lav-deep); }
+    @media (max-width: 920px) { .what { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .tile.wide, .tile.narrow, .tile.half { grid-column: span 6; } }
 
-      .nav-logo span { display: none; }
-      .nav-cta { font-size: 0.72rem; padding: 0.48rem 1rem; }
+    /* ─── TEXT REVEAL (scroll) ─────────────────────────────────── */
+    .reveal-quote { padding: clamp(4rem, 9vw, 7rem) 0; }
+    .reveal-quote blockquote {
+      font-family: 'DM Serif Display', serif; font-style: italic;
+      font-size: clamp(1.9rem, 4.6vw, 3.6rem); line-height: 1.2; text-align: center;
+      max-width: 22ch; margin: 0 auto; color: var(--purple);
+    }
+    .reveal-quote blockquote .w { opacity: .16; transition: opacity .25s linear; }
+    .reveal-quote blockquote .w.on { opacity: 1; }
+    .reveal-quote .ic-row { display: flex; justify-content: center; margin-bottom: 1.8rem; }
 
-      .hero-content { padding: 1.5rem; padding-top: 80px; padding-bottom: 5rem; }
-      .hero-content h1 { font-size: 2rem; }
-      .hero-content p  { font-size: 0.9rem; }
-      .hero-eyebrow { font-size: 0.65rem; }
-      .btn-primary, .btn-secondary {
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-left: 0;
-        margin-bottom: 0.6rem;
-      }
+    /* ─── CONTEXTOS ─────────────────────────────────────────────── */
+    .contexts { display: grid; grid-template-columns: repeat(4, 1fr); gap: .9rem; }
+    .ctx {
+      position: relative; background: var(--white); border-radius: var(--radius); padding: 1.5rem 1.4rem 1.6rem;
+      border: 1px solid rgba(184,180,212,.3); overflow: hidden;
+      transition: border-color .3s, transform .45s var(--ease), box-shadow .45s var(--ease);
+    }
+    .ctx::before { content: ""; position: absolute; inset: 0; background: var(--grad); opacity: 0; transition: opacity .45s var(--ease); z-index: 0; }
+    .ctx > * { position: relative; z-index: 1; }
+    .ctx:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: transparent; }
+    .ctx:hover::before { opacity: .22; }
+    .ctx .num { font-family: 'DM Serif Display', serif; font-size: .95rem; color: var(--lav); margin-bottom: 1.4rem; display: block; }
+    .ctx h3 { font-size: 1.15rem; color: var(--purple); margin-bottom: .45rem; }
+    .ctx p { font-size: .88rem; line-height: 1.6; }
+    .contexts-foot { margin-top: 2rem; text-align: center; font-size: .95rem; }
+    .contexts-foot a { color: var(--lav-deep); font-weight: 500; text-underline-offset: 4px; }
+    @media (max-width: 980px) { .contexts { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .contexts { grid-template-columns: 1fr; } }
 
-      .slide-dots { left: 1.5rem; bottom: 1.8rem; }
+    /* ─── PASOS — tarjetas apiladas sticky (estilo Skiper UI) ───── */
+    .steps-wrap { background: var(--white); border-radius: var(--radius-lg); margin: 0 .75rem; }
+    .steps-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+    .steps-intro { position: sticky; top: 7rem; }
+    .steps-intro p { margin-bottom: 2rem; }
+    .stack { display: grid; gap: 1.5rem; }
+    .step {
+      position: sticky; top: calc(6.5rem + var(--i) * 1.4rem);
+      border-radius: var(--radius-lg); padding: clamp(1.8rem, 3.5vw, 2.6rem);
+      min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; gap: 2rem;
+      box-shadow: 0 -8px 30px rgba(61,56,96,.08);
+      transform-origin: top center;
+    }
+    .step:nth-child(1) { background: var(--lav-xlight); }
+    .step:nth-child(2) { background: var(--grad); }
+    .step:nth-child(3) { background: var(--grad-dark); }
+    .step-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .step-num { font-family: 'DM Serif Display', serif; font-size: clamp(3.5rem, 7vw, 5.5rem); line-height: .85; color: rgba(83,74,183,.25); }
+    .step:nth-child(2) .step-num { color: rgba(255,255,255,.6); }
+    .step:nth-child(3) .step-num { color: rgba(255,255,255,.25); }
+    .step-badge { display: inline-flex; align-items: center; gap: .4rem; font-size: .75rem; font-weight: 500; padding: .4rem .8rem; border-radius: 100px; background: rgba(255,255,255,.7); color: var(--purple); }
+    .step-badge .i { width: 15px; height: 15px; }
+    .step h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); color: var(--purple); margin-bottom: .6rem; }
+    .step p { color: #4a4860; max-width: 34rem; }
+    .step:nth-child(3) h3 { color: var(--white); }
+    .step:nth-child(3) p { color: rgba(255,255,255,.78); }
+    .step:nth-child(3) .step-badge { background: rgba(255,255,255,.12); color: var(--white); }
+    @media (max-width: 920px) {
+      .steps-layout { grid-template-columns: 1fr; }
+      .steps-intro { position: static; }
+      .step { top: calc(5.5rem + var(--i) * 1rem); min-height: 260px; }
+    }
 
-      .badge-bar { gap: 0.9rem; padding: 1.2rem; justify-content: flex-start; }
-      .badge { font-size: 0.65rem; }
+    /* ─── ROLES (Dani + psicólogo) ─────────────────────────────── */
+    .roles { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .role { border-radius: var(--radius-lg); padding: clamp(1.8rem, 3.5vw, 2.6rem); position: relative; overflow: hidden; }
+    .role.ai { background: var(--white); border: 1px solid rgba(184,180,212,.4); }
+    .role.human { background: var(--grad-dark); color: var(--white); }
+    .role-tag { display: inline-flex; align-items: center; gap: .5rem; font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: .4rem .8rem; border-radius: 100px; margin-bottom: 1.3rem; }
+    .role.ai .role-tag { background: var(--lav-xlight); color: var(--lav-deep); }
+    .role.human .role-tag { background: rgba(255,255,255,.12); color: var(--white); }
+    .role h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-bottom: .7rem; color: var(--purple); }
+    .role.human h3 { color: var(--white); }
+    .role.human p { color: rgba(255,255,255,.75); }
+    .role ul { list-style: none; margin-top: 1.5rem; display: grid; gap: .7rem; }
+    .role li { display: flex; gap: .7rem; align-items: flex-start; font-size: .95rem; color: var(--charcoal); font-weight: 400; }
+    .role.human li { color: rgba(255,255,255,.9); }
+    .role li .i { width: 18px; height: 18px; margin-top: .2rem; color: var(--sage-dark); stroke-width: 2.2; }
+    .role.human li .i { color: var(--lav-light); }
+    .role .ghost-orb { position: absolute; width: 220px; height: 220px; right: -70px; top: -70px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.14); background: rgba(255,255,255,.04); }
+    .trust-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-top: 2.2rem; }
+    @media (max-width: 820px) { .roles { grid-template-columns: 1fr; } }
 
-      .affirmation { padding: 2.5rem 1.25rem; }
-      .affirmation blockquote { font-size: 1.1rem; }
+    /* ─── PRECIO ────────────────────────────────────────────────── */
+    .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+    .price-card {
+      position: relative; border-radius: var(--radius-lg); padding: 2px; background: var(--grad);
+      box-shadow: var(--shadow);
+    }
+    .price-inner { background: var(--white); border-radius: calc(var(--radius-lg) - 2px); padding: clamp(1.8rem, 4vw, 2.8rem); position: relative; overflow: hidden; }
+    .price-kicker { font-size: .72rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--sage-dark); }
+    .price-amount { font-family: 'DM Serif Display', serif; font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1; color: var(--purple); margin: .9rem 0 .3rem; }
+    .price-amount small { font-family: 'Poppins', sans-serif; font-size: .95rem; color: var(--mid); font-weight: 400; margin-left: .3rem; }
+    .price-amount.ask { font-size: clamp(1.7rem, 3.6vw, 2.3rem); line-height: 1.2; }
+    .price-note { font-size: .9rem; margin-bottom: 1.6rem; }
+    .price-list { list-style: none; display: grid; gap: .75rem; padding: 1.4rem 0 1.8rem; border-top: 1px solid var(--lav-xlight); }
+    .price-list li { display: flex; gap: .7rem; align-items: center; font-size: .95rem; font-weight: 400; }
+    .price-list .tick { width: 24px; height: 24px; border-radius: 50%; background: var(--sage-light); color: var(--sage-dark); display: grid; place-items: center; flex-shrink: 0; }
+    .price-list .tick .i { width: 14px; height: 14px; stroke-width: 2.6; }
+    .price-card .btn { width: 100%; }
+    @media (max-width: 860px) { .price-grid { grid-template-columns: 1fr; } }
 
-      .section { padding: 3rem 1.25rem; }
+    /* ─── FAQ (accordion) ───────────────────────────────────────── */
+    .faq { max-width: 820px; margin: 0 auto; display: grid; gap: .7rem; }
+    .qa { background: var(--white); border-radius: 20px; border: 1px solid rgba(184,180,212,.35); transition: box-shadow .3s, border-color .3s; }
+    .qa.open { box-shadow: var(--shadow-sm); border-color: var(--lav); }
+    .qa button {
+      width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      padding: 1.25rem 1.4rem; background: none; border: 0; cursor: pointer; text-align: left;
+      font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 500; color: var(--purple);
+    }
+    .qa .plus { width: 32px; height: 32px; border-radius: 50%; background: var(--lav-xlight); color: var(--lav-deep); display: grid; place-items: center; flex-shrink: 0; transition: transform .4s var(--ease), background .3s; }
+    .qa.open .plus { transform: rotate(45deg); background: var(--lav-deep); color: var(--white); }
+    .qa .plus .i { width: 16px; height: 16px; stroke-width: 2.2; }
+    .qa-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s var(--ease); }
+    .qa.open .qa-body { grid-template-rows: 1fr; }
+    .qa-body > div { overflow: hidden; }
+    .qa-body p { padding: 0 1.4rem 1.4rem; font-size: .95rem; }
 
-      .what-image-block { aspect-ratio: 3/2; border-radius: 16px; }
+    /* ─── AVISO DE CRISIS ───────────────────────────────────────── */
+    .care-note {
+      max-width: 820px; margin: 2.5rem auto 0; display: flex; gap: 1rem; align-items: flex-start;
+      background: var(--sage-light); border-radius: 20px; padding: 1.3rem 1.4rem;
+    }
+    .care-note .i { color: var(--sage-dark); width: 22px; height: 22px; margin-top: .15rem; }
+    .care-note p { color: #3f4d46; font-size: .92rem; }
+    .care-note strong { font-weight: 600; color: #2f3d36; }
 
-      .steps-intro { margin-bottom: 2rem; }
-      .step-card { padding: 2rem 1.5rem; }
-      .step-num { font-size: 2.4rem; }
+    /* ─── CIERRE ────────────────────────────────────────────────── */
+    .closing { padding: 0 .75rem clamp(1rem, 3vw, 2rem); }
+    .closing-panel {
+      position: relative; overflow: hidden; max-width: 1400px; margin: 0 auto;
+      border-radius: var(--radius-lg); background: var(--grad-dark); color: var(--white);
+      padding: clamp(4rem, 10vw, 8rem) var(--gutter); text-align: center;
+    }
+    .closing-panel h2 { color: var(--white); font-size: clamp(2.2rem, 5vw, 3.8rem); max-width: 16ch; margin: 0 auto 1.2rem; }
+    .closing-panel p { color: rgba(255,255,255,.75); max-width: 30rem; margin: 0 auto 2.4rem; font-size: 1.05rem; }
+    .closing-panel .btn-row { justify-content: center; }
+    .closing-panel .small { margin: 1.4rem auto 0; font-size: .85rem; color: rgba(255,255,255,.55); }
+    .closing-panel .orb { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.04); }
 
-      .pillar { border-right: none; border-bottom: 1px solid var(--sage-light); padding: 2rem 1.25rem; }
-      .pillar:last-child { border-bottom: none; }
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    footer { padding: 3rem 0 6rem; }
+    .foot { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
+    .foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; list-style: none; }
+    .foot-links a { font-size: .85rem; color: var(--mid); text-decoration: none; }
+    .foot-links a:hover { color: var(--lav-deep); }
+    .foot-copy { width: 100%; padding-top: 1.6rem; border-top: 1px solid rgba(184,180,212,.35); font-size: .8rem; color: #8b8a96; }
 
-      .trust-image-block { aspect-ratio: 3/2; border-radius: 16px; }
+    /* ─── WHATSAPP FLOTANTE ─────────────────────────────────────── */
+    .wa-float {
+      position: fixed; right: 1.1rem; bottom: 1.1rem; z-index: 60;
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--lav-deep); color: var(--white); text-decoration: none;
+      padding: .85rem 1.25rem .85rem .95rem; border-radius: 100px;
+      font-size: .9rem; font-weight: 500;
+      box-shadow: 0 12px 32px rgba(83,74,183,.38);
+      opacity: 0; transform: translateY(20px) scale(.95); pointer-events: none;
+      transition: opacity .4s var(--ease), transform .4s var(--ease), background .2s;
+    }
+    .wa-float.show { opacity: 1; transform: none; pointer-events: auto; }
+    .wa-float:hover { background: var(--lav-deeper); }
+    .wa-float .i { width: 22px; height: 22px; }
+    @media (max-width: 560px) {
+      .wa-float { left: 1rem; right: 1rem; justify-content: center; padding: 1rem; }
+    }
 
-      .closing { padding: 4rem 1.25rem; }
-      .closing h2 { font-size: 1.8rem; }
-      .closing .btn-primary,
-      .closing .btn-secondary {
-        display: block;
-        width: 100%;
-        text-align: center;
-        margin-left: 0;
-        margin-bottom: 0.6rem;
-      }
+    /* ─── ENTRADA AL HACER SCROLL ───────────────────────────────── */
+    .rv { opacity: 0; transform: translateY(26px); filter: blur(6px); transition: opacity .8s var(--ease), transform .8s var(--ease), filter .8s var(--ease); }
+    .rv.in { opacity: 1; transform: none; filter: none; }
+    .d1 { transition-delay: .08s; } .d2 { transition-delay: .16s; } .d3 { transition-delay: .24s; } .d4 { transition-delay: .32s; }
 
-      footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.25rem; }
-      .footer-links { align-items: flex-start; }
+    /* ─── MÓVIL ─────────────────────────────────────────────────── */
+    @media (max-width: 560px) {
+      .hero { padding: 4.6rem .5rem 0; }
+      .hero-panel { border-radius: 26px; }
+      .hero-grid { padding: 2.4rem 1.25rem 3rem; }
+      .btn-row .btn { width: 100%; }
+      .nav .btn-sm span { display: none; }
+      .nav .btn-sm { padding: .6rem; }
+      .chat-body { height: 340px; }
+      .phone-note { display: none; }
+      .steps-wrap { margin: 0 .5rem; border-radius: 26px; }
+      .closing { padding: 0 .5rem 1rem; }
+      .closing-panel { border-radius: 26px; }
+      .chip { font-size: 1rem; padding: .6rem 1.1rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .fade-up { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+      .rv { opacity: 1; transform: none; filter: none; }
+      .hero h1 .word { opacity: 1; filter: none; transform: none; }
+      .reveal-quote blockquote .w { opacity: 1; }
+      .marquee-track { animation: none; }
+      .marquee { overflow-x: auto; }
     }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════ NAV ═══════════════════ -->
-<nav>
-  <a href="#" class="nav-logo">
-    claritia
-    <span>Terapia Clínica Online</span>
-  </a>
-  <a href="#empieza" class="nav-cta">Empieza hoy</a>
-</nav>
+<!-- Iconos (sprite) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24 0 4.55-3.7 8.24-8.23 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29z"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="shield" viewBox="0 0 24 24"><path d="M12 21.5s7.5-3.6 7.5-9.5V5.5L12 2.5 4.5 5.5V12c0 5.9 7.5 9.5 7.5 9.5z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="keyhole" viewBox="0 0 24 24"><circle cx="12" cy="9.5" r="3.5"/><path d="M10.5 12.5L9.5 19h5l-1-6.5"/></symbol>
+  <symbol id="cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="video" viewBox="0 0 24 24"><rect x="2.5" y="6" width="13" height="12" rx="2.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></symbol>
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 20.5s-8-4.6-8-10.4A4.6 4.6 0 0 1 12 7a4.6 4.6 0 0 1 8 3.1c0 5.8-8 10.4-8 10.4z"/></symbol>
+  <symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.9A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14z"/><path d="M5 19l7-7"/></symbol>
+  <symbol id="send" viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></symbol>
+</svg>
 
+<!-- ═══════════════════ NAV ═══════════════════ -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#inicio" class="logo" aria-label="claritia — inicio">
+      <span class="logo-cluster" aria-hidden="true"><span class="c1"></span><span class="c2"></span><span class="c3"></span></span>
+      <span><span class="logo-word">claritia</span><span class="logo-tag">Terapia Clínica Online</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#que-es">Qué es</a></li>
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#precio">Precio</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+    </ul>
+    <a class="btn btn-primary btn-sm" data-wa="general" href="#" aria-label="Escríbenos por WhatsApp">
+      <svg class="i i-wa"><use href="#wa"/></svg><span>Escríbenos</span>
+    </a>
+  </div>
+</header>
+
+<main>
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <section class="hero" id="inicio">
+  <div class="hero-panel">
+    <div class="orbs" aria-hidden="true"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span></div>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow"><span class="pulse" aria-hidden="true"></span>Terapia clínica online · América Latina</span>
+        <h1 data-words>No tienes que tener todo claro para empezar.</h1>
+        <p class="hero-sub">Muchas personas que hoy están en proceso sintieron exactamente lo mismo al inicio. Solo hace falta dar un paso — y puede ser tan pequeño como un mensaje.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" data-wa="general" data-magnetic href="#"><svg class="i i-wa"><use href="#wa"/></svg>Escríbenos por WhatsApp</a>
+          <a class="btn btn-ghost" href="#como-funciona">Cómo funciona</a>
+        </div>
+        <div class="hero-assure">
+          <span><svg class="i"><use href="#check"/></svg>Sin formularios</span>
+          <span><svg class="i"><use href="#check"/></svg>Psicólogos verificados</span>
+          <span><svg class="i"><use href="#check"/></svg>Desde tu casa</span>
+        </div>
+      </div>
 
-  <!-- Background image slideshow -->
-  <div class="hero-slides" aria-hidden="true">
-    <!-- STOCK IMAGE 1: stock-hero-woman-window-latam.jpg
-         Direction: person looking out a window, calm, natural light, introspective — not staged -->
-    <div class="hero-slide active" style="background-color: #9AABA0; background-image: url('images/stock-hero-woman-window-latam.jpg');"></div>
-    <!-- STOCK IMAGE 2: stock-hero-man-couch-phone-latam.jpg
-         Direction: person on a couch, looking at phone/laptop, relaxed home environment -->
-    <div class="hero-slide" style="background-color: #B8B4D4; background-image: url('images/stock-hero-man-couch-phone-latam.jpg');"></div>
-    <!-- STOCK IMAGE 3: stock-hero-outdoor-calm-latam.jpg
-         Direction: person outside, quiet moment, not performing emotion — just present -->
-    <div class="hero-slide" style="background-color: #C4C0DC; background-image: url('images/stock-hero-outdoor-calm-latam.jpg');"></div>
-  </div>
-
-  <!-- Dark overlay for readability -->
-  <div class="hero-overlay"></div>
-
-  <!-- Static copy — one message, always visible -->
-  <div class="hero-content">
-    <p class="hero-eyebrow">Terapia clínica online</p>
-    <h1>No tienes que tener todo claro para empezar.</h1>
-    <p>Muchas personas que hoy están en proceso sintieron exactamente lo mismo al inicio. Solo hace falta dar un paso.</p>
-    <a href="#empieza" class="btn-primary">Empieza hoy</a>
-    <a href="#empieza" class="btn-secondary">Hablar con alguien</a>
-  </div>
-
-  <!-- Dots show which background image is active -->
-  <div class="slide-dots">
-    <button class="dot active" onclick="goToSlide(0)" aria-label="Imagen 1"></button>
-    <button class="dot" onclick="goToSlide(1)" aria-label="Imagen 2"></button>
-    <button class="dot" onclick="goToSlide(2)" aria-label="Imagen 3"></button>
-  </div>
-</section>
-
-
-<!-- ═══════════════════ BADGE BAR ═══════════════════ -->
-<div class="badge-bar">
-  <div class="badge">
-    <div class="badge-icon">
-      <svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
-    </div>
-    Sesiones online
-  </div>
-  <div class="badge">
-    <div class="badge-icon">
-      <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/></svg>
-    </div>
-    Psicólogos verificados
-  </div>
-  <div class="badge">
-    <div class="badge-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
-    Confidencial
-  </div>
-  <div class="badge">
-    <div class="badge-icon">
-      <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-    </div>
-    Precio accesible
-  </div>
-  <div class="badge">
-    <div class="badge-icon">
-      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    </div>
-    Desde casa
-  </div>
-</div>
-
-
-<!-- ═══════════════════ WHAT IS CLARITIA ═══════════════════ -->
-<section class="section what-section" id="que-es">
-  <div class="what-image-block fade-up">
-    <!-- STOCK IMAGE: stock-woman-home-relaxed-latam.jpg
-         Direction: woman at home, natural light, relaxed but pensive — not posing, not performing happiness -->
-    <div class="what-image-placeholder">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <span>stock-woman-home-relaxed-latam.jpg</span>
-    </div>
-  </div>
-
-  <div class="section-body fade-up delay-1">
-    <p class="section-label">Qué es claritia</p>
-    <h2 class="section-title">A veces solo necesitas hablar con alguien de verdad.</h2>
-    <p>No hace falta llegar a un punto límite para buscar apoyo. Si algo te pesa, si tu mente no para, si sientes que cargas con demasiado — eso es suficiente razón para empezar.</p>
-    <p>claritia conecta a personas como tú con psicólogos verificados, de forma completamente online, a un precio que no se convierte en otra preocupación más.</p>
-    <div class="what-pills">
-      <span class="pill">Sin desplazamientos</span>
-      <span class="pill">Sin juicios</span>
-      <span class="pill">Sin listas de espera</span>
-      <span class="pill">Con psicólogos reales</span>
+      <!-- Vista previa de la conversación por WhatsApp -->
+      <div class="phone" aria-label="Ejemplo de cómo empieza una conversación con claritia por WhatsApp" role="img">
+        <div class="phone-screen" aria-hidden="true">
+          <div class="chat-top">
+            <span class="chat-avatar"><span class="logo-cluster"><span class="c1"></span><span class="c2"></span><span class="c3"></span></span></span>
+            <span><span class="chat-name">claritia</span><span class="chat-status" style="display:block">en línea</span></span>
+          </div>
+          <div class="chat-body" id="chat">
+            <div class="msg out">Hola… no sé bien por dónde empezar.<time>21:14</time></div>
+            <div class="msg in"><span class="who">Dani · claritia</span>Hola. Aquí estoy. ¿Cómo te has sentido estos días?<time>21:14</time></div>
+            <div class="msg out">Cansada. Mi mente no para, ni de noche.<time>21:15</time></div>
+            <div class="msg in"><span class="who">Dani · claritia</span>Gracias por contármelo. Te ayudo a encontrar a la psicóloga indicada y un horario que te funcione.<time>21:15</time></div>
+            <div class="typing" id="typing"><i></i><i></i><i></i></div>
+          </div>
+          <div class="chat-input"><div>Escribe un mensaje</div><span><svg class="i" style="width:16px;height:16px"><use href="#send"/></svg></span></div>
+        </div>
+        <div class="phone-note" aria-hidden="true">
+          <span class="dot-ic"><svg class="i"><use href="#user"/></svg></span>
+          La terapia siempre la conduce un psicólogo real.
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 
-<!-- ═══════════════════ AFFIRMATION 1 ═══════════════════ -->
-<div class="affirmation sage">
-  <blockquote>Sentirte abrumado no significa que algo está mal contigo. Significa que eres humano.</blockquote>
-</div>
-
-
-<!-- ═══════════════════ PILLARS ═══════════════════ -->
-<div class="pillars-bar">
-  <div class="pillar fade-up">
-    <div class="pillar-icon">
-      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    </div>
-    <h3>Flexible</h3>
-    <p>Sesiones en el horario que se adapte a tu vida, no al revés.</p>
+<!-- ═══════════════════ LO QUE SE SIENTE (marquee) ═══════════════════ -->
+<section class="feel" aria-labelledby="feel-title">
+  <div class="wrap feel-head">
+    <p id="feel-title">Cosas que muchas personas sienten antes de escribirnos</p>
   </div>
-  <div class="pillar fade-up delay-1">
-    <div class="pillar-icon">
-      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="chip">Mi mente no para</span><span class="chip">Estoy cansado todo el tiempo</span><span class="chip">No sé con quién hablar</span><span class="chip">Me cuesta dormir</span><span class="chip">Siento que debería poder solo</span><span class="chip">Todo me pesa más que antes</span>
     </div>
-    <h3>Privado</h3>
-    <p>Lo que compartes aquí no sale de aquí. Confidencialidad total.</p>
+    <div class="marquee-track">
+      <span class="chip">Mi mente no para</span><span class="chip">Estoy cansado todo el tiempo</span><span class="chip">No sé con quién hablar</span><span class="chip">Me cuesta dormir</span><span class="chip">Siento que debería poder solo</span><span class="chip">Todo me pesa más que antes</span>
+    </div>
   </div>
-  <div class="pillar fade-up delay-2">
-    <div class="pillar-icon">
-      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+  <div class="marquee rev" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="chip">“Tampoco es para tanto”… ¿o sí?</span><span class="chip">No logro desconectarme del trabajo</span><span class="chip">Necesito hablar con alguien</span><span class="chip">Reviso todo dos veces</span><span class="chip">Me siento desconectada</span><span class="chip">Llevo mucho tiempo con esto</span>
     </div>
-    <h3>Humano</h3>
-    <p>Psicólogos reales. Nada de respuestas automáticas, nada de protocolos fríos.</p>
-  </div>
-</div>
-
-
-<!-- ═══════════════════ 3 STEPS ═══════════════════ -->
-<section class="section steps-section" id="como-funciona">
-  <div class="steps-intro fade-up">
-    <p class="section-label">Cómo funciona</p>
-    <h2 class="section-title">El primer paso es más fácil de lo que crees.</h2>
-    <p>No necesitas prepararte, ni saber exactamente qué decir. Solo cuéntanos cómo te sientes — de ahí en adelante, nosotros te acompañamos.</p>
-  </div>
-
-  <div class="steps-grid">
-    <div class="step-card fade-up">
-      <div class="step-num">1</div>
-      <h3>Cuéntanos qué estás viviendo</h3>
-      <p>Sin formularios interminables. Dinos cómo te sientes y te orientamos hacia el psicólogo que mejor puede acompañarte.</p>
-    </div>
-    <div class="step-card fade-up delay-1">
-      <div class="step-num">2</div>
-      <h3>Elige cuándo conectarte</h3>
-      <p>Selecciona el día y hora que funcione para ti. Si algo cambia, puedes reagendar sin complicaciones.</p>
-    </div>
-    <div class="step-card fade-up delay-2">
-      <div class="step-num">3</div>
-      <h3>Habla desde donde estés</h3>
-      <p>Tu primera sesión sucede desde casa, desde la oficina, desde donde quieras. El proceso ya comenzó.</p>
+    <div class="marquee-track">
+      <span class="chip">“Tampoco es para tanto”… ¿o sí?</span><span class="chip">No logro desconectarme del trabajo</span><span class="chip">Necesito hablar con alguien</span><span class="chip">Reviso todo dos veces</span><span class="chip">Me siento desconectada</span><span class="chip">Llevo mucho tiempo con esto</span>
     </div>
   </div>
 </section>
 
 
-<!-- ═══════════════════ TRUST / PSYCHOLOGISTS ═══════════════════ -->
-<section class="section trust-section" id="psicologos">
-  <div class="section-body fade-up">
-    <p class="section-label">Con quién vas a hablar</p>
-    <h2 class="section-title">Personas que eligieron esto porque les importa.</h2>
-    <p>Cada psicólogo en claritia pasó por un proceso de selección riguroso. Verificamos su formación, su experiencia y su capacidad para ofrecer una atención cercana y basada en evidencia.</p>
-    <p>Lo que no hacemos es poner un bot donde debería haber una persona. La terapia la conduce un profesional real, en cada sesión.</p>
-    <div class="trust-tags">
+<!-- ═══════════════════ QUÉ ES CLARITIA ═══════════════════ -->
+<section class="section" id="que-es">
+  <div class="wrap what">
+    <div class="what-copy rv">
+      <span class="label">Qué es claritia</span>
+      <h2 style="margin-bottom:1.3rem">A veces solo necesitas hablar con alguien de verdad.</h2>
+      <p>No hace falta llegar a un punto límite para buscar apoyo. Si algo te pesa, si tu mente no para, si sientes que cargas con demasiado — eso es suficiente razón para empezar.</p>
+      <p>claritia conecta a personas como tú con psicólogos verificados, de forma completamente online, a un precio que no se convierte en otra preocupación más.</p>
+      <div class="pills">
+        <span class="pill">Sin desplazamientos</span>
+        <span class="pill">Sin juicios</span>
+        <span class="pill">Sin listas de espera</span>
+        <span class="pill">Con psicólogos reales</span>
+      </div>
+    </div>
+
+    <div class="bento">
+      <article class="tile wide grad rv d1">
+        <div class="ic-cluster"><b class="b1"><svg class="i"><use href="#home"/></svg></b><b class="b2"></b></div>
+        <h3>Desde donde estés</h3>
+        <p>Tu sesión sucede por videollamada — desde casa, la oficina o donde te sientas cómodo. Sin tráfico, sin salas de espera.</p>
+      </article>
+      <article class="tile narrow dark rv d2">
+        <span class="ghost-orb"></span>
+        <div class="ic-cluster"><b class="b1"><svg class="i"><use href="#cal"/></svg></b><b class="b2"></b></div>
+        <h3>En tu horario</h3>
+        <p>Se adapta a tu vida, no al revés.</p>
+      </article>
+      <article class="tile half rv d3">
+        <div class="ic-cluster"><b class="b1"><svg class="i"><use href="#keyhole"/></svg></b><b class="b2"></b></div>
+        <h3>Privado</h3>
+        <p>Tus sesiones son entre tú y tu psicólogo, con la confidencialidad propia de la práctica profesional.</p>
+      </article>
+      <article class="tile half rv d4">
+        <div class="ic-cluster"><b class="b1"><svg class="i"><use href="#heart"/></svg></b><b class="b2"></b></div>
+        <h3>Humano</h3>
+        <p>Psicólogos reales. Nada de respuestas de plantilla, nada de protocolos fríos.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ FRASE (text reveal) ═══════════════════ -->
+<section class="reveal-quote" aria-label="Frase">
+  <div class="wrap">
+    <div class="ic-row" aria-hidden="true">
+      <span class="logo-cluster" style="transform:scale(1.4)"><span class="c1"></span><span class="c2"></span><span class="c3"></span></span>
+    </div>
+    <blockquote id="reveal">Sentirte abrumado no significa que algo está mal contigo. Significa que eres humano.</blockquote>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ CONTEXTOS ═══════════════════ -->
+<section class="section" id="acompanamos" style="padding-top:clamp(2rem,5vw,4rem)">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="label">Lo que acompañamos</span>
+      <h2>No hablamos de etiquetas. Hablamos de lo que estás viviendo.</h2>
+      <p>Si te reconoces en alguna de estas experiencias — o en ninguna, pero algo no se siente bien — puedes escribirnos.</p>
+    </div>
+    <div class="contexts">
+      <article class="ctx rv"><span class="num">01</span><h3>Ansiedad</h3><p>La mente que no para. Dificultad para descansar. Revisar todo dos veces.</p></article>
+      <article class="ctx rv d1"><span class="num">02</span><h3>Tristeza y desánimo</h3><p>Falta de energía para cosas que antes importaban. Sentirte lejos de los demás.</p></article>
+      <article class="ctx rv d2"><span class="num">03</span><h3>Agotamiento laboral</h3><p>Un cansancio que no se va con descanso. Dejar de encontrarle sentido a lo que haces.</p></article>
+      <article class="ctx rv d3"><span class="num">04</span><h3>Rupturas y pérdidas</h3><p>Cambios que llegan de golpe y hacen difícil sostener el día a día.</p></article>
+      <article class="ctx rv"><span class="num">05</span><h3>Experiencias del pasado</h3><p>Cosas que pasaron hace tiempo y siguen afectando cómo vives hoy.</p></article>
+      <article class="ctx rv d1"><span class="num">06</span><h3>Maternidad</h3><p>Agotamiento, culpa y emociones que nadie te dijo que llegarían.</p></article>
+      <article class="ctx rv d2"><span class="num">07</span><h3>Sentir que funcionas distinto</h3><p>Llevar toda la vida sintiendo que tu mente va a otro ritmo, sin entender por qué.</p></article>
+      <article class="ctx rv d3"><span class="num">08</span><h3>Duelo y transiciones</h3><p>No estás en crisis, pero necesitas a alguien con quien pensar lo que está cambiando.</p></article>
+    </div>
+    <p class="contexts-foot rv">¿No ves lo tuyo aquí? <a data-wa="unsure" href="#">Cuéntanos con tus palabras</a></p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ CÓMO FUNCIONA ═══════════════════ -->
+<div class="steps-wrap">
+<section class="section" id="como-funciona">
+  <div class="wrap steps-layout">
+    <div class="steps-intro rv">
+      <span class="label">Cómo funciona</span>
+      <h2 style="margin-bottom:1rem">El primer paso es más fácil de lo que crees.</h2>
+      <p>No necesitas prepararte, ni saber exactamente qué decir. Todo empieza con un mensaje por WhatsApp — de ahí en adelante, te acompañamos.</p>
+      <a class="btn btn-primary" data-wa="general" data-magnetic href="#"><svg class="i i-wa"><use href="#wa"/></svg>Escríbenos</a>
+    </div>
+
+    <div class="stack">
+      <article class="step" style="--i:0">
+        <div class="step-top"><span class="step-num">01</span><span class="step-badge"><svg class="i"><use href="#chat"/></svg>WhatsApp</span></div>
+        <div>
+          <h3>Cuéntanos qué estás viviendo</h3>
+          <p>Escríbenos por WhatsApp. Sin formularios interminables: dinos cómo te sientes, con tus palabras, y te orientamos hacia el psicólogo que mejor puede acompañarte.</p>
+        </div>
+      </article>
+      <article class="step" style="--i:1">
+        <div class="step-top"><span class="step-num">02</span><span class="step-badge"><svg class="i"><use href="#cal"/></svg>Tu horario</span></div>
+        <div>
+          <h3>Elige cuándo conectarte</h3>
+          <p>Ahí mismo, en la conversación, eliges el día y la hora que funcionen para ti. Si algo cambia, reagendas con un mensaje.</p>
+        </div>
+      </article>
+      <article class="step" style="--i:2">
+        <div class="step-top"><span class="step-num">03</span><span class="step-badge"><svg class="i"><use href="#video"/></svg>Videollamada</span></div>
+        <div>
+          <h3>Habla desde donde estés</h3>
+          <p>Tu primera sesión sucede desde casa, desde la oficina, desde donde quieras. El proceso ya comenzó.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<!-- ═══════════════════ CON QUIÉN VAS A HABLAR ═══════════════════ -->
+<section class="section" id="psicologos">
+  <div class="wrap">
+    <div class="section-head center rv">
+      <span class="label">Con quién vas a hablar</span>
+      <h2>Personas que eligieron esto porque les importa.</h2>
+      <p>Cada psicólogo en claritia pasó por un proceso de selección. Verificamos su formación, su experiencia y su capacidad para ofrecer una atención cercana y basada en evidencia.</p>
+    </div>
+
+    <div class="roles">
+      <article class="role ai rv d1">
+        <span class="role-tag"><svg class="i" style="width:14px;height:14px"><use href="#chat"/></svg>Al escribirnos</span>
+        <h3>Dani te da la bienvenida</h3>
+        <p>Dani es el asistente de claritia. Te responde por WhatsApp, te escucha sin prisa y te ayuda con lo práctico.</p>
+        <ul>
+          <li><svg class="i"><use href="#check"/></svg>Te orienta para encontrar al psicólogo indicado</li>
+          <li><svg class="i"><use href="#check"/></svg>Agenda, reagenda y te recuerda tus sesiones</li>
+          <li><svg class="i"><use href="#check"/></svg>Responde dudas sobre precio y horarios</li>
+        </ul>
+      </article>
+      <article class="role human rv d2">
+        <span class="ghost-orb"></span>
+        <span class="role-tag"><svg class="i" style="width:14px;height:14px"><use href="#user"/></svg>En cada sesión</span>
+        <h3>Tu psicólogo conduce la terapia</h3>
+        <p>La terapia la conduce siempre un profesional real. Nunca un bot.</p>
+        <ul>
+          <li><svg class="i"><use href="#check"/></svg>Todas las sesiones, sin excepción</li>
+          <li><svg class="i"><use href="#check"/></svg>Define contigo el enfoque de tu proceso</li>
+          <li><svg class="i"><use href="#check"/></svg>Te acompaña en los momentos difíciles</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="trust-pills rv">
       <span class="pill">Formación verificada</span>
       <span class="pill">Terapia basada en evidencia</span>
-      <span class="pill">Supervisión continua</span>
       <span class="pill">Atención humana siempre</span>
     </div>
-    <a href="#empieza" class="btn-primary dark" style="margin-top:2rem; display:inline-block;">Empieza hoy</a>
   </div>
+</section>
 
-  <div class="trust-image-block fade-up delay-1">
-    <!-- STOCK IMAGE: stock-psychologist-warm-professional-latam.jpg
-         Direction: psychologist in a calm, natural setting — approachable, present, not posed behind a desk -->
-    <div class="trust-image-placeholder">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <span>stock-psychologist-warm-professional-latam.jpg</span>
+
+<!-- ═══════════════════ PRECIO ═══════════════════ -->
+<section class="section" id="precio" style="padding-top:clamp(1rem,4vw,3rem)">
+  <div class="wrap price-grid">
+    <div class="rv">
+      <span class="label">Precio</span>
+      <h2 style="margin-bottom:1.2rem">Un precio pensado para que no sea una barrera.</h2>
+      <p>Porque el acceso al bienestar no debería depender de cuánto ganas. Te decimos el precio de frente, sin letras pequeñas.</p>
+      <p style="margin-top:1rem">No prometemos resultados mágicos. Prometemos acompañarte.</p>
+    </div>
+
+    <div class="price-card rv d2">
+      <div class="price-inner">
+        <span class="price-kicker">Sesión individual online</span>
+        <div class="price-amount" id="price-amount"></div>
+        <p class="price-note" id="price-note"></p>
+        <ul class="price-list">
+          <li><span class="tick"><svg class="i"><use href="#check"/></svg></span>Videollamada con un psicólogo verificado</li>
+          <li><span class="tick"><svg class="i"><use href="#check"/></svg></span>El horario que mejor te funcione</li>
+          <li><span class="tick"><svg class="i"><use href="#check"/></svg></span>Agenda y reagenda por WhatsApp</li>
+          <li><span class="tick"><svg class="i"><use href="#check"/></svg></span>Escribirnos no tiene costo</li>
+        </ul>
+        <a class="btn btn-primary" data-wa="price" href="#"><svg class="i i-wa"><use href="#wa"/></svg>Preguntar por WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
 
 
-<!-- ═══════════════════ AFFIRMATION 2 ═══════════════════ -->
-<div class="affirmation lavanda">
-  <blockquote>La claridad no llega de golpe. Se construye, despacio, con el acompañamiento adecuado.</blockquote>
-</div>
+<!-- ═══════════════════ PREGUNTAS ═══════════════════ -->
+<section class="section" id="preguntas" style="padding-top:clamp(1rem,4vw,3rem)">
+  <div class="wrap">
+    <div class="section-head center rv">
+      <span class="label">Preguntas frecuentes</span>
+      <h2>Lo que muchas personas preguntan antes de empezar.</h2>
+    </div>
+
+    <div class="faq">
+      <div class="qa rv">
+        <button aria-expanded="false">¿Necesito saber exactamente qué me pasa para escribir?<span class="plus"><svg class="i"><use href="#plus"/></svg></span></button>
+        <div class="qa-body"><div><p>No. Puedes escribir algo tan simple como “hola, no sé por dónde empezar”. A partir de ahí te acompañamos a ponerle palabras y a encontrar al psicólogo indicado.</p></div></div>
+      </div>
+      <div class="qa rv">
+        <button aria-expanded="false">¿Cómo agendo mi primera sesión?<span class="plus"><svg class="i"><use href="#plus"/></svg></span></button>
+        <div class="qa-body"><div><p>Todo sucede por WhatsApp. Nos escribes, te orientamos, eliges día y hora, y recibes la confirmación ahí mismo. No necesitas crear una cuenta ni llenar formularios.</p></div></div>
+      </div>
+      <div class="qa rv">
+        <button aria-expanded="false">¿Con quién hablo cuando escribo por WhatsApp?<span class="plus"><svg class="i"><use href="#plus"/></svg></span></button>
+        <div class="qa-body"><div><p>Te da la bienvenida Dani, el asistente de claritia, que te ayuda con la orientación, los horarios y las dudas prácticas. La terapia, en cambio, la conduce siempre un psicólogo real en cada sesión.</p></div></div>
+      </div>
+      <div class="qa rv">
+        <button aria-expanded="false">¿Cómo son las sesiones?<span class="plus"><svg class="i"><use href="#plus"/></svg></span></button>
+        <div class="qa-body"><div><p>Son por videollamada, desde el lugar donde te sientas cómodo. Solo necesitas un teléfono o computadora con internet y un espacio donde puedas hablar con tranquilidad.</p></div></div>
+      </div>
+      <div class="qa rv">
+        <button aria-expanded="false">¿Puedo cambiar el horario de mi sesión?<span class="plus"><svg class="i"><use href="#plus"/></svg></span></button>
+        <div class="qa-body"><div><p>Sí. Si algo cambia, nos escribes por WhatsApp y te ayudamos a reagendar sin complicaciones.</p></div></div>
+      </div>
+      <div class="qa rv">
+        <button aria-expanded="false">¿Lo que comparto es privado?<span class="plus"><svg class="i"><use href="#plus"/></svg></span></button>
+        <div class="qa-body"><div><p>Tus sesiones son entre tú y tu psicólogo, y se manejan con la confidencialidad propia de la práctica profesional. Puedes consultar los detalles en nuestra política de privacidad.</p></div></div>
+      </div>
+      <div class="qa rv">
+        <button aria-expanded="false">¿claritia es para cualquier situación?<span class="plus"><svg class="i"><use href="#plus"/></svg></span></button>
+        <div class="qa-body"><div><p>claritia acompaña procesos de terapia online. Si lo que necesitas es atención presencial, de urgencia o manejo de medicación, te lo diremos con honestidad y te orientaremos hacia el apoyo adecuado.</p></div></div>
+      </div>
+    </div>
+
+    <div class="care-note rv" role="note">
+      <svg class="i"><use href="#leaf"/></svg>
+      <p><strong>Si estás en peligro o en una emergencia,</strong> no esperes: llama ahora a la línea de emergencias de tu país o acude al servicio de urgencias más cercano. claritia no es un servicio de emergencias.</p>
+    </div>
+  </div>
+</section>
 
 
-<!-- ═══════════════════ CLOSING CTA ═══════════════════ -->
+<!-- ═══════════════════ CIERRE ═══════════════════ -->
 <section class="closing" id="empieza">
-  <div style="position:relative; z-index:1;">
-    <h2 class="fade-up">Cuando estés listo, aquí estamos.</h2>
-    <p class="fade-up delay-1">No tienes que tener todo claro. No tienes que estar en crisis. Solo tienes que querer empezar.</p>
-    <div class="fade-up delay-2">
-      <a href="#" class="btn-primary">Empieza hoy</a>
-      <a href="#" class="btn-secondary">Hablar con alguien</a>
+  <div class="closing-panel">
+    <div class="orbs" aria-hidden="true"><span class="orb o1"></span><span class="orb o3"></span><span class="orb o4"></span></div>
+    <div style="position:relative;z-index:2">
+      <h2 class="rv">Cuando estés listo, aquí estamos.</h2>
+      <p class="rv d1">No tienes que tener todo claro. No tienes que estar en crisis. Solo tienes que querer empezar.</p>
+      <div class="btn-row rv d2">
+        <a class="btn btn-light" data-wa="general" data-magnetic href="#"><svg class="i i-wa"><use href="#wa"/></svg>Escríbenos. Solo eso.</a>
+      </div>
+      <p class="small rv d3">Te respondemos por WhatsApp.</p>
     </div>
   </div>
 </section>
+
+</main>
 
 
 <!-- ═══════════════════ FOOTER ═══════════════════ -->
 <footer>
-  <a href="#" class="footer-logo">
-    claritia
-    <span>Terapia Clínica Online</span>
-  </a>
-  <div class="footer-links">
-    <a href="#">Política de privacidad</a>
-    <a href="#">Términos y condiciones</a>
-    <a href="#">Contacto</a>
+  <div class="wrap foot">
+    <a href="#inicio" class="logo" aria-label="claritia — inicio">
+      <span class="logo-cluster" aria-hidden="true"><span class="c1"></span><span class="c2"></span><span class="c3"></span></span>
+      <span><span class="logo-word">claritia</span><span class="logo-tag">Terapia Clínica Online</span></span>
+    </a>
+    <ul class="foot-links">
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#precio">Precio</a></li>
+      <li><a href="#preguntas">Preguntas</a></li>
+      <li><a href="#" data-todo="privacidad">Política de privacidad</a></li>
+      <li><a href="#" data-todo="terminos">Términos y condiciones</a></li>
+      <li><a data-wa="general" href="#">Contacto</a></li>
+    </ul>
+    <p class="foot-copy">© <span id="year">2026</span> claritia. Todos los derechos reservados.</p>
   </div>
-  <p class="footer-copy">© 2026 claritia. Todos los derechos reservados.</p>
 </footer>
 
+<a class="wa-float" id="wa-float" data-wa="general" href="#" aria-label="Escríbenos por WhatsApp">
+  <svg class="i i-wa"><use href="#wa"/></svg>Escríbenos
+</a>
 
-<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
+
 <script>
-  // ── Hero image slideshow ───────────────────────────────────
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.hero-slide');
-  const dots   = document.querySelectorAll('.dot');
-  let timer;
+/* ═════════════════════════════════════════════════════════════
+   CONFIGURACIÓN — lo único que hay que editar antes de publicar
+   ═════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  // Número de WhatsApp Business en formato internacional, solo dígitos.
+  // Ej. México: "5215512345678"  ·  Colombia: "573001234567"
+  whatsapp: "",
 
-  function goToSlide(n) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = n;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-    clearInterval(timer);
-    timer = setInterval(nextSlide, 6000);
+  // Precio por sesión. Déjalo vacío ("") para mostrar "Escríbenos y te lo compartimos".
+  price: "",            // ej. "$450 MXN"
+  priceUnit: "por sesión",
+  priceNote: "",        // ej. "Precio para México. Escríbenos para conocer el de tu país."
+
+  // Mensajes que aparecen ya escritos al abrir WhatsApp
+  messages: {
+    general: "Hola, me gustaría empezar con claritia.",
+    price:   "Hola, me gustaría saber el precio de las sesiones.",
+    unsure:  "Hola, no sé bien por dónde empezar."
+  },
+
+  // Enlaces legales (relativos, para GitHub Pages)
+  privacy: "",          // ej. "privacidad/"
+  terms:   ""           // ej. "terminos/"
+};
+
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── Enlaces de WhatsApp ── */
+  const waLink = key => {
+    const text = encodeURIComponent(CONFIG.messages[key] || CONFIG.messages.general);
+    const num = (CONFIG.whatsapp || '').replace(/\D/g, '');
+    return num ? `https://wa.me/${num}?text=${text}` : `https://wa.me/?text=${text}`;
+  };
+  document.querySelectorAll('[data-wa]').forEach(a => {
+    a.href = waLink(a.dataset.wa);
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+  if (!CONFIG.whatsapp) console.warn('[claritia] Falta CONFIG.whatsapp — los botones abren WhatsApp sin destinatario.');
+
+  /* ── Enlaces legales ── */
+  const legal = { privacidad: CONFIG.privacy, terminos: CONFIG.terms };
+  document.querySelectorAll('[data-todo]').forEach(a => {
+    const url = legal[a.dataset.todo];
+    if (url) a.href = url; else a.parentElement.style.display = 'none';
+  });
+
+  /* ── Precio ── */
+  const amt = document.getElementById('price-amount');
+  const note = document.getElementById('price-note');
+  if (CONFIG.price) {
+    amt.innerHTML = `${CONFIG.price}<small>${CONFIG.priceUnit}</small>`;
+    note.textContent = CONFIG.priceNote || 'Sin costos ocultos. Pagas por sesión.';
+  } else {
+    amt.classList.add('ask');
+    amt.textContent = 'Escríbenos y te lo compartimos.';
+    note.textContent = 'Te damos el precio para tu país en el primer mensaje, sin compromiso.';
   }
 
-  function nextSlide() {
-    goToSlide((currentSlide + 1) % slides.length);
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── Nav al hacer scroll + botón flotante ── */
+  const nav = document.getElementById('nav');
+  const fab = document.getElementById('wa-float');
+  const hero = document.querySelector('.hero-panel');
+  const closing = document.getElementById('empieza');
+  const onScroll = () => {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 20);
+    const pastHero = hero.getBoundingClientRect().bottom < 80;
+    const atClosing = closing.getBoundingClientRect().top < window.innerHeight * .7;
+    fab.classList.toggle('show', pastHero && !atClosing);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── Título del hero palabra por palabra ── */
+  const h1 = document.querySelector('[data-words]');
+  if (h1 && !reduce) {
+    const words = h1.textContent.trim().split(/\s+/);
+    h1.setAttribute('aria-label', h1.textContent.trim());
+    h1.innerHTML = words.map((w, i) => `<span class="word" aria-hidden="true" style="animation-delay:${0.15 + i * 0.07}s">${w}</span>`).join(' ');
   }
 
-  timer = setInterval(nextSlide, 6000);
-
-  // ── Fade-up on scroll ──────────────────────────────────────
-  const fadeEls = document.querySelectorAll('.fade-up');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  /* ── Conversación del hero ── */
+  const msgs = [...document.querySelectorAll('#chat .msg')];
+  const typing = document.getElementById('typing');
+  const playChat = () => {
+    if (reduce) { msgs.forEach(m => m.classList.add('show')); return; }
+    let t = 700;
+    msgs.forEach(m => {
+      const isIn = m.classList.contains('in');
+      if (isIn) {
+        setTimeout(() => { typing.classList.add('show'); m.before(typing); }, t);
+        t += 1300;
+      }
+      setTimeout(() => { typing.classList.remove('show'); m.classList.add('show'); }, t);
+      t += isIn ? 1500 : 1100;
     });
-  }, { threshold: 0.12 });
-  fadeEls.forEach(el => io.observe(el));
+  };
+  const phone = document.querySelector('.phone');
+  const chatIO = new IntersectionObserver(es => {
+    if (es.some(e => e.isIntersecting)) { chatIO.disconnect(); playChat(); }
+  }, { threshold: 0.35 });
+  chatIO.observe(phone);
+
+  /* ── Entrada al hacer scroll ── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+  /* ── Frase que se revela con el scroll ── */
+  const quote = document.getElementById('reveal');
+  if (quote && !reduce) {
+    const ws = quote.textContent.trim().split(/\s+/);
+    quote.setAttribute('aria-label', quote.textContent.trim());
+    quote.innerHTML = ws.map(w => `<span class="w" aria-hidden="true">${w}</span>`).join(' ');
+    const spans = quote.querySelectorAll('.w');
+    const update = () => {
+      const r = quote.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.55)));
+      const n = Math.round(p * spans.length);
+      spans.forEach((s, i) => s.classList.toggle('on', i < n));
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+  /* ── Tarjetas apiladas: se reducen al quedar detrás ── */
+  const steps = [...document.querySelectorAll('.step')];
+  if (!reduce && steps.length) {
+    const stackUpdate = () => {
+      steps.forEach((s, i) => {
+        const next = steps[i + 1];
+        if (!next) return;
+        const gap = next.getBoundingClientRect().top - s.getBoundingClientRect().top;
+        const h = s.offsetHeight;
+        const p = Math.min(1, Math.max(0, 1 - gap / h));
+        s.style.transform = `scale(${1 - p * 0.05})`;
+        s.style.filter = `brightness(${1 - p * 0.06})`;
+      });
+    };
+    window.addEventListener('scroll', stackUpdate, { passive: true });
+    stackUpdate();
+  }
+
+  /* ── Preguntas (acordeón) ── */
+  document.querySelectorAll('.qa button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qa = btn.parentElement;
+      const open = !qa.classList.contains('open');
+      document.querySelectorAll('.qa.open').forEach(o => { o.classList.remove('open'); o.querySelector('button').setAttribute('aria-expanded', 'false'); });
+      qa.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+
+  /* ── Botones magnéticos (solo con mouse) ── */
+  if (!reduce && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('[data-magnetic]').forEach(b => {
+      b.addEventListener('mousemove', e => {
+        const r = b.getBoundingClientRect();
+        b.style.setProperty('--bx', `${(e.clientX - r.left - r.width / 2) * 0.18}px`);
+        b.style.setProperty('--by', `${(e.clientY - r.top - r.height / 2) * 0.28}px`);
+      });
+      b.addEventListener('mouseleave', () => { b.style.setProperty('--bx', '0px'); b.style.setProperty('--by', '0px'); });
+    });
+  }
+})();
 </script>
 
 </body>
